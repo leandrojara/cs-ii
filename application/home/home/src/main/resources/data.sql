@@ -1,2 +1,1 @@
-insert into cliente(id, nome) values (1, 'TESTE');
-insert into cliente(id, nome) values (2, 'TESTE 2');
+insert into usuario(id, nome, telefone, email, senha, DTYPE) values (1, 'USER', '999999', 'email@email.com', 'A665A45920422F9D417E4867EFDC4FB8A04A1F3FFF1FA07E998E86F7F7A27AE3', 'Usuario');
