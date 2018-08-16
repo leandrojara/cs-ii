@@ -25,7 +25,8 @@ public class ImovelController {
     }
 
     @GetMapping(value = "buscar/{anuncianteId}/{imovelId}")
-    public List<Imovel> buscar(@PathVariable Long anuncianteId, @PathVariable Long imovelId) {
+    public List<Imovel> buscar(@PathVariable(required = false) Long anuncianteId,
+                               @PathVariable(required = false) Long imovelId) {
         if (anuncianteId != null && anuncianteId > 0) {
             return imovelRepository.findByAnuncianteId(anuncianteId);
         } else if (imovelId != null && imovelId > 0) {
