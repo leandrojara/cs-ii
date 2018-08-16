@@ -6,6 +6,9 @@ import br.ufms.facom.home.repository.ImovelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+import java.util.List;
+
 @RestController
 @RequestMapping("/imovel")
 public class ImovelController {
@@ -19,5 +22,16 @@ public class ImovelController {
         imovel.getAnunciante().setId(anuncianteId);
         imovelRepository.save(imovel);
         return imovel;
+    }
+
+    @GetMapping(value = "buscar/{anuncianteId}/{imovelId}")
+    public List<Imovel> buscar(@PathVariable Long anuncianteId, @PathVariable Long imovelId) {
+        if (anuncianteId != null && anuncianteId > 0) {
+            return imovelRepository.findByAnuncianteId(anuncianteId);
+        } else if (imovelId != null && imovelId > 0) {
+            return Arrays.asList(imovelRepository.findById(imovelId).get());
+        } else {
+            return imovelRepository.findAll();
+        }
     }
 }
