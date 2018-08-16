@@ -106,6 +106,9 @@ public class Imovel {
             inverseJoinColumns = {@JoinColumn(name = "id_adicional")})
     private List<AdicionalImovel> adicionais;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true, mappedBy = "imovel")
+    private List<ImovelImagem> imagens;
+
     public Long getId() {
         return id;
     }
@@ -328,5 +331,13 @@ public class Imovel {
 
     public void setAreaTotal(Double areaTotal) {
         this.areaTotal = areaTotal;
+    }
+
+    public List<ImovelImagem> getImagens() {
+        return imagens;
+    }
+
+    public void setImagens(List<ImovelImagem> imagens) {
+        this.imagens = imagens;
     }
 }
