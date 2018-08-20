@@ -1,4 +1,6 @@
-<html>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"  />
@@ -13,15 +15,19 @@
 	<div class="login-page">
 
 		<div class="form">
-			<form>
-				<input type="text" placeholder="Nome de Usuário"/>
-				<input type="email" placeholder="E-mail"/>
-				<input type="text" placeholder="Telefone"/>
-				<input type="text" placeholder="CPF"/>
-				<input type="password" placeholder="Nova Senha"/>
-				<input type="password" placeholder="Repetir Senha"/>
-				<button>Criar</button>
+			<form th:action="@{/usuario/salvar}" method="POST" th:object="${anunciante}">
+
+				<input type="text" th:field="*{nome}" placeholder="Nome de Usuário"/>
+				<input type="email" th:field="*{email}" placeholder="E-mail"/>
+				<input type="text" th:field="*{telefone}" placeholder="Telefone"/>
+				<input type="text" th:field="*{cnpj}" placeholder="CNPJ(Opcional)"/>
+				<input type="text" th:field="*{creci}" placeholder="CRECI(Opcional)"/>
+				<input type="password" th:field="*{senha}" placeholder="Nova Senha"/>
+				<!--input type="password" placeholder="Repetir Senha"/-->
+				<button type="submit" th:text="Criar Cadastro">Criar Cadastro</button>
+				
 				<p class="message"><a href="login.html">Voltar para Login</a></p>
+
 			</form>
 		</div>
 	</div>

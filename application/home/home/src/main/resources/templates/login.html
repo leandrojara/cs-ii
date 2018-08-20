@@ -1,4 +1,6 @@
-<html>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"  />
@@ -18,11 +20,13 @@
 				<h3 style="color: #071075">Login</h3>
 			</div>
 			<br>
-			<form class="login-form">
-				<input type="text" placeholder="Nome de Usuário"/>
-				<input type="password" placeholder="Senha"/>
-				<button>login</button>
-				<p class="message">Não é Registrado? <a href="criar_cadastro.html">Criar uma conta</a></p>
+			<form th:action="@{/login}" method="POST" class="login-form">
+
+				<input type="text" id="email" name="email" placeholder="E-mail"/>
+				<input type="password" id="senha" name="senha" placeholder="Senha"/>
+				<button name="Submit" value="Login" type="submit" th:text="Login">Login</button>
+				<p class="message">Não é Registrado? <a href="@{/anunciante/cadastrar}">Criar uma conta</a></p>
+
 			</form>
 		</div>
 	</div>
