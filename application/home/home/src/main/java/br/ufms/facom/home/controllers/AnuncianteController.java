@@ -11,21 +11,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.validation.Valid;
 
 @Controller
-//@RequestMapping("/anunciante")
 public class AnuncianteController {
 
     @Autowired
     private AnuncianteRepository anuncianteRepository;
 
-    @RequestMapping(name = "/cadastrar", method = RequestMethod.GET)
+    @RequestMapping(name = "/anunciante/cadastrar", method = RequestMethod.GET)
     public String cadastrar(Model model) {
         model.addAttribute("anunciante", new Anunciante());
-        return "cadastrar";
+        return "anunciante/cadastrar";
     }
 
-    @RequestMapping(name = "/salvar", method = RequestMethod.POST)
+    @RequestMapping(name = "/anunciante/salvar", method = RequestMethod.POST)
     public String salvar(@Valid Anunciante anunciante, Model model) {
         anuncianteRepository.save(anunciante);
-        return "/";
+        model.addAttribute("anunciante", anunciante);
+        return "login";
     }
 }
