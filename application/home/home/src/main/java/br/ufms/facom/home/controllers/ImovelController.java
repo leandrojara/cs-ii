@@ -2,6 +2,9 @@ package br.ufms.facom.home.controllers;
 
 import br.ufms.facom.home.domain.Anunciante;
 import br.ufms.facom.home.domain.Imovel;
+import br.ufms.facom.home.domain.enums.TipoConservacao;
+import br.ufms.facom.home.domain.enums.TipoImovel;
+import br.ufms.facom.home.domain.enums.TipoNegocio;
 import br.ufms.facom.home.repository.ImovelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +24,9 @@ public class ImovelController {
     @RequestMapping(value = "/imovel/anunciar", method = RequestMethod.GET)
     public String anunciar(Model model) {
         model.addAttribute("imovel", new Imovel());
+        model.addAttribute("tipoImovel", TipoImovel.values());
+        model.addAttribute("tipoNegocio", TipoNegocio.values());
+        model.addAttribute("tipoConservacao", TipoConservacao.values());
         return "imovel/anunciar";
     }
 
