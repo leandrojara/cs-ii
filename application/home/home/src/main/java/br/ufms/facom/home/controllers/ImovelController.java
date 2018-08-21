@@ -5,6 +5,7 @@ import br.ufms.facom.home.domain.Imovel;
 import br.ufms.facom.home.domain.enums.TipoConservacao;
 import br.ufms.facom.home.domain.enums.TipoImovel;
 import br.ufms.facom.home.domain.enums.TipoNegocio;
+import br.ufms.facom.home.repository.AdicionalImovelRepository;
 import br.ufms.facom.home.repository.ImovelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,8 @@ public class ImovelController {
 
     @Autowired
     private ImovelRepository imovelRepository;
+    @Autowired
+    private AdicionalImovelRepository adicionalImovelRepository;
 
     @RequestMapping(value = "/imovel/anunciar", method = RequestMethod.GET)
     public String anunciar(Model model) {
@@ -27,6 +30,7 @@ public class ImovelController {
         model.addAttribute("tipoImovel", TipoImovel.values());
         model.addAttribute("tipoNegocio", TipoNegocio.values());
         model.addAttribute("tipoConservacao", TipoConservacao.values());
+        model.addAttribute("adicionais", adicionalImovelRepository.findAll());
         return "imovel/anunciar";
     }
 
