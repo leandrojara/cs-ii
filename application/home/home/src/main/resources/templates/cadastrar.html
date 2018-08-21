@@ -4,7 +4,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"  />
-    <link rel="stylesheet" type="text/css" href="../css/styleLogin.css"> 
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styleLogin.css}" />
     <title>
     	House Catalog - Página de Login
     </title>
@@ -15,7 +15,7 @@
 	<div class="login-page">
 
 		<div class="form">
-			<form th:action="@{/usuario/salvar}" method="POST" th:object="${anunciante}">
+			<form th:action="@{/salvar}" method="POST" th:object="${anunciante}">
 
 				<input type="text" th:field="*{nome}" placeholder="Nome de Usuário"/>
 				<input type="email" th:field="*{email}" placeholder="E-mail"/>
@@ -24,7 +24,7 @@
 				<input type="text" th:field="*{creci}" placeholder="CRECI(Opcional)"/>
 				<input type="password" th:field="*{senha}" placeholder="Nova Senha"/>
 				<!--input type="password" placeholder="Repetir Senha"/-->
-				<button type="submit" th:text="Criar Cadastro">Criar Cadastro</button>
+				<button type="submit">Criar Cadastro</button>
 				
 				<p class="message"><a href="login.html">Voltar para Login</a></p>
 

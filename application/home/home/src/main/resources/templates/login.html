@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"  />
-    <link rel="stylesheet" type="text/css" href="../css/styleLogin.css"> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styleLogin.css}">
     <title>
-    	House Catalog - Página de Login
+        House Catalog - Página de Login
     </title>
 </head>
 
 <body>
-	
-	<div class="login-page">
 
-		<div class="form">
-			<div style="width: 100%; height: 150px">
-				<img src="../imagens/logo.png" style="width: 100%" />
-				<h3 style="color: #071075">Login</h3>
-			</div>
-			<br>
-			<form th:action="@{/login}" method="POST" class="login-form">
+<div class="login-page">
 
-				<input type="text" id="email" name="email" placeholder="E-mail"/>
-				<input type="password" id="senha" name="senha" placeholder="Senha"/>
-				<button name="Submit" value="Login" type="submit" th:text="Login">Login</button>
-				<p class="message">Não é Registrado? <a href="@{/anunciante/cadastrar}">Criar uma conta</a></p>
+    <div class="form">
+        <div style="width: 100%; height: 150px">
+            <img src="../imagens/logo.png" style="width: 100%"/>
+            <h3 style="color: #071075">Login</h3>
+        </div>
+        <br>
+        <form th:action="@{/login}" method="POST" class="login-form">
 
-			</form>
-		</div>
-	</div>
+            <input type="text" id="email" name="email" placeholder="E-mail"/>
+            <input type="password" id="senha" name="senha" placeholder="Senha"/>
+            <button name="Submit" value="Login" type="submit" th:text="Login">Login</button>
+
+        </form>
+        <p class="message">Não é Registrado? <a href="/cadastrar">Criar uma conta</a></p>
+    </div>
+</div>
 
 </body>
 

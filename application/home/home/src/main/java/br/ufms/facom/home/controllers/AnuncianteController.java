@@ -1,14 +1,31 @@
 package br.ufms.facom.home.controllers;
 
+import br.ufms.facom.home.domain.Anunciante;
 import br.ufms.facom.home.repository.AnuncianteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-@RestController
-@RequestMapping("/anunciante")
+import javax.validation.Valid;
+
+@Controller
+//@RequestMapping("/anunciante")
 public class AnuncianteController {
 
     @Autowired
     private AnuncianteRepository anuncianteRepository;
+
+    @RequestMapping(name = "/cadastrar", method = RequestMethod.GET)
+    public String cadastrar(Model model) {
+        model.addAttribute("anunciante", new Anunciante());
+        return "cadastrar";
+    }
+
+    @RequestMapping(name = "/salvar", method = RequestMethod.POST)
+    public String salvar(@Valid Anunciante anunciante, Model model) {
+        anuncianteRepository.save(anunciante);
+        return "/";
+    }
 }
