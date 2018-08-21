@@ -27,9 +27,9 @@ public class ImovelController {
     @RequestMapping(value = "/imovel/anunciar", method = RequestMethod.GET)
     public String anunciar(Model model) {
         model.addAttribute("imovel", new Imovel());
-        model.addAttribute("tipoImovel", TipoImovel.values());
-        model.addAttribute("tipoNegocio", TipoNegocio.values());
-        model.addAttribute("tipoConservacao", TipoConservacao.values());
+        model.addAttribute("tiposImovel", TipoImovel.values());
+        model.addAttribute("tiposNegocio", TipoNegocio.values());
+        model.addAttribute("tiposConservacao", TipoConservacao.values());
         model.addAttribute("adicionais", adicionalImovelRepository.findAll());
         return "imovel/anunciar";
     }
