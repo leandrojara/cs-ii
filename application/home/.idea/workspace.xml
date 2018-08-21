@@ -66,7 +66,7 @@
           <entry key="css" value="1" />
           <entry key="html" value="5" />
           <entry key="java" value="55" />
-          <entry key="sql" value="1" />
+          <entry key="sql" value="2" />
           <entry key="xml" value="2" />
         </counts>
       </usages-collector>
@@ -76,7 +76,7 @@
           <entry key="CSS" value="1" />
           <entry key="HTML" value="5" />
           <entry key="JAVA" value="55" />
-          <entry key="SQL" value="1" />
+          <entry key="SQL" value="2" />
           <entry key="XML" value="2" />
         </counts>
       </usages-collector>
@@ -85,7 +85,7 @@
           <entry key="dummy" value="5" />
           <entry key="html" value="43" />
           <entry key="java" value="2018" />
-          <entry key="sql" value="128" />
+          <entry key="sql" value="131" />
           <entry key="xml" value="2" />
         </counts>
       </usages-collector>
@@ -94,7 +94,7 @@
           <entry key="HTML" value="43" />
           <entry key="JAVA" value="2018" />
           <entry key="PLAIN_TEXT" value="5" />
-          <entry key="SQL" value="128" />
+          <entry key="SQL" value="131" />
           <entry key="XML" value="2" />
         </counts>
       </usages-collector>
@@ -169,16 +169,21 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/controllers/ImovelController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="493">
-              <caret line="29" column="58" selection-start-line="29" selection-start-column="58" selection-end-line="29" selection-end-column="58" />
+              <caret line="29" column="66" selection-start-line="29" selection-start-column="66" selection-end-line="29" selection-end-column="66" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/home/src/main/resources/data.sql">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -223,7 +228,6 @@
         <option value="$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/domain/enums/TipoConservacao.java" />
         <option value="$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/domain/enums/AdicionalImovel.java" />
         <option value="$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/domain/AdicionalImovel.java" />
-        <option value="$PROJECT_DIR$/home/src/main/resources/data.sql" />
         <option value="$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/controllers/UsuarioController.java" />
         <option value="$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/domain/Usuario.java" />
         <option value="$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/domain/ImovelImagem.java" />
@@ -239,6 +243,7 @@
         <option value="$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/config/MvcConfig.java" />
         <option value="$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/controllers/AnuncianteController.java" />
         <option value="$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/controllers/ImovelController.java" />
+        <option value="$PROJECT_DIR$/home/src/main/resources/data.sql" />
       </list>
     </option>
   </component>
@@ -379,7 +384,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1534815091925" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1534815188147" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
@@ -592,13 +597,6 @@
             <element signature="e#333#334#0" expanded="true" />
             <element signature="e#358#359#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/home/src/main/resources/data.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="74" lean-forward="true" selection-start-line="6" selection-start-column="74" selection-end-line="6" selection-end-column="74" />
         </state>
       </provider>
     </entry>
@@ -817,12 +815,15 @@
     <entry file="file://$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/controllers/ImovelController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
-          <caret line="29" column="58" selection-start-line="29" selection-start-column="58" selection-end-line="29" selection-end-column="58" />
+          <caret line="29" column="66" selection-start-line="29" selection-start-column="66" selection-end-line="29" selection-end-column="66" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/home/src/main/resources/data.sql">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
   <component name="masterDetails">
