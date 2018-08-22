@@ -44,7 +44,7 @@ public class UsuarioController implements UserDetailsService {
     public String login(@PathVariable("email") String email, @PathVariable("senha") String senha, Model model) {
         Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
         if (!usuario.isPresent()) {
-            model.addAttribute("erro", "Usuário e/ou senha inválidos");
+            model.addAttribute("erro", "Usuário não cadastrado no sistema");
             return "login";
         }
 
