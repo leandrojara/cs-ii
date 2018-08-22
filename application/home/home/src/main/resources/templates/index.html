@@ -1,63 +1,64 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<meta charset="UTF-8">
-	<title>House Catalog</title>
+    <meta charset="UTF-8">
+    <title>House Catalog</title>
 
-	<link rel="stylesheet" type="text/css" href="../../resources/static/css/reset.css" th:href="@{/css/reset.css}">
-	<link rel="stylesheet" type="text/css" href="../../resources/static/css/main.css" th:href="@{/css/main.css}">
+    <link rel="stylesheet" type="text/css" href="../../resources/static/css/reset.css" th:href="@{/css/reset.css}">
+    <link rel="stylesheet" type="text/css" href="../../resources/static/css/main.css" th:href="@{/css/main.css}">
 </head>
 
 <body>
 
-	<div id ="div-central">
+<div id="div-central">
 
-		<header id="header">
-			
-			<div id="div-logo">
-				<img src="../../resources/static/imagens/logo.png" th:src="@{/imagens/logo.png}" id="logo-header" />
-			</div>
+    <header id="header">
 
-			<div id="div-secao-login">
-				<div>
-					Olá, <a href="#" title="Editar" >José Joaquim</a>&nbsp;
-					<div id="div-botao-sair">
-						<a href="#" title="Logout">
-						x
-						</a>
-					</div>
-				</div>
-			</div>
+        <div id="div-logo">
+            <img src="../../resources/static/imagens/logo.png" th:src="@{/imagens/logo.png}" id="logo-header"/>
+        </div>
 
-			<div id="barraAzul-header">
+        <div id="div-secao-login">
+            <div>
+                Olá, <a href="#" title="Editar">José Joaquim</a>&nbsp;
+                <div id="div-botao-sair">
+                    <a href="#" title="Logout">
+                        x
+                    </a>
+                </div>
+            </div>
+        </div>
 
-				<ul id="menu-header-ul">
-					<li>
-						<a href="">Comprar</a>
-					</li>
-					<li>
-						<a href="">Alugar</a>
-					</li>
-					<li>
-						<a href="">Anunciar</a>
-					</li>
-				</ul>
+        <div id="barraAzul-header">
 
-			</div>
+            <ul id="menu-header-ul">
+                <li>
+                    <a href="">Comprar</a>
+                </li>
+                <li>
+                    <a href="">Alugar</a>
+                </li>
+                <li>
+                    <a href="">Anunciar</a>
+                </li>
+            </ul>
 
-		</header>
+        </div>
 
-		<aside id="barra-lateral">
-			
-		</aside>
+    </header>
 
-		<section id="section-conteudo">
-			
-		</section>
+    <aside id="barra-lateral">
 
-	</div>
-	
+    </aside>
+
+    <section id="section-conteudo">
+
+    </section>
+
+</div>
+
 </body>
 
 </html>

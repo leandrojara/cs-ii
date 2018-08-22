@@ -18,7 +18,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/static/**", "/static/css/**", "/static/imagens/**").permitAll()
+                .antMatchers("../resources/static/css/**", "../resources/static/imagens/**").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/", "/anunciante/cadastrar", "/anunciante/salvar").permitAll()
                 .antMatchers("/imovel/anunciar", "/imovel/salvar").permitAll()
@@ -34,7 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/static/**", "/static/css/**", "/static/imagens/**").anyRequest();
+        web.ignoring().antMatchers("../resources/static/css/**", "../resources/static/imagens/**").anyRequest();
     }
 
     @Override

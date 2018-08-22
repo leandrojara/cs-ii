@@ -3,114 +3,115 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"  />
-    <link rel="stylesheet" type="text/css" href="../../resources/static/css/reset.css" th:href="@{/css/reset.css}">
-    <link rel="stylesheet" type="text/css" href="../../resources/static/css/main.css" th:href="@{/css/main.css}">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" type="text/css" href="../../../resources/static/css/reset.css" th:href="@{/css/reset.css}">
+    <link rel="stylesheet" type="text/css" href="../../../resources/static/css/main.css" th:href="@{/css/main.css}">
     <title>
         House Catalog - Anunciar Imóvel
     </title>
 </head>
 
 <body>
-    
-    <div id ="div-central">
 
-        <header id="header">
-            
-            <div id="div-logo">
-                <img src="../../../resources/static/imagens/logo.png" th:src="@{/imagens/logo.png}" id="logo-header" />
-            </div>
+<div id="div-central">
 
-            <div id="div-secao-login">
-                <div>
-                    Olá, <a href="#" title="Editar" >José Joaquim</a>&nbsp;
-                    <div id="div-botao-sair">
-                        <a href="#" title="Logout">
+    <header id="header">
+
+        <div id="div-logo">
+            <img src="../../../resources/static/imagens/logo.png" th:src="@{/imagens/logo.png}" id="logo-header"/>
+        </div>
+
+        <div id="div-secao-login">
+            <div>
+                Olá, <a href="#" title="Editar">José Joaquim</a>&nbsp;
+                <div id="div-botao-sair">
+                    <a href="#" title="Logout">
                         x
-                        </a>
-                    </div>
+                    </a>
                 </div>
             </div>
+        </div>
 
-            <div id="barraAzul-header">
+        <div id="barraAzul-header">
 
-                <ul id="menu-header-ul">
-                    <li>
-                        <a href="">Comprar</a>
-                    </li>
-                    <li>
-                        <a href="">Alugar</a>
-                    </li>
-                    <li>
-                        <a href="">Anunciar</a>
-                    </li>
-                </ul>
+            <ul id="menu-header-ul">
+                <li>
+                    <a href="">Comprar</a>
+                </li>
+                <li>
+                    <a href="">Alugar</a>
+                </li>
+                <li>
+                    <a href="">Anunciar</a>
+                </li>
+            </ul>
 
-            </div>
+        </div>
 
-        </header>
+    </header>
 
-        <section id="section-conteudo">
-            
-            <h1>Anunciar Imóvel</h1>
-            <div class="form">
-                <form th:action="@{/imovel/salvar}" method="POST" th:object="${imovel}">
+    <section id="section-conteudo">
 
-                    <input type="text" th:field="*{descricao}" placeholder="Descrição" style="width:100%" />
-                    <input type="text" th:field="*{rua}" placeholder="Rua"/>
-                    <input type="text" th:field="*{numero}" placeholder="Número"/>
-                    <input type="text" th:field="*{complemento}" placeholder="Complemento"/>
-                    <input type="text" th:field="*{bairro}" placeholder="Bairro"/>
-                    <input type="text" th:field="*{cep}" placeholder="CEP"/>
-                    <input type="text" th:field="*{cidade}" placeholder="Cidade"/>
-                    <input type="text" th:field="*{estado}" placeholder="Estado"/>
+        <h1>Anunciar Imóvel</h1>
+        <div class="form">
+            <form th:action="@{/imovel/salvar}" method="POST" th:object="${imovel}">
 
-                    <!-- Tipo do imóvel Casa, Apartamento, Terreno, Sobrado -->
-                    <select id="tipoImovel" th:field="*{tipoImovel}">
-                        <option value="">Tipo do Imóvel</option>
-                        <option th:each="tipoImovel : ${tiposImovel}" th:value="${tipoImovel}" th:text="${tipoImovel.descricao}"
-                                selected="selected"></option>
-                    </select>
+                <input type="text" th:field="*{descricao}" placeholder="Descrição" style="width:100%"/>
+                <input type="text" th:field="*{rua}" placeholder="Rua"/>
+                <input type="text" th:field="*{numero}" placeholder="Número"/>
+                <input type="text" th:field="*{complemento}" placeholder="Complemento"/>
+                <input type="text" th:field="*{bairro}" placeholder="Bairro"/>
+                <input type="text" th:field="*{cep}" placeholder="CEP"/>
+                <input type="text" th:field="*{cidade}" placeholder="Cidade"/>
+                <input type="text" th:field="*{estado}" placeholder="Estado"/>
 
-                    <!-- Negócio, venda ou aluguel -->
-                    <select id="tipoNegocio" th:field="*{tipoNegocio}">
-                        <option value="">Tipo de Negócio</option>
-                        <option th:each="tipoNegocio : ${tiposNegocio}" th:value="${tipoNegocio}"
-                                th:text="${tipoNegocio.descricao}" selected="selected"></option>
-                    </select>
+                <!-- Tipo do imóvel Casa, Apartamento, Terreno, Sobrado -->
+                <select id="tipoImovel" th:field="*{tipoImovel}">
+                    <option value="">Tipo do Imóvel</option>
+                    <option th:each="tipoImovel : ${tiposImovel}" th:value="${tipoImovel}"
+                            th:text="${tipoImovel.descricao}"
+                            selected="selected"></option>
+                </select>
 
-                    <!-- Estado de Conservação -->
-                    <select id="tipoConservacao" th:field="*{tipoConservacao}">
-                        <option value="">Estado de Conservação</option>
-                        <option th:each="tipoConservacao : ${tiposConservacao}" th:value="${tipoConservacao}"
-                                th:text="${tipoConservacao.descricao}" selected="selected"></option>
-                    </select>
+                <!-- Negócio, venda ou aluguel -->
+                <select id="tipoNegocio" th:field="*{tipoNegocio}">
+                    <option value="">Tipo de Negócio</option>
+                    <option th:each="tipoNegocio : ${tiposNegocio}" th:value="${tipoNegocio}"
+                            th:text="${tipoNegocio.descricao}" selected="selected"></option>
+                </select>
 
-                    <input type="text" th:field="*{valorImovel}" placeholder="Valor"/>
-                    <input type="text" th:field="*{valorCondominio}" placeholder="Valor do Condomínio"/>
-                    <input type="text" th:field="*{largura}" placeholder="Largura"/>
-                    <input type="text" th:field="*{comprimento}" placeholder="Comprimento"/>
-                    <input type="text" th:field="*{areaTotal}" placeholder="Área Total"/>
-                    <input type="text" th:field="*{areaConstruida}" placeholder="Área Construída"/>
-                    <input type="text" th:field="*{comodos}" placeholder="Cômodos"/>
-                    <input type="text" th:field="*{quartosSimples}" placeholder="Quartos"/>
-                    <input type="text" th:field="*{banheirosSimples}" placeholder="Banheiros"/>
-                    <input type="text" th:field="*{suites}" placeholder="Suítes"/>
-                    <input type="text" th:field="*{vagasGaragem}" placeholder="Vagas na Garagem"/>
+                <!-- Estado de Conservação -->
+                <select id="tipoConservacao" th:field="*{tipoConservacao}">
+                    <option value="">Estado de Conservação</option>
+                    <option th:each="tipoConservacao : ${tiposConservacao}" th:value="${tipoConservacao}"
+                            th:text="${tipoConservacao.descricao}" selected="selected"></option>
+                </select>
 
-                    <h2>Adicionais</h2>
+                <input type="text" th:field="*{valorImovel}" placeholder="Valor"/>
+                <input type="text" th:field="*{valorCondominio}" placeholder="Valor do Condomínio"/>
+                <input type="text" th:field="*{largura}" placeholder="Largura"/>
+                <input type="text" th:field="*{comprimento}" placeholder="Comprimento"/>
+                <input type="text" th:field="*{areaTotal}" placeholder="Área Total"/>
+                <input type="text" th:field="*{areaConstruida}" placeholder="Área Construída"/>
+                <input type="text" th:field="*{comodos}" placeholder="Cômodos"/>
+                <input type="text" th:field="*{quartosSimples}" placeholder="Quartos"/>
+                <input type="text" th:field="*{banheirosSimples}" placeholder="Banheiros"/>
+                <input type="text" th:field="*{suites}" placeholder="Suítes"/>
+                <input type="text" th:field="*{vagasGaragem}" placeholder="Vagas na Garagem"/>
 
-                    <div class="checkbox" th:each="adicional : *{adicionais}">
-                        <input type="checkbox" name="adicionais" th:value="${adicional.id}"/>
-                        <label th:text="${adicional.descricao}"></label>
-                    </div>
+                <h2>Adicionais</h2>
 
-                    <button type="submit">Anunciar</button>
+                <div class="checkbox" th:each="adicional : *{adicionais}">
+                    <input type="checkbox" name="adicionais" th:value="${adicional.id}"/>
+                    <label th:text="${adicional.descricao}"></label>
+                </div>
 
-                </form>
-            </div>
-        </section>
-    </div>
+                <button type="submit">Anunciar</button>
+
+            </form>
+        </div>
+    </section>
+</div>
 
 </body>
 
