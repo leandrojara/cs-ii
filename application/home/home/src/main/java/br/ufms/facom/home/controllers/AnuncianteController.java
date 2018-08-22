@@ -8,6 +8,7 @@ import br.ufms.facom.home.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,13 +32,14 @@ public class AnuncianteController {
     }
 
     @RequestMapping(value = "/anunciante/salvar", method = RequestMethod.POST)
-    public String salvarAnunciante(@Valid @RequestBody Anunciante anunciante, BindingResult bindingResult, Model model) {
+    public String salvarAnunciante(@Valid Anunciante anunciante, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("erros", Utils.criarListaDeErrosDaValidacao(bindingResult.getAllErrors()));
             model.addAttribute("anunciante", anunciante);
             return "anunciante/cadastrar";
         }
 
+        anunciante.setSenha(new BCryptPasswordEncoder().encode(anunciante.getSenha()));
         anuncianteRepository.save(anunciante);
         model.addAttribute("anunciante", anunciante);
         return "login";
@@ -54,7 +56,7 @@ public class AnuncianteController {
             return new ResponseEntity(new ResponseError(CodeError.USUARIO_EXISTENTE, "E-mail já cadastrado"), HttpStatus.BAD_REQUEST);
         }
 
-        anunciante.setSenha(Utils.encrypt(anunciante.getSenha()));
+        anunciante.setSenha(new BCryptPasswordEncoder().encode(anunciante.getSenha()));
         anuncianteRepository.save(anunciante);
         return ResponseEntity.ok(anunciante);
     }

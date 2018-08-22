@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" type="text/css" href="../../resources/static/css/styleLogin.css" th:href="@{/css/styleLogin.css}">
     <title>
-        House Catalog - Página de Login
+        House Catalog - Login
     </title>
 </head>
 
@@ -22,8 +22,8 @@
         <br>
         <form th:action="@{/login}" method="POST" class="login-form">
 
-            <input type="text" id="email" name="email" placeholder="E-mail"/>
-            <input type="password" id="senha" name="senha" placeholder="Senha"/>
+            <input type="text" id="email" name="username" placeholder="E-mail"/>
+            <input type="password" id="senha" name="password" placeholder="Senha"/>
             <button name="Submit" value="Login" type="submit" th:text="Login">Login</button>
 
         </form>
