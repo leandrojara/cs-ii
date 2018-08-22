@@ -14,9 +14,19 @@ body {
 }
 
 body h1 {
+  font-size: 18px;
 	font-weight: bold;
 	color:#071075;
-	margin-bottom: 20px;
+	margin-bottom: 30px;
+  font-family: "Ebrima";
+}
+
+body h2 {
+  font-weight: bold;
+  color:#071075;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-family: "Ebrima";
 }
 
 #div-central {
@@ -48,7 +58,6 @@ body h1 {
 }
 
 #div-secao-login a {
-	color: #0b3cbf;
 	font-size: 15px;
 	text-decoration: none;
 }
@@ -68,6 +77,31 @@ body h1 {
 	background-color: #C71218;
 }
 
+.botao-entrar a {
+  margin-right: 10px;
+  display: inline;
+  padding: 7px 15px;
+  font-size: 13px;
+  background-color:#071075;
+  color: white
+}
+
+.botao-entrar a:hover {
+  background-color: #1b3c9c;
+}
+
+.botao-cadastrar a {
+  display: inline;
+  padding: 7px 15px;
+  font-size: 13px;
+  background-color:#C71218;
+  color: white
+}
+
+.botao-cadastrar a:hover {
+  background-color: #A60107;
+}
+
 #barraAzul-header {
 	height: 48px;
 	width: 100%;
@@ -85,7 +119,7 @@ body h1 {
 #menu-header-ul {
 	width: 100%;
 	line-height: 48px;
-	margin-left: 170px;
+	margin-left: 20px;
 }
 
 #menu-header-ul li {
@@ -106,7 +140,7 @@ body h1 {
 
 #barra-lateral {
 	width:170px;
-	height: 800px;
+	height: 900px;
 	background-color: #ddd;
 	float: left;
 }
@@ -114,7 +148,7 @@ body h1 {
 #section-conteudo {
 	background-color: white;
 	height: 800px;
-	padding: 50px;
+	padding: 40px;
 }
 
 
