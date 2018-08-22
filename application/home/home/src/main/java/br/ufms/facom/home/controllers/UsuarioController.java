@@ -1,6 +1,7 @@
 package br.ufms.facom.home.controllers;
 
 import br.ufms.facom.home.domain.Usuario;
+import br.ufms.facom.home.repository.ImovelRepository;
 import br.ufms.facom.home.repository.UsuarioRepository;
 import br.ufms.facom.home.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class UsuarioController implements UserDetailsService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+    @Autowired
+    private ImovelRepository imovelRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -47,6 +50,7 @@ public class UsuarioController implements UserDetailsService {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Model model) {
         model.addAttribute("usuarioLogado", Utils.getUsuarioLogado());
+        model.addAttribute("imoveis", imovelRepository.findAll());
         return "index";
     }
 }

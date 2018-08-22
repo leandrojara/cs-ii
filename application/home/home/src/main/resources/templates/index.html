@@ -49,13 +49,13 @@
                 <li>
                     <a href="/">Home</a>
                 </li>
-                <li>
-                    <a href="comprar.html">Comprar</a>
-                </li>
-                <li>
-                    <a href="alugar.html">Alugar</a>
-                </li>
-                <li>
+                <!--<li>-->
+                <!--<a href="/imovel/comprar">Comprar</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                <!--<a href="/imovel/alugar">Alugar</a>-->
+                <!--</li>-->
+                <li th:if="${usuarioLogado}">
                     <a href="/imovel/anunciar">Anunciar</a>
                 </li>
             </ul>
@@ -65,7 +65,26 @@
     </header>
 
     <section id="section-conteudo">
+        <div style="padding-left: 170px" th:if="!${imoveis.isEmpty()}">
 
+            <h1>Imóveis Recentes</h1>
+
+            <div class="quadro-anuncio" th:each="imovel : ${imoveis}">
+
+                <div class="imagem-quadro-anuncio">
+                    <img src="../static/imagens/no-image.jpg" width="100%"/>
+                </div>
+
+                <h2>Titulo do imovel</h2>
+                <p th:text="${imovel.descricao}"></p>
+
+                <div class="rodape-quadro-anuncio">
+                    <div class="rodape-quadro-anuncio-preco" th:text="${imovel.valorImovel}">R$ 250.000,00</div>
+                </div>
+
+            </div>
+
+        </div>
     </section>
 
 </div>
