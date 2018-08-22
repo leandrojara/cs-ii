@@ -22,8 +22,8 @@
         </div>
 
         <div id="div-secao-login">
-            <div>
-                Olá, <a href="#" title="Editar">José Joaquim</a>&nbsp;
+            <div th:if="${usuarioLogado}">
+                Olá, <a href="#" title="Editar" th:text="${usuarioLogado.nome}"></a>&nbsp;
                 <div id="div-botao-sair">
                     <a href="#" title="Logout">
                         x

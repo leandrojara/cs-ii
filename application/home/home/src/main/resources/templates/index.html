@@ -21,7 +21,7 @@
         </div>
 
         <div id="div-secao-login">
-            <div>
+            <div th:if="!${usuarioLogado}">
                 <span class="botao-entrar">
                     <a href="/login" title="Entrar">
                         Login
@@ -32,6 +32,14 @@
                         Registrar
                     </a>
                 </span>
+            </div>
+            <div th:if="${usuarioLogado}">
+                Olá, <a href="#" title="Editar" th:text="${usuarioLogado.nome}"></a>&nbsp;
+                <div id="div-botao-sair">
+                    <a href="#" title="Logout">
+                        x
+                    </a>
+                </div>
             </div>
         </div>
 

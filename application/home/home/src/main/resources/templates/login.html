@@ -20,6 +20,8 @@
             <h3 style="color: #071075">Login</h3>
         </div>
         <br>
+
+        <p th:if="${param.error}" class="error">E-mail e/ou senhas inválidos!</p>
         <form th:action="@{/login}" method="POST" class="login-form">
 
             <input type="text" id="email" name="username" placeholder="E-mail"/>

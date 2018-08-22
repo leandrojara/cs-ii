@@ -1,8 +1,8 @@
 package br.ufms.facom.home.controllers;
 
-import br.ufms.facom.home.domain.AdicionalImovel;
 import br.ufms.facom.home.domain.Anunciante;
 import br.ufms.facom.home.domain.Imovel;
+import br.ufms.facom.home.domain.Usuario;
 import br.ufms.facom.home.domain.enums.TipoConservacao;
 import br.ufms.facom.home.domain.enums.TipoImovel;
 import br.ufms.facom.home.domain.enums.TipoNegocio;
@@ -41,6 +41,7 @@ public class ImovelController {
         model.addAttribute("tiposImovel", TipoImovel.values());
         model.addAttribute("tiposNegocio", TipoNegocio.values());
         model.addAttribute("tiposConservacao", TipoConservacao.values());
+        model.addAttribute("usuarioLogado", Utils.getUsuarioLogado());
         return "imovel/anunciar";
     }
 
@@ -48,6 +49,8 @@ public class ImovelController {
     public String salvarImovel(@Valid Imovel imovel,
                                @RequestParam(value = "adicionais", required = false) long[] adicionais,
                                BindingResult bindingResult, Model model) {
+        Usuario usuario = Utils.getUsuarioLogado();
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("erros", Utils.criarListaDeErrosDaValidacao(bindingResult.getAllErrors()));
             imovel.setAdicionais(adicionalImovelRepository.findAll());
@@ -55,18 +58,22 @@ public class ImovelController {
             model.addAttribute("tiposImovel", TipoImovel.values());
             model.addAttribute("tiposNegocio", TipoNegocio.values());
             model.addAttribute("tiposConservacao", TipoConservacao.values());
+            if (usuario != null) {
+                model.addAttribute("usuarioLogado", usuario);
+            }
             return "imovel/anunciar";
         }
 
         imovel.setAdicionais(new ArrayList<>());
         if (adicionais != null) {
             for (long adicional : adicionais) {
-                imovel.getAdicionais().add(new AdicionalImovel(adicional));
+                imovel.getAdicionais().add(adicionalImovelRepository.findById(adicional).get());
             }
         }
 
         imovel.setDataCadastro(new Date());
-        imovel.setAnunciante((Anunciante) model.asMap().get("anunciante"));
+        Anunciante anunciante = anuncianteRepository.findById(Long.parseLong(usuario.getAuthorities().iterator().next().getAuthority())).get();
+        imovel.setAnunciante(anunciante);
         imovelRepository.save(imovel);
         return anunciarImovel(model);
     }
@@ -74,6 +81,7 @@ public class ImovelController {
     @RequestMapping(value = "/imovel/buscar", method = RequestMethod.GET)
     public String buscarTodosImoveis(Model model) {
         model.addAttribute("imoveis", imovelRepository.findAll());
+        model.addAttribute("usuarioLogado", Utils.getUsuarioLogado());
         return "index";
     }
 

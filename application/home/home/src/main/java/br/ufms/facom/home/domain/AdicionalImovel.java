@@ -14,9 +14,6 @@ public class AdicionalImovel {
     @Column(name = "descricao")
     private String descricao;
 
-    @Transient
-    private boolean selecionado = true;
-
     public AdicionalImovel() {
     }
 
@@ -38,13 +35,5 @@ public class AdicionalImovel {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public boolean isSelecionado() {
-        return selecionado;
-    }
-
-    public void setSelecionado(boolean selecionado) {
-        this.selecionado = selecionado;
     }
 }

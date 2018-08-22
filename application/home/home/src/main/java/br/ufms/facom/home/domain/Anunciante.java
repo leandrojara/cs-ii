@@ -14,6 +14,13 @@ public class Anunciante extends Usuario {
     @Column(name = "creci")
     private String creci;
 
+    public Anunciante() {
+    }
+
+    public Anunciante(Long id) {
+        setId(id);
+    }
+
     public String getCnpj() {
         return cnpj;
     }
