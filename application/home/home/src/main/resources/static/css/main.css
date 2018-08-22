@@ -153,6 +153,44 @@ body h2 {
 
 
 
+.quadro-anuncio {
+  position: relative;
+  width: 300px;
+  height: 310px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  padding: 10px;
+  float: left;
+}
+
+.imagem-quadro-anuncio {
+  width: 100%;
+  height: 200px;
+}
+
+.quadro-anuncio h2 {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+.quadro-anuncio p {
+  font-family: "Ebrima";
+  font-size: 13px;
+  color: #777;
+}
+
+.rodape-quadro-anuncio {
+  position: absolute; 
+  bottom: 10px; 
+  width: 300px;
+  height: 18px;
+}
+
+.rodape-quadro-anuncio-preco {
+  color: green;
+  text-align: right;
+  font-weight: bold;
+}
+
+
 
 .form {
   margin: 0 auto 50px;
