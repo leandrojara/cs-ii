@@ -31,7 +31,13 @@ public class AnuncianteController {
     }
 
     @RequestMapping(value = "/anunciante/salvar", method = RequestMethod.POST)
-    public String salvarAnunciante(@Valid Anunciante anunciante, Model model) {
+    public String salvarAnunciante(@Valid @RequestBody Anunciante anunciante, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("erros", Utils.criarListaDeErrosDaValidacao(bindingResult.getAllErrors()));
+            model.addAttribute("anunciante", anunciante);
+            return "anunciante/cadastrar";
+        }
+
         anuncianteRepository.save(anunciante);
         model.addAttribute("anunciante", anunciante);
         return "login";

@@ -46,8 +46,18 @@ public class ImovelController {
 
     @RequestMapping(value = "/imovel/salvar", method = RequestMethod.POST)
     public String salvarImovel(@Valid Imovel imovel,
-                         @RequestParam(value = "adicionais", required = false) long[] adicionais,
-                         Model model) {
+                               @RequestParam(value = "adicionais", required = false) long[] adicionais,
+                               BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("erros", Utils.criarListaDeErrosDaValidacao(bindingResult.getAllErrors()));
+            imovel.setAdicionais(adicionalImovelRepository.findAll());
+            model.addAttribute("imovel", imovel);
+            model.addAttribute("tiposImovel", TipoImovel.values());
+            model.addAttribute("tiposNegocio", TipoNegocio.values());
+            model.addAttribute("tiposConservacao", TipoConservacao.values());
+            return "imovel/anunciar";
+        }
+
         imovel.setAdicionais(new ArrayList<>());
         if (adicionais != null) {
             for (long adicional : adicionais) {
