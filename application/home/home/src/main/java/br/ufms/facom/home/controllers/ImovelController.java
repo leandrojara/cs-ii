@@ -75,6 +75,8 @@ public class ImovelController {
         Anunciante anunciante = anuncianteRepository.findById(Long.parseLong(usuario.getAuthorities().iterator().next().getAuthority())).get();
         imovel.setAnunciante(anunciante);
         imovelRepository.save(imovel);
+
+        model.addAttribute("onSave", "Imóvel salvo com sucesso!");
         return anunciarImovel(model);
     }
 

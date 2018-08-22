@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c5edc9a1-0b85-496f-bccc-c80526941025" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/controllers/ImovelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/controllers/ImovelController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/controllers/UsuarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/controllers/UsuarioController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/domain/AdicionalImovel.java" beforeDir="false" afterPath="$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/domain/AdicionalImovel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/domain/Anunciante.java" beforeDir="false" afterPath="$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/domain/Anunciante.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/utils/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/src/main/resources/templates/imovel/anunciar.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/src/main/resources/templates/imovel/anunciar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/src/main/resources/templates/login.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/home/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -209,14 +201,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="211" />
-          <entry key="java" value="1739" />
+          <entry key="html" value="215" />
+          <entry key="java" value="1789" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="211" />
-          <entry key="JAVA" value="1739" />
+          <entry key="HTML" value="215" />
+          <entry key="JAVA" value="1789" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts" />
@@ -245,22 +237,25 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/controllers/UsuarioController.java">
+        <entry file="file://$PROJECT_DIR$/home/src/main/resources/templates/imovel/anunciar.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="704">
-              <caret line="48" column="70" selection-start-line="48" selection-start-column="70" selection-end-line="48" selection-end-column="70" />
+            <state relative-caret-position="364">
+              <caret line="27" column="47" lean-forward="true" selection-start-line="27" selection-start-column="47" selection-end-line="27" selection-end-column="47" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#form#0;n#div#0;n#section#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/home/src/main/resources/templates/imovel/anunciar.html">
+        <entry file="file://$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/controllers/UsuarioController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="106" column="77" selection-start-line="106" selection-start-column="77" selection-end-line="106" selection-end-column="77" />
+            <state relative-caret-position="419">
+              <caret line="48" column="70" selection-start-line="48" selection-start-column="70" selection-end-line="48" selection-end-column="70" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -280,8 +275,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/controllers/ImovelController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="587">
-              <caret line="38" column="48" selection-start-line="38" selection-start-column="48" selection-end-line="38" selection-end-column="48" />
+            <state relative-caret-position="655">
+              <caret line="78" column="34" selection-start-line="78" selection-start-column="28" selection-end-line="78" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -350,13 +345,13 @@
         <option value="$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/config/WebSecurityConfig.java" />
         <option value="$PROJECT_DIR$/home/src/main/resources/templates/login.html" />
         <option value="$PROJECT_DIR$/home/src/main/resources/templates/index.html" />
-        <option value="$PROJECT_DIR$/home/src/main/resources/templates/imovel/anunciar.html" />
         <option value="$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/domain/Anunciante.java" />
         <option value="$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/domain/AdicionalImovel.java" />
         <option value="$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/domain/Usuario.java" />
         <option value="$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/utils/Utils.java" />
-        <option value="$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/controllers/ImovelController.java" />
         <option value="$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/controllers/UsuarioController.java" />
+        <option value="$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/controllers/ImovelController.java" />
+        <option value="$PROJECT_DIR$/home/src/main/resources/templates/imovel/anunciar.html" />
       </list>
     </option>
   </component>
@@ -547,7 +542,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1534977359029" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1534978070366" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -618,18 +613,18 @@
       <workItem from="1534889902052" duration="4972000" />
       <workItem from="1534953347961" duration="1779000" />
       <workItem from="1534966873162" duration="3303000" />
-      <workItem from="1534973311079" duration="4030000" />
+      <workItem from="1534973311079" duration="4539000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16862000" />
+    <option name="totallyTimeSpent" value="17371000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49921507" visible="true" weight="0.2531983" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49921507" visible="true" weight="0.2531983" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -982,27 +977,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/home/src/main/resources/templates/imovel/anunciar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="106" column="77" selection-start-line="106" selection-start-column="77" selection-end-line="106" selection-end-column="77" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/utils/Utils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="687">
           <caret line="42" column="37" selection-start-line="42" selection-start-column="37" selection-end-line="42" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/controllers/ImovelController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="587">
-          <caret line="38" column="48" selection-start-line="38" selection-start-column="48" selection-end-line="38" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1021,10 +999,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/controllers/UsuarioController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="704">
+        <state relative-caret-position="419">
           <caret line="48" column="70" selection-start-line="48" selection-start-column="70" selection-end-line="48" selection-end-column="70" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/home/src/main/java/br/ufms/facom/home/controllers/ImovelController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="655">
+          <caret line="78" column="34" selection-start-line="78" selection-start-column="28" selection-end-line="78" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/home/src/main/resources/templates/imovel/anunciar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="27" column="47" lean-forward="true" selection-start-line="27" selection-start-column="47" selection-end-line="27" selection-end-column="47" />
+          <folding>
+            <element signature="n#style#0;n#input#0;n#form#0;n#div#0;n#section#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
