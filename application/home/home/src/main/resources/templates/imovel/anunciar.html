@@ -68,19 +68,22 @@
                     <!-- Tipo do imóvel Casa, Apartamento, Terreno, Sobrado -->
                     <select id="tipoImovel" th:field="*{tipoImovel}">
                         <option value="">Tipo do Imóvel</option>
-                        <option th:each="tipoImovel : ${tiposImovel}" th:value="${tipoImovel}" th:text="${tipoImovel.descricao}" selected="selected"></option>
+                        <option th:each="tipoImovel : ${tiposImovel}" th:value="${tipoImovel}" th:text="${tipoImovel.descricao}"
+                                selected="selected"></option>
                     </select>
-                    
+
                     <!-- Negócio, venda ou aluguel -->
                     <select id="tipoNegocio" th:field="*{tipoNegocio}">
-                        <option value="">Tipo do Imóvel</option>
-                        <option th:each="tipoNegocio : ${tiposNegocio}" th:value="${tipoNegocio}" th:text="${tipoNegocio.descricao}" selected="selected"></option>
+                        <option value="">Tipo de Negócio</option>
+                        <option th:each="tipoNegocio : ${tiposNegocio}" th:value="${tipoNegocio}"
+                                th:text="${tipoNegocio.descricao}" selected="selected"></option>
                     </select>
-                    
+
                     <!-- Estado de Conservação -->
                     <select id="tipoConservacao" th:field="*{tipoConservacao}">
-                        <option value="">Tipo do Imóvel</option>
-                        <option th:each="tipoConservacao : ${tiposConservacao}" th:value="${tipoConservacao}" th:text="${tipoConservacao.descricao}" selected="selected"></option>
+                        <option value="">Estado de Conservação</option>
+                        <option th:each="tipoConservacao : ${tiposConservacao}" th:value="${tipoConservacao}"
+                                th:text="${tipoConservacao.descricao}" selected="selected"></option>
                     </select>
 
                     <input type="text" th:field="*{valorImovel}" placeholder="Valor"/>
@@ -97,12 +100,9 @@
 
                     <h2>Adicionais</h2>
 
-                    <div class="checkbox" th:each="adicional : ${adicionais}">
-                        <label> 
-                            <input type="checkbox" id="present" name="present"
-                            th:text="${adicional.descricao}"></input> 
-                            <input type="hidden" id="adicional" name="adicional" th:value="${adicional.id}" />
-                        </label>
+                    <div class="checkbox" th:each="adicional : *{adicionais}">
+                        <input type="checkbox" name="adicionais" th:value="${adicional.id}"/>
+                        <label th:text="${adicional.descricao}"></label>
                     </div>
 
                     <button type="submit">Anunciar</button>
