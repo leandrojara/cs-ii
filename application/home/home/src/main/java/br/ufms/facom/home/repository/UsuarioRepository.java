@@ -1,13 +1,13 @@
 package br.ufms.facom.home.repository;
 
-import br.ufms.facom.home.domain.Anunciante;
+import br.ufms.facom.home.domain.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface AnuncianteRepository extends JpaRepository<Anunciante, Long> {
+public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
-    Optional<Anunciante> findByEmail(String email);
+    Optional<Usuario> findByEmail(String email);
 }

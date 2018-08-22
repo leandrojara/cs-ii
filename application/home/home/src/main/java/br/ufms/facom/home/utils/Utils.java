@@ -1,7 +1,12 @@
 package br.ufms.facom.home.utils;
 
+import br.ufms.facom.home.domain.bean.Validation;
+import org.springframework.validation.ObjectError;
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Utils {
 
@@ -15,5 +20,15 @@ public class Utils {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static List<Validation> criarListaDeErrosDaValidacao(List<ObjectError> erros){
+        List<Validation> lista = new ArrayList<>();
+        if(erros != null && !erros.isEmpty()){
+            for(ObjectError error : erros){
+                lista.add(new Validation(error.getObjectName(), error.getDefaultMessage()));
+            }
+        }
+        return lista;
     }
 }
