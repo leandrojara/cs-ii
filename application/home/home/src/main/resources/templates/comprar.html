@@ -60,24 +60,24 @@
         <div style="padding-left: 170px">
 
             <h1>Imóveis Recentes</h1>
-
-            <a href="#">
-                <div class="quadro-anuncio">
-
-                    <div class="imagem-quadro-anuncio">
-                        <img src="../static/imagens/no-image.jpg" width="100%" />
-                    </div>
-
-                    <h2>Titulo do imovel</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla suscipit vulputate mi, at dictum lacus facilisis at. Vestibulum vitae scelerisque erat.</p>
-
-                    <div class="rodape-quadro-anuncio">
-                        <div class="rodape-quadro-anuncio-preco">R$ 250.000,00</div>
-                    </div>
-
-                </div>
-            </a>
             
+            <div class="quadro-anuncio" th:each="imovel : ${imoveis}">
+
+                <div class="imagem-quadro-anuncio">
+                    <img src="../static/imagens/no-image.jpg" width="100%" />
+                </div>
+
+                <h2 th:text="">Titulo do imovel</h2>
+                <p th:text="imovel.descricao">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla suscipit vulputate mi, at dictum lacus facilisis at. Vestibulum vitae scelerisque erat.
+                </p>
+
+                <div class="rodape-quadro-anuncio">
+                    <div class="rodape-quadro-anuncio-preco" th:text="imovel.valorImovel">R$ 250.000,00</div>
+                </div>
+
+            </div>
+
         </div>
     </section>
 
