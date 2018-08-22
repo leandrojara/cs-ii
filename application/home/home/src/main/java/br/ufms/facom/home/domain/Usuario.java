@@ -1,12 +1,17 @@
 package br.ufms.facom.home.domain;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "usuario")
-public class Usuario {
+public class Usuario implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,6 +36,21 @@ public class Usuario {
     @NotEmpty(message = "A senha do usuário não foi informada!")
     @Column(name = "senha")
     protected String senha;
+
+    @Column(name = "bloqueado")
+    protected boolean bloqueado;
+
+    @Transient
+    private List<GrantedAuthority> grantList;
+
+    public Usuario() {
+    }
+
+    public Usuario(String nome, String senha, List<GrantedAuthority> grantList) {
+        this.nome = nome;
+        this.senha = senha;
+        this.grantList = grantList;
+    }
 
     public Long getId() {
         return id;
@@ -70,5 +90,40 @@ public class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return grantList;
+    }
+
+    @Override
+    public String getPassword() {
+        return senha;
+    }
+
+    @Override
+    public String getUsername() {
+        return nome;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return !bloqueado;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return !bloqueado;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return !bloqueado;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return !bloqueado;
     }
 }
