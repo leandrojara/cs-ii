@@ -23,12 +23,12 @@
 <div class="login-page">
 
     <div class="form">
+
+        <p th:if="${erro}" class="error" th:text="${erro}"></p>
         <form th:action="@{/anunciante/salvar}" method="POST" th:object="${anunciante}">
-
-
             <input type="text" th:field="*{nome}" placeholder="Nome de Usuário" required />
             <input type="email" th:field="*{email}" placeholder="E-mail" required />
-            <input type="text" th:field="*{telefone}" class="telefone" placeholder="Telefone"/>
+            <input type="text" th:field="*{telefone}" class="telefone" placeholder="Telefone(Opcional)"/>
             <input type="text" th:field="*{cnpj}" class="cnpj" placeholder="CNPJ(Opcional)"/>
             <input type="text" th:field="*{creci}" placeholder="CRECI(Opcional)"/>
             <input type="password" th:field="*{senha}" placeholder="Senha" required/>

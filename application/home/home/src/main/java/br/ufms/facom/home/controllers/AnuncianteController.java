@@ -1,9 +1,11 @@
 package br.ufms.facom.home.controllers;
 
 import br.ufms.facom.home.domain.Anunciante;
+import br.ufms.facom.home.domain.Usuario;
 import br.ufms.facom.home.domain.bean.ResponseError;
 import br.ufms.facom.home.domain.enums.CodeError;
 import br.ufms.facom.home.repository.AnuncianteRepository;
+import br.ufms.facom.home.repository.UsuarioRepository;
 import br.ufms.facom.home.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,6 +26,8 @@ public class AnuncianteController {
 
     @Autowired
     private AnuncianteRepository anuncianteRepository;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     @RequestMapping(value = "/anunciante/cadastrar", method = RequestMethod.GET)
     public String cadastrarAnunciante(Model model) {
@@ -37,6 +41,12 @@ public class AnuncianteController {
             model.addAttribute("erros", Utils.criarListaDeErrosDaValidacao(bindingResult.getAllErrors()));
             model.addAttribute("anunciante", anunciante);
             return "anunciante/cadastrar";
+        }
+
+        Optional<Usuario> usuario = usuarioRepository.findByEmail(anunciante.getEmail());
+        if (usuario.isPresent()) {
+            model.addAttribute("erro", "Usuário já cadastrado no sistema");
+            return cadastrarAnunciante(model);
         }
 
         anunciante.setSenha(new BCryptPasswordEncoder().encode(anunciante.getSenha()));
