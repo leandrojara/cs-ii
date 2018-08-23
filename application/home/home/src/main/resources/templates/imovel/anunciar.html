@@ -80,21 +80,25 @@
                 <input type="text" name="estado" th:field="*{estado}" style="width:100px" placeholder="Estado" required />
 
                 <!-- Tipo do imóvel Casa, Apartamento, Terreno, Sobrado -->
-                <select id="tipoImovel" th:field="*{tipoImovel}" required>
+
+                <select class="appearance-select" th:field="*{tipoImovel}" required>
+
                     <option value="" selected="selected">Tipo do Imóvel</option>
                     <option th:each="tipoImovel : ${tiposImovel}" th:value="${tipoImovel}"
                             th:text="${tipoImovel.descricao}"></option>
                 </select>
 
                 <!-- Negócio, venda ou aluguel -->
-                <select id="tipoNegocio" th:field="*{tipoNegocio}" required>
+                <select class="appearance-select" th:field="*{tipoNegocio}" required>
+>
                     <option value="" selected="selected">Tipo de Negócio</option>
                     <option th:each="tipoNegocio : ${tiposNegocio}" th:value="${tipoNegocio}"
                             th:text="${tipoNegocio.descricao}" ></option>
                 </select>
 
                 <!-- Estado de Conservação -->
-                <select id="tipoConservacao" th:field="*{tipoConservacao}" required>
+                <select class="appearance-select" th:field="*{tipoConservacao}" required >
+
                     <option value="" selected="selected" >Estado de Conservação</option>
                     <option th:each="tipoConservacao : ${tiposConservacao}" th:value="${tipoConservacao}"
                             th:text="${tipoConservacao.descricao}"></option>
