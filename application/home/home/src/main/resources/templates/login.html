@@ -16,7 +16,7 @@
 
     <div class="form">
         <div style="width: 100%; height: 150px">
-            <img src="../../resources/static/imagens/logo.png" style="width: 100%"/>
+            <img src="../../resources/static/imagens/logo.png" th:src="@{/imagens/logo.png}" style="width: 100%"/>
             <h3 style="color: #071075">Login</h3>
         </div>
         <br>
@@ -30,6 +30,8 @@
 
         </form>
         <p class="message">Não é Registrado? <a href="/anunciante/cadastrar">Criar uma conta</a></p>
+        <p class="message"><a href="/">Cancelar</a></p>
+
     </div>
 </div>
 

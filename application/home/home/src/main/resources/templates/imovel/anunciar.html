@@ -9,6 +9,17 @@
     <title>
         House Catalog - Anunciar Imóvel
     </title>
+
+    <script type="text/javascript" >
+        function validarCampos(){
+
+        if(document.formulario.numero.value=="")
+        {
+            alert( "Preencha campo NÚMERO corretamente" );
+            document.formulario.rua.focus();
+            return false;
+        }
+    </script>
 </head>
 
 <body>
@@ -38,12 +49,12 @@
                 <li>
                     <a href="/">Home</a>
                 </li>
-                <!--<li>-->
-                    <!--<a href="../comprar.html">Comprar</a>-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--<a href="../alugar.html">Alugar</a>-->
-                <!--</li>-->
+                <li>
+                    <a href="../comprar.html">Comprar</a>
+                </li>
+                <li>
+                    <a href="../alugar.html">Alugar</a>
+                </li>
                 <li>
                     <a href="/imovel/anunciar">Anunciar</a>
                 </li>
@@ -57,49 +68,49 @@
 
         <h1>Anunciar Imóvel</h1>
         <div class="form">
-            <form th:action="@{/imovel/salvar}" method="POST" th:object="${imovel}">
+            <form th:action="@{/imovel/salvar}" method="POST" th:object="${imovel}" name="formulario" onSubmit="validarCampos()" >
 
-                <input type="text" th:field="*{descricao}" placeholder="Descrição" style="width:100%"/>
-                <input type="text" th:field="*{rua}" style="width:500px" placeholder="Rua"/>
-                <input type="text" th:field="*{numero}" style="width:100px" placeholder="Número"/>
-                <input type="text" th:field="*{complemento}" style="width:300px" placeholder="Complemento"/>
-                <input type="text" th:field="*{bairro}" placeholder="Bairro"/>
-                <input type="text" th:field="*{cep}" placeholder="CEP"/>
-                <input type="text" th:field="*{cidade}" placeholder="Cidade"/>
-                <input type="text" th:field="*{estado}" style="width:100px" placeholder="Estado"/>
+                <input type="text" name="descricao" th:field="*{descricao}" style="width:100%" placeholder="Descrição"/>
+                <input type="text" name="rua" th:field="*{rua}" style="width:500px" placeholder="Rua" required />
+                <input type="text" name="numero" th:field="*{numero}" style="width:100px" placeholder="Número" required />
+                <input type="text" name="complemento" th:field="*{complemento}" style="width:300px" placeholder="Complemento"/>
+                <input type="text" name="bairro" th:field="*{bairro}" placeholder="Bairro" required />
+                <input type="text" name="cep" th:field="*{cep}" placeholder="CEP" required />
+                <input type="text" name="cidade" th:field="*{cidade}" placeholder="Cidade" required />
+                <input type="text" name="estado" th:field="*{estado}" style="width:100px" placeholder="Estado" required />
 
                 <!-- Tipo do imóvel Casa, Apartamento, Terreno, Sobrado -->
-                <select id="tipoImovel" th:field="*{tipoImovel}">
+                <select id="tipoImovel" th:field="*{tipoImovel}" required>
                     <option value="" selected="selected">Tipo do Imóvel</option>
                     <option th:each="tipoImovel : ${tiposImovel}" th:value="${tipoImovel}"
                             th:text="${tipoImovel.descricao}"></option>
                 </select>
 
                 <!-- Negócio, venda ou aluguel -->
-                <select id="tipoNegocio" th:field="*{tipoNegocio}">
+                <select id="tipoNegocio" th:field="*{tipoNegocio}" required>
                     <option value="" selected="selected">Tipo de Negócio</option>
                     <option th:each="tipoNegocio : ${tiposNegocio}" th:value="${tipoNegocio}"
                             th:text="${tipoNegocio.descricao}" ></option>
                 </select>
 
                 <!-- Estado de Conservação -->
-                <select id="tipoConservacao" th:field="*{tipoConservacao}">
+                <select id="tipoConservacao" th:field="*{tipoConservacao}" required>
                     <option value="" selected="selected" >Estado de Conservação</option>
                     <option th:each="tipoConservacao : ${tiposConservacao}" th:value="${tipoConservacao}"
                             th:text="${tipoConservacao.descricao}"></option>
                 </select>
 
-                <input type="text" th:field="*{valorImovel}" placeholder="Valor"/>
-                <input type="text" th:field="*{valorCondominio}" placeholder="Valor do Condomínio"/>
-                <input type="text" th:field="*{largura}" placeholder="Largura"/>
-                <input type="text" th:field="*{comprimento}" placeholder="Comprimento"/>
-                <input type="text" th:field="*{areaTotal}" placeholder="Área Total"/>
-                <input type="text" th:field="*{areaConstruida}" placeholder="Área Construída"/>
-                <input type="text" th:field="*{comodos}" placeholder="Cômodos"/>
-                <input type="text" th:field="*{quartosSimples}" placeholder="Quartos"/>
-                <input type="text" th:field="*{banheirosSimples}" placeholder="Banheiros"/>
-                <input type="text" th:field="*{suites}" placeholder="Suítes"/>
-                <input type="text" th:field="*{vagasGaragem}" placeholder="Vagas na Garagem"/>
+                <input type="text" name="valorImovel" th:field="*{valorImovel}" placeholder="Valor" required />
+                <input type="text" name="valorCondominio" th:field="*{valorCondominio}" placeholder="Valor do Condomínio"/>
+                <input type="text" name="largura" th:field="*{largura}" placeholder="Largura"/>
+                <input type="text" name="comprimento" th:field="*{comprimento}" placeholder="Comprimento"/>
+                <input type="text" name="areaTotal" th:field="*{areaTotal}" placeholder="Área Total"/>
+                <input type="text" name="areaConstruida" th:field="*{areaConstruida}" placeholder="Área Construída"/>
+                <input type="text" name="comodos" th:field="*{comodos}" placeholder="Cômodos" required />
+                <input type="text" name="quartosSimples" th:field="*{quartosSimples}" placeholder="Quartos" required />
+                <input type="text" name="banheirosSimples" th:field="*{banheirosSimples}" placeholder="Banheiros" required />
+                <input type="text" name="suites" th:field="*{suites}" placeholder="Suítes" required />
+                <input type="text" name="vagasGaragem" th:field="*{vagasGaragem}" placeholder="Vagas na Garagem" required />
 
                 <h2>Adicionais</h2>
 
