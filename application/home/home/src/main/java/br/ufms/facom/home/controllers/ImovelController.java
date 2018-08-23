@@ -2,6 +2,7 @@ package br.ufms.facom.home.controllers;
 
 import br.ufms.facom.home.domain.Anunciante;
 import br.ufms.facom.home.domain.Imovel;
+import br.ufms.facom.home.domain.ImovelImagem;
 import br.ufms.facom.home.domain.Usuario;
 import br.ufms.facom.home.domain.enums.TipoConservacao;
 import br.ufms.facom.home.domain.enums.TipoImovel;
@@ -17,8 +18,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
@@ -32,6 +36,8 @@ public class ImovelController {
     private AdicionalImovelRepository adicionalImovelRepository;
     @Autowired
     private AnuncianteRepository anuncianteRepository;
+
+    public static final String uploadingdir = System.getProperty("user.dir") + "/uploadingdir/";
 
     @RequestMapping(value = "/imovel/anunciar", method = RequestMethod.GET)
     public String anunciarImovel(Model model) {
@@ -48,7 +54,8 @@ public class ImovelController {
     @RequestMapping(value = "/imovel/salvar", method = RequestMethod.POST)
     public String salvarImovel(@Valid Imovel imovel,
                                @RequestParam(value = "adicionais", required = false) long[] adicionais,
-                               BindingResult bindingResult, Model model) {
+                               @RequestParam("uploadingFiles") MultipartFile[] uploadingFiles,
+                               BindingResult bindingResult, Model model) throws IOException {
         Usuario usuario = Utils.getUsuarioLogado();
 
         if (bindingResult.hasErrors()) {
@@ -75,6 +82,30 @@ public class ImovelController {
         Anunciante anunciante = anuncianteRepository.findById(Long.parseLong(usuario.getAuthorities().iterator().next().getAuthority())).get();
         imovel.setAnunciante(anunciante);
         imovelRepository.save(imovel);
+
+        if (uploadingFiles != null) {
+            imovel.setImagens(new ArrayList<>());
+
+            for (MultipartFile uploadedFile : uploadingFiles) {
+                File file = new File(uploadingdir);
+                if (!file.exists()) {
+                    file.mkdir();
+                }
+                file = new File(uploadingdir + System.getProperty("file.separator") + imovel.getId());
+                if (!file.exists()) {
+                    file.mkdir();
+                }
+                file = new File(uploadingdir + System.getProperty("file.separator") + imovel.getId() + uploadedFile.getOriginalFilename());
+                uploadedFile.transferTo(file);
+
+                ImovelImagem imovelImagem = new ImovelImagem();
+                imovelImagem.setImovel(imovel);
+                imovelImagem.setDiretorio(file.getPath());
+                imovel.getImagens().add(imovelImagem);
+            }
+
+            imovelRepository.save(imovel);
+        }
 
         model.addAttribute("onSave", "Imóvel salvo com sucesso!");
         return anunciarImovel(model);

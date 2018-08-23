@@ -13,10 +13,29 @@
         House Catalog - Anunciar Imóvel
     </title>
 
-    <script type="text/javascript" >
-        $(document).ready(function(){
+    <script type="text/javascript">
+        $(document).ready(function () {
             $('.cep').mask('00000-000');
         });
+
+        function updateSize() {
+            var nBytes = 0,
+                oFiles = document.getElementById("fileInput").files,
+                nFiles = oFiles.length;
+            for (var nFileId = 0; nFileId < nFiles; nFileId++) {
+                nBytes += oFiles[nFileId].size;
+            }
+
+            var sOutput = nBytes + " bytes";
+            // optional code for multiples approximation
+            for (var aMultiples = ["KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"], nMultiple = 0, nApprox = nBytes / 1024; nApprox > 1; nApprox /= 1024, nMultiple++) {
+                sOutput = nApprox.toFixed(3) + " " + aMultiples[nMultiple] + " (" + nBytes + " bytes)";
+            }
+            // end of optional code
+
+            document.getElementById("fileNum").innerHTML = nFiles;
+            document.getElementById("fileSize").innerHTML = sOutput;
+        }
     </script>
 </head>
 
@@ -48,10 +67,10 @@
                     <a href="/">Home</a>
                 </li>
                 <!--<li>-->
-                    <!--<a href="../comprar.html">Comprar</a>-->
+                <!--<a href="../comprar.html">Comprar</a>-->
                 <!--</li>-->
                 <!--<li>-->
-                    <!--<a href="../alugar.html">Alugar</a>-->
+                <!--<a href="../alugar.html">Alugar</a>-->
                 <!--</li>-->
                 <li>
                     <a href="/imovel/anunciar">Anunciar</a>
@@ -66,16 +85,19 @@
 
         <h1>Anunciar Imóvel</h1>
         <div class="form">
-            <form th:action="@{/imovel/salvar}" method="POST" th:object="${imovel}" >
+            <form th:action="@{/imovel/salvar}" method="POST" th:object="${imovel}" enctype="multipart/form-data">
 
                 <input type="text" name="descricao" th:field="*{descricao}" style="width:100%" placeholder="Descrição"/>
-                <input type="text" name="rua" th:field="*{rua}" style="width:500px" placeholder="Rua" required />
-                <input type="text" name="numero" th:field="*{numero}" style="width:100px" placeholder="Número" required />
-                <input type="text" name="complemento" th:field="*{complemento}" style="width:300px" placeholder="Complemento"/>
-                <input type="text" name="bairro" th:field="*{bairro}" placeholder="Bairro" required />
-                <input type="text" class="cep" name="cep" th:field="*{cep}" placeholder="CEP" required />
-                <input type="text" name="cidade" th:field="*{cidade}" placeholder="Cidade" required />
-                <input type="text" name="estado" th:field="*{estado}" style="width:100px" placeholder="Estado" required />
+                <input type="text" name="rua" th:field="*{rua}" style="width:500px" placeholder="Rua" required/>
+                <input type="text" name="numero" th:field="*{numero}" style="width:100px" placeholder="Número"
+                       required/>
+                <input type="text" name="complemento" th:field="*{complemento}" style="width:300px"
+                       placeholder="Complemento"/>
+                <input type="text" name="bairro" th:field="*{bairro}" placeholder="Bairro" required/>
+                <input type="text" class="cep" name="cep" th:field="*{cep}" placeholder="CEP" required/>
+                <input type="text" name="cidade" th:field="*{cidade}" placeholder="Cidade" required/>
+                <input type="text" name="estado" th:field="*{estado}" style="width:100px" placeholder="Estado"
+                       required/>
 
                 <!-- Tipo do imóvel Casa, Apartamento, Terreno, Sobrado -->
 
@@ -91,28 +113,31 @@
 
                     <option value="" selected="selected">Tipo de Negócio</option>
                     <option th:each="tipoNegocio : ${tiposNegocio}" th:value="${tipoNegocio}"
-                            th:text="${tipoNegocio.descricao}" ></option>
+                            th:text="${tipoNegocio.descricao}"></option>
                 </select>
 
                 <!-- Estado de Conservação -->
-                <select class="appearance-select" th:field="*{tipoConservacao}" required >
+                <select class="appearance-select" th:field="*{tipoConservacao}" required>
 
-                    <option value="" selected="selected" >Estado de Conservação</option>
+                    <option value="" selected="selected">Estado de Conservação</option>
                     <option th:each="tipoConservacao : ${tiposConservacao}" th:value="${tipoConservacao}"
                             th:text="${tipoConservacao.descricao}"></option>
                 </select>
 
-                <input type="number" name="valorImovel" th:field="*{valorImovel}" placeholder="Valor" required />
-                <input type="number" name="valorCondominio" th:field="*{valorCondominio}" placeholder="Valor do Condomínio"/>
+                <input type="number" name="valorImovel" th:field="*{valorImovel}" placeholder="Valor" required/>
+                <input type="number" name="valorCondominio" th:field="*{valorCondominio}"
+                       placeholder="Valor do Condomínio"/>
                 <input type="number" name="largura" th:field="*{largura}" placeholder="Largura"/>
                 <input type="number" name="comprimento" th:field="*{comprimento}" placeholder="Comprimento"/>
                 <input type="number" name="areaTotal" th:field="*{areaTotal}" placeholder="Área Total"/>
                 <input type="number" name="areaConstruida" th:field="*{areaConstruida}" placeholder="Área Construída"/>
-                <input type="number" name="comodos" th:field="*{comodos}" placeholder="Cômodos" required />
-                <input type="number" name="quartosSimples" th:field="*{quartosSimples}" placeholder="Quartos" required />
-                <input type="number" name="banheirosSimples" th:field="*{banheirosSimples}" placeholder="Banheiros" required />
-                <input type="number" name="suites" th:field="*{suites}" placeholder="Suítes" required />
-                <input type="number" name="vagasGaragem" th:field="*{vagasGaragem}" placeholder="Vagas na Garagem" required />
+                <input type="number" name="comodos" th:field="*{comodos}" placeholder="Cômodos" required/>
+                <input type="number" name="quartosSimples" th:field="*{quartosSimples}" placeholder="Quartos" required/>
+                <input type="number" name="banheirosSimples" th:field="*{banheirosSimples}" placeholder="Banheiros"
+                       required/>
+                <input type="number" name="suites" th:field="*{suites}" placeholder="Suítes" required/>
+                <input type="number" name="vagasGaragem" th:field="*{vagasGaragem}" placeholder="Vagas na Garagem"
+                       required/>
 
                 <h2>Adicionais</h2>
 
@@ -123,7 +148,9 @@
 
                 <h2>Adicione imagens do imóvel</h2>
 
-                <input type="file" name="pic" accept="image/*" multiple>
+                <input id="fileInput" type="file" name="uploadingFiles" onchange="updateSize();" multiple>
+                selected files: <span id="fileNum">0</span>;
+                total size: <span id="fileSize">0</span>
                 <br>
 
                 <button type="submit">Anunciar</button>
