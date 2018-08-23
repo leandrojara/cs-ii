@@ -24,8 +24,8 @@
         <p th:if="${param.error}" class="error">E-mail e/ou senhas inválidos!</p>
         <form th:action="@{/login}" method="POST" class="login-form">
 
-            <input type="text" id="email" name="username" placeholder="E-mail"/>
-            <input type="password" id="senha" name="password" placeholder="Senha"/>
+            <input type="text" id="email" name="username" placeholder="E-mail" required/>
+            <input type="password" id="senha" name="password" placeholder="Senha" required/>
             <button name="Submit" value="Login" type="submit" th:text="Login">Login</button>
 
         </form>

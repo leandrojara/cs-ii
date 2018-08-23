@@ -17,12 +17,12 @@
     <div class="form">
         <form th:action="@{/anunciante/salvar}" method="POST" th:object="${anunciante}">
 
-            <input type="text" th:field="*{nome}" placeholder="Nome de Usuário"/>
-            <input type="email" th:field="*{email}" placeholder="E-mail"/>
-            <input type="text" th:field="*{telefone}" placeholder="Telefone"/>
+            <input type="text" th:field="*{nome}" placeholder="Nome de Usuário" required/>
+            <input type="email" th:field="*{email}" placeholder="E-mail" required/>
+            <input type="text" th:field="*{telefone}" placeholder="Telefone(Opcional)"/>
             <input type="text" th:field="*{cnpj}" placeholder="CNPJ(Opcional)"/>
             <input type="text" th:field="*{creci}" placeholder="CRECI(Opcional)"/>
-            <input type="password" th:field="*{senha}" placeholder="Senha"/>
+            <input type="password" th:field="*{senha}" placeholder="Senha" required/>
             <!--input type="password" placeholder="Repetir Senha"/-->
             <button type="submit">Criar Cadastro</button>
 

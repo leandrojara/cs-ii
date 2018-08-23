@@ -22,8 +22,6 @@ public class Usuario implements UserDetails {
     @Column(name = "nome")
     protected String nome;
 
-    @NotNull(message = "O telefone do usuário não foi informado!")
-    @NotEmpty(message = "O telefone do usuário não foi informado!")
     @Column(name = "telefone")
     protected String telefone;
 
