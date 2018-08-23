@@ -6,19 +6,21 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" type="text/css" href="../../../resources/static/css/reset.css" th:href="@{/css/reset.css}">
     <link rel="stylesheet" type="text/css" href="../../../resources/static/css/main.css" th:href="@{/css/main.css}">
+    <script th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
+
     <title>
         House Catalog - Anunciar Imóvel
     </title>
 
     <script type="text/javascript" >
-        function validarCampos(){
 
-        if(document.formulario.numero.value=="")
-        {
-            alert( "Preencha campo NÚMERO corretamente" );
-            document.formulario.rua.focus();
-            return false;
-        }
+        $(document).ready(function(){
+            $('.cep').mask('00000-000');
+            $('.telefone').mask('(00) 0000-0000');
+            $('.cpf').mask('000.000.000-00');
+            $('.cnpj').mask('00.000.000/0000-00');
+        });
+
     </script>
 </head>
 
@@ -68,7 +70,7 @@
 
         <h1>Anunciar Imóvel</h1>
         <div class="form">
-            <form th:action="@{/imovel/salvar}" method="POST" th:object="${imovel}" name="formulario" onSubmit="validarCampos()" >
+            <form th:action="@{/imovel/salvar}" method="POST" th:object="${imovel}" >
 
                 <input type="text" name="descricao" th:field="*{descricao}" style="width:100%" placeholder="Descrição"/>
                 <input type="text" name="rua" th:field="*{rua}" style="width:500px" placeholder="Rua" required />
@@ -90,7 +92,7 @@
 
                 <!-- Negócio, venda ou aluguel -->
                 <select class="appearance-select" th:field="*{tipoNegocio}" required>
->
+
                     <option value="" selected="selected">Tipo de Negócio</option>
                     <option th:each="tipoNegocio : ${tiposNegocio}" th:value="${tipoNegocio}"
                             th:text="${tipoNegocio.descricao}" ></option>

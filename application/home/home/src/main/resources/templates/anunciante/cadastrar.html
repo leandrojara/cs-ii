@@ -5,9 +5,17 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" type="text/css" href="../../../resources/static/css/styleLogin.css" th:href="@{/css/styleLogin.css}">
+    <script th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
     <title>
         House Catalog - Cadastro
     </title>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.telefone').mask('(00) 0000-0000');
+            $('.cnpj').mask('00.000.000/0000-00');
+        });
+    </script>
 </head>
 
 <body>
@@ -19,8 +27,8 @@
 
             <input type="text" th:field="*{nome}" placeholder="Nome de Usuário"/>
             <input type="email" th:field="*{email}" placeholder="E-mail"/>
-            <input type="text" th:field="*{telefone}" placeholder="Telefone"/>
-            <input type="text" th:field="*{cnpj}" placeholder="CNPJ(Opcional)"/>
+            <input type="text" th:field="*{telefone}" class="telefone" placeholder="Telefone"/>
+            <input type="text" th:field="*{cnpj}" class="cnpj" placeholder="CNPJ(Opcional)"/>
             <input type="text" th:field="*{creci}" placeholder="CRECI(Opcional)"/>
             <input type="password" th:field="*{senha}" placeholder="Senha"/>
             <!--input type="password" placeholder="Repetir Senha"/-->
