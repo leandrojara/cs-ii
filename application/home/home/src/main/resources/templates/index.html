@@ -75,11 +75,11 @@
                     <img src="../static/imagens/no-image.jpg" width="100%"/>
                 </div>
 
-                <h2>Titulo do imovel</h2>
+                <h2 th:text="${imovel.getDescription()}"></h2>
                 <p th:text="${imovel.descricao}"></p>
 
                 <div class="rodape-quadro-anuncio">
-                    <div class="rodape-quadro-anuncio-preco" th:text="${imovel.valorImovel}">R$ 250.000,00</div>
+                    <div class="rodape-quadro-anuncio-preco" th:text="${imovel.getValorStr()}">R$ 250.000,00</div>
                 </div>
 
             </div>

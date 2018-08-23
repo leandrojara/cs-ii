@@ -5,6 +5,7 @@ import br.ufms.facom.home.domain.enums.TipoImovel;
 import br.ufms.facom.home.domain.enums.TipoNegocio;
 
 import javax.persistence.*;
+import java.text.NumberFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -339,5 +340,13 @@ public class Imovel {
 
     public void setImagens(List<ImovelImagem> imagens) {
         this.imagens = imagens;
+    }
+
+    public String getDescription(){
+        return tipoImovel.getDescricao() + ", " + cidade + ", " + bairro;
+    }
+
+    public String getValorStr(){
+        return NumberFormat.getCurrencyInstance().format(valorImovel);
     }
 }
