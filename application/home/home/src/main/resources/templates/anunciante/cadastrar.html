@@ -4,15 +4,17 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link rel="stylesheet" type="text/css" href="../../../resources/static/css/styleLogin.css" th:href="@{/css/styleLogin.css}">
+    <link rel="stylesheet" type="text/css" href="../../../resources/static/css/styleLogin.css"
+          th:href="@{/css/styleLogin.css}">
     <script th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
+    <script th:src="@{/js/jquery.mask.js}"></script>
     <title>
         House Catalog - Cadastro
     </title>
 
     <script type="text/javascript">
         $(document).ready(function(){
-            $('.telefone').mask('(00) 0000-0000');
+            $('.telefone').mask('(00) 90000-0000');
             $('.cnpj').mask('00.000.000/0000-00');
         });
     </script>
@@ -26,8 +28,8 @@
 
         <p th:if="${erro}" class="error" th:text="${erro}"></p>
         <form th:action="@{/anunciante/salvar}" method="POST" th:object="${anunciante}">
-            <input type="text" th:field="*{nome}" placeholder="Nome de Usuário" required />
-            <input type="email" th:field="*{email}" placeholder="E-mail" required />
+            <input type="text" th:field="*{nome}" placeholder="Nome de Usuário" required/>
+            <input type="email" th:field="*{email}" placeholder="E-mail" required/>
             <input type="text" th:field="*{telefone}" class="telefone" placeholder="Telefone(Opcional)"/>
             <input type="text" th:field="*{cnpj}" class="cnpj" placeholder="CNPJ(Opcional)"/>
             <input type="text" th:field="*{creci}" placeholder="CRECI(Opcional)"/>

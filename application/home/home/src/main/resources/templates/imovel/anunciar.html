@@ -7,20 +7,16 @@
     <link rel="stylesheet" type="text/css" href="../../../resources/static/css/reset.css" th:href="@{/css/reset.css}">
     <link rel="stylesheet" type="text/css" href="../../../resources/static/css/main.css" th:href="@{/css/main.css}">
     <script th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
+    <script th:src="@{/js/jquery.mask.js}"></script>
 
     <title>
         House Catalog - Anunciar Imóvel
     </title>
 
     <script type="text/javascript" >
-
         $(document).ready(function(){
             $('.cep').mask('00000-000');
-            $('.telefone').mask('(00) 0000-0000');
-            $('.cpf').mask('000.000.000-00');
-            $('.cnpj').mask('00.000.000/0000-00');
         });
-
     </script>
 </head>
 
@@ -77,7 +73,7 @@
                 <input type="text" name="numero" th:field="*{numero}" style="width:100px" placeholder="Número" required />
                 <input type="text" name="complemento" th:field="*{complemento}" style="width:300px" placeholder="Complemento"/>
                 <input type="text" name="bairro" th:field="*{bairro}" placeholder="Bairro" required />
-                <input type="text" name="cep" th:field="*{cep}" placeholder="CEP" required />
+                <input type="text" class="cep" name="cep" th:field="*{cep}" placeholder="CEP" required />
                 <input type="text" name="cidade" th:field="*{cidade}" placeholder="Cidade" required />
                 <input type="text" name="estado" th:field="*{estado}" style="width:100px" placeholder="Estado" required />
 

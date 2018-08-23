@@ -10,7 +10,6 @@ import br.ufms.facom.home.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -49,7 +48,7 @@ public class AnuncianteController {
             return cadastrarAnunciante(model);
         }
 
-        anunciante.setSenha(new BCryptPasswordEncoder().encode(anunciante.getSenha()));
+        anunciante.setSenha(Utils.encrypt(anunciante.getSenha()));
         anuncianteRepository.save(anunciante);
         model.addAttribute("anunciante", anunciante);
         return "login";
@@ -66,7 +65,7 @@ public class AnuncianteController {
             return new ResponseEntity(new ResponseError(CodeError.USUARIO_EXISTENTE, "E-mail já cadastrado"), HttpStatus.BAD_REQUEST);
         }
 
-        anunciante.setSenha(new BCryptPasswordEncoder().encode(anunciante.getSenha()));
+        anunciante.setSenha(Utils.encrypt(anunciante.getSenha()));
         anuncianteRepository.save(anunciante);
         return ResponseEntity.ok(anunciante);
     }
