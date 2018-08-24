@@ -15,7 +15,7 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('.cep').mask('00000-000');
+            $("#formAnunciar input[name=cep]").mask('00000-000');
         });
 
         function updateSize() {
@@ -85,7 +85,7 @@
 
         <h1>Anunciar Imóvel</h1>
         <div class="form">
-            <form th:action="@{/imovel/salvar}" method="POST" th:object="${imovel}" enctype="multipart/form-data">
+            <form th:action="@{/imovel/salvar}" id="formAnunciar" method="POST" th:object="${imovel}" enctype="multipart/form-data">
 
                 <input type="text" name="descricao" th:field="*{descricao}" style="width:100%" placeholder="Descrição"/>
                 <input type="text" name="rua" th:field="*{rua}" style="width:500px" placeholder="Rua" required/>
@@ -94,7 +94,7 @@
                 <input type="text" name="complemento" th:field="*{complemento}" style="width:300px"
                        placeholder="Complemento"/>
                 <input type="text" name="bairro" th:field="*{bairro}" placeholder="Bairro" required/>
-                <input type="text" class="cep" name="cep" th:field="*{cep}" placeholder="CEP" required/>
+                <input type="text" name="cep" th:field="*{cep}" placeholder="CEP" required/>
                 <input type="text" name="cidade" th:field="*{cidade}" placeholder="Cidade" required/>
                 <input type="text" name="estado" th:field="*{estado}" style="width:100px" placeholder="Estado"
                        required/>
