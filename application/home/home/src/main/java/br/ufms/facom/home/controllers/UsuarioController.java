@@ -1,5 +1,7 @@
 package br.ufms.facom.home.controllers;
 
+import br.ufms.facom.home.domain.Imovel;
+import br.ufms.facom.home.domain.ImovelImagem;
 import br.ufms.facom.home.domain.Usuario;
 import br.ufms.facom.home.repository.ImovelRepository;
 import br.ufms.facom.home.repository.UsuarioRepository;
@@ -15,6 +17,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -48,9 +53,24 @@ public class UsuarioController implements UserDetailsService {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(Model model) {
+    public String index(Model model) throws IOException {
         model.addAttribute("usuarioLogado", Utils.getUsuarioLogado());
-        model.addAttribute("imoveis", imovelRepository.findAll());
+
+        List<Imovel> imoveis = imovelRepository.findAll();
+        if (imoveis != null) {
+            for (Imovel imovel : imoveis) {
+                if (imovel.getImagens() != null) {
+                    for (ImovelImagem imagem : imovel.getImagens()) {
+                        File file = new File(imagem.getDiretorio());
+                        if (file.exists()) {
+                            imagem.setBytesImg(Files.readAllBytes(file.toPath()));
+                        }
+                    }
+                }
+            }
+        }
+
+        model.addAttribute("imoveis", imoveis);
         return "index";
     }
 }
