@@ -51,10 +51,10 @@
                     <a href="/">Home</a>
                 </li>
                 <!--<li>-->
-                    <!--<a href="/imovel/comprar">Comprar</a>-->
+                <!--<a href="/imovel/comprar">Comprar</a>-->
                 <!--</li>-->
                 <!--<li>-->
-                    <!--<a href="/imovel/alugar">Alugar</a>-->
+                <!--<a href="/imovel/alugar">Alugar</a>-->
                 <!--</li>-->
                 <li th:if="${usuarioLogado}">
                     <a href="/imovel/anunciar">Anunciar</a>
@@ -72,12 +72,14 @@
 
             <div class="quadro-anuncio" th:each="imovel : ${imoveis}">
 
-                <div class="w3-content w3-display-container">
+                <div class="w3-content w3-display-container" th:if="!${imovel.imagens.isEmpty()}">
                     <img class="mySlides imgAnuncio" th:src="${imagem.getBytesImgFormatted()}" style="width:100%"
                          th:each="imagem : ${imovel.imagens}">
                     <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
                     <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
                 </div>
+
+                <img src="../../resources/static/imagens/no-image.jpg" width="100%" th:if="${imovel.imagens.isEmpty()}"/>
 
                 <h2 th:text="${imovel.getDescription()}"></h2>
                 <p th:text="${imovel.descricao}"></p>
@@ -106,12 +108,16 @@
     function showDivs(n) {
         var i;
         var x = document.getElementsByClassName("mySlides");
-        if (n > x.length) {slideIndex = 1}
-        if (n < 1) {slideIndex = x.length}
+        if (n > x.length) {
+            slideIndex = 1
+        }
+        if (n < 1) {
+            slideIndex = x.length
+        }
         for (i = 0; i < x.length; i++) {
             x[i].style.display = "none";
         }
-        x[slideIndex-1].style.display = "block";
+        x[slideIndex - 1].style.display = "block";
     }
 </script>
 

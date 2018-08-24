@@ -86,21 +86,23 @@ public class ImovelController {
             imovel.setImagens(new ArrayList<>());
 
             for (MultipartFile uploadedFile : uploadingFiles) {
-                File file = new File(uploadingdir);
-                if (!file.exists()) {
-                    file.mkdir();
-                }
-                file = new File(uploadingdir + System.getProperty("file.separator") + imovel.getId());
-                if (!file.exists()) {
-                    file.mkdir();
-                }
-                file = new File(uploadingdir + System.getProperty("file.separator") + imovel.getId() + uploadedFile.getOriginalFilename());
-                uploadedFile.transferTo(file);
+                if (!uploadedFile.isEmpty()) {
+                    File file = new File(uploadingdir);
+                    if (!file.exists()) {
+                        file.mkdir();
+                    }
+                    file = new File(uploadingdir + System.getProperty("file.separator") + imovel.getId());
+                    if (!file.exists()) {
+                        file.mkdir();
+                    }
+                    file = new File(uploadingdir + System.getProperty("file.separator") + imovel.getId() + uploadedFile.getOriginalFilename());
+                    uploadedFile.transferTo(file);
 
-                ImovelImagem imovelImagem = new ImovelImagem();
-                imovelImagem.setImovel(imovel);
-                imovelImagem.setDiretorio(file.getPath());
-                imovel.getImagens().add(imovelImagem);
+                    ImovelImagem imovelImagem = new ImovelImagem();
+                    imovelImagem.setImovel(imovel);
+                    imovelImagem.setDiretorio(file.getPath());
+                    imovel.getImagens().add(imovelImagem);
+                }
             }
 
             imovelRepository.save(imovel);
