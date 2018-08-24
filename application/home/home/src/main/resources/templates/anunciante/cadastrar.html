@@ -14,7 +14,15 @@
 
     <script type="text/javascript">
         $(document).ready(function(){
-            $('.telefone').mask('(00) 90000-0000');
+            $('.telefone').mask('(00) 0000-00009');
+            $('.telefone').on( "keydown", function(e){
+                if($(this).val().length > 13) {
+                    $(this).mask('(00) 00000-0009');
+                }
+                if( e.which == 8 || e.which == 46){
+                    $(this).mask('(00) 0000-00009');
+                }
+            });
             $('.cnpj').mask('00.000.000/0000-00');
         });
     </script>

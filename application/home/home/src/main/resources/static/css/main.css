@@ -140,14 +140,14 @@ body h2 {
 
 #barra-lateral {
 	width:170px;
-	height: 900px;
+	height: 1000px;
 	background-color: #ddd;
 	float: left;
 }
 
 #section-conteudo {
 	background-color: white;
-	height: 800px;
+	height: 900px;
 	padding: 40px;
 }
 
