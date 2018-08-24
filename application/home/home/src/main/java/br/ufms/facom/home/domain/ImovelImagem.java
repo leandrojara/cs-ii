@@ -1,6 +1,7 @@
 package br.ufms.facom.home.domain;
 
 import javax.persistence.*;
+import java.util.Base64;
 
 @Entity
 @Table(name = "imovel_imagem")
@@ -17,6 +18,9 @@ public class ImovelImagem {
 
     @Column(name = "diretorio")
     private String diretorio;
+
+    @Transient
+    private byte[] bytesImg;
 
     public Long getId() {
         return id;
@@ -40,5 +44,18 @@ public class ImovelImagem {
 
     public void setDiretorio(String diretorio) {
         this.diretorio = diretorio;
+    }
+
+    public byte[] getBytesImg() {
+        return bytesImg;
+    }
+
+    public void setBytesImg(byte[] bytesImg) {
+        this.bytesImg = bytesImg;
+    }
+
+    public String getBytesImgFormatted() {
+        String tipoImagem = diretorio.split("\\.")[diretorio.split("\\.").length - 1];
+        return "data:image/" + tipoImagem + ";base64," + new String(Base64.getEncoder().encode(bytesImg));
     }
 }
