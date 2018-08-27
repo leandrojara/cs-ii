@@ -70,13 +70,13 @@
 
             <h1>Imóveis Recentes</h1>
 
-            <div class="quadro-anuncio" th:each="imovel : ${imoveis}">
+            <div class="quadro-anuncio" th:each="imovel, iterator : ${imoveis}">
 
                 <div class="w3-content w3-display-container" th:if="!${imovel.imagens.isEmpty()}">
-                    <img class="mySlides imgAnuncio" th:src="${imagem.getBytesImgFormatted()}" style="width:100%"
+                    <img class="mySlides'+iterator.index' imgAnuncio" th:src="${imagem.getBytesImgFormatted()}" style="width:100%"
                          th:each="imagem : ${imovel.imagens}">
-                    <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
-                    <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+                    <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1, iterator.index)">&#10094;</button>
+                    <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1, iterator.index)">&#10095;</button>
                 </div>
 
                 <img src="../../resources/static/imagens/no-image.jpg" th:src="@{/imagens/no-image.jpg}" width="100%"
@@ -97,6 +97,7 @@
 </body>
 
 <script>
+    /*
     var slideIndex = 1;
     showDivs(slideIndex);
 
@@ -117,6 +118,27 @@
             x[i].style.display = "none";
         }
         x[slideIndex - 1].style.display = "block";
+    } */
+
+    var slideIndex = [1,2,3];
+    var slideId = ["mySlides1", "mySlides2", "mySlides3"]
+    showDivs(1, 0);
+    showDivs(1, 1);
+    showDivs(1, 2);
+
+    function plusDivs(n, no) {
+      showDivs(slideIndex[no] += n, no);
+    }
+
+    function showDivs(n, no) {
+      var i;
+      var x = document.getElementsByClassName(slideId[no]);
+      if (n > x.length) {slideIndex[no] = 1}    
+      if (n < 1) {slideIndex[no] = x.length}
+      for (i = 0; i < x.length; i++) {
+         x[i].style.display = "none";  
+      }
+      x[slideIndex[no]-1].style.display = "block";  
     }
 </script>
 
