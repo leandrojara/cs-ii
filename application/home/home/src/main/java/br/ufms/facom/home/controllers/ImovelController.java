@@ -36,7 +36,8 @@ public class ImovelController {
     @Autowired
     private AnuncianteRepository anuncianteRepository;
 
-    public static final String uploadingdir = System.getProperty("user.dir") + "/uploadingdir/";
+    private static final String fileSeparator = System.getProperty("file.separator");
+    private static final String uploadingdir = System.getProperty("user.dir") + fileSeparator + "uploadingdir" + fileSeparator;
 
     @RequestMapping(value = "/imovel/anunciar", method = RequestMethod.GET)
     public String anunciarImovel(Model model) {
@@ -91,11 +92,11 @@ public class ImovelController {
                     if (!file.exists()) {
                         file.mkdir();
                     }
-                    file = new File(uploadingdir + System.getProperty("file.separator") + imovel.getId());
+                    file = new File(uploadingdir + imovel.getId());
                     if (!file.exists()) {
                         file.mkdir();
                     }
-                    file = new File(uploadingdir + System.getProperty("file.separator") + imovel.getId() + uploadedFile.getOriginalFilename());
+                    file = new File(uploadingdir + imovel.getId() + fileSeparator + uploadedFile.getOriginalFilename());
                     uploadedFile.transferTo(file);
 
                     ImovelImagem imovelImagem = new ImovelImagem();
