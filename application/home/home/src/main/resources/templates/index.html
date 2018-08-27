@@ -79,7 +79,8 @@
                     <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
                 </div>
 
-                <img src="../../resources/static/imagens/no-image.jpg" width="100%" th:if="${imovel.imagens.isEmpty()}"/>
+                <img src="../../resources/static/imagens/no-image.jpg" th:src="@{/imagens/no-image.jpg}" width="100%"
+                     th:if="${imovel.imagens.isEmpty()}"/>
 
                 <h2 th:text="${imovel.getDescription()}"></h2>
                 <p th:text="${imovel.descricao}"></p>
@@ -87,9 +88,7 @@
                 <div class="rodape-quadro-anuncio">
                     <div class="rodape-quadro-anuncio-preco" th:text="${imovel.getValorStr()}">R$ 250.000,00</div>
                 </div>
-
             </div>
-
         </div>
     </section>
 
