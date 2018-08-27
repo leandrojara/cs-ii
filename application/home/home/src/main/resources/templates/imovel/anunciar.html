@@ -6,8 +6,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" type="text/css" href="../../../resources/static/css/reset.css" th:href="@{/css/reset.css}">
     <link rel="stylesheet" type="text/css" href="../../../resources/static/css/main.css" th:href="@{/css/main.css}">
-    <script th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
     <script th:src="@{/js/jquery.mask.js}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <title>
         House Catalog - Anunciar Imóvel
@@ -82,7 +84,11 @@
     </header>
 
     <section id="section-conteudo">
-
+        <div class="alert alert-success alert-dismissible" th:if="${onSave}">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Sucesso!</strong>
+            <span th:text="${onSave}">Test</span>
+        </div>
         <h1>Anunciar Imóvel</h1>
         <div class="form">
             <form th:action="@{/imovel/salvar}" id="formAnunciar" method="POST" th:object="${imovel}" enctype="multipart/form-data">
