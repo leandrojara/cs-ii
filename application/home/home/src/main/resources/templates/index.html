@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../resources/static/css/reset.css" th:href="@{/css/reset.css}">
     <link rel="stylesheet" type="text/css" href="../../resources/static/css/main.css" th:href="@{/css/main.css}">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!--link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"-->
 </head>
 
 <body>
@@ -22,6 +22,14 @@
         </div>
 
         <div class="div-secao-login">
+            <div th:if="${usuarioLogado}">
+                Olá, <a href="#" title="Editar" th:text="${usuarioLogado.nome}"></a>&nbsp;
+                <div id="div-botao-sair">
+                    <a href="/logout" title="Logout">
+                        x
+                    </a>
+                </div>
+            </div>
             <div th:if="!${usuarioLogado}">
                 <span class="botao-entrar">
                     <a href="/login" title="Entrar">
@@ -33,14 +41,6 @@
                         Registrar
                     </a>
                 </span>
-            </div>
-            <div th:if="${usuarioLogado}">
-                Olá, <a href="#" title="Editar" th:text="${usuarioLogado.nome}"></a>&nbsp;
-                <div id="div-botao-sair">
-                    <a href="/logout" title="Logout">
-                        x
-                    </a>
-                </div>
             </div>
         </div>
 
