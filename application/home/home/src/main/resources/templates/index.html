@@ -21,7 +21,7 @@
             <img src="../../resources/static/imagens/logo.png" th:src="@{/imagens/logo.png}" id="logo-header"/>
         </div>
 
-        <div id="div-secao-login">
+        <div class="div-secao-login">
             <div th:if="!${usuarioLogado}">
                 <span class="botao-entrar">
                     <a href="/login" title="Entrar">
@@ -66,7 +66,7 @@
     </header>
 
     <section id="section-conteudo">
-        <div style="padding-left: 170px" th:if="!${imoveis.isEmpty()}">
+        <div th:if="!${imoveis.isEmpty()}">
 
             <h1>Imóveis Recentes</h1>
 

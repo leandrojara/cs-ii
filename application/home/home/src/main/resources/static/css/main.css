@@ -46,18 +46,18 @@ body h2 {
 	height: 110px;
 }
 
-#div-secao-login {
+.div-secao-login {
 	width: 100%;
 	height: 27px;
 	text-align: right;
 	font-size: 12px;
 }
 
-#div-secao-login > div {
+.div-secao-login > div {
 	margin-right: 20px;
 }
 
-#div-secao-login a {
+.div-secao-login a {
 	font-size: 15px;
 	text-decoration: none;
 }
@@ -160,6 +160,8 @@ body h2 {
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   padding: 10px;
   float: left;
+  margin-right: 30px;
+  margin-bottom: 40px;
 }
 
 .imagem-quadro-anuncio {
@@ -170,7 +172,9 @@ body h2 {
 .quadro-anuncio h2 {
   margin-top: 8px;
   margin-bottom: 8px;
+  font-size: 15px;
 }
+
 .quadro-anuncio p {
   font-family: "Ebrima";
   font-size: 13px;
