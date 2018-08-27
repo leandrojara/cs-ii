@@ -311,7 +311,9 @@ body h2 {
     background-color: inherit;
     text-align: center;
     cursor: pointer;
-    white-space: nowrap
+    white-space: nowrap;
+    width: 10px;
+    height: 10px;
 }
 
 .w3-btn:hover {
@@ -527,7 +529,7 @@ body h2 {
 
 .w3-black, .w3-hover-black:hover {
     color: #fff !important;
-    background-color: #000 !important
+    background-color: #f7f1f1 !important
 }
 
 .w3-display-left {

@@ -76,12 +76,11 @@
                     <img th:class="${'imgAnuncio mySlides'+iterator.index}" th:src="${imagem.getBytesImgFormatted()}"
                          style="width:100%;" th:styleappend="${iteratorImg.index} > 0 ? 'display:none;' : 'display:block;'"
                          th:each="imagem, iteratorImg: ${imovel.imagens}">
-                    <button class="w3-button w3-black w3-display-left"
-                            th:onclick="'plusDivs(-1, \''+${iterator.index}+'\');'">
-                    </button>
-                    <button class="w3-button w3-black w3-display-right"
-                            th:onclick="'plusDivs(1, \''+${iterator.index}+'\');'">
-                    </button>
+
+                    <img class="w3-button w3-black w3-display-left" th:onclick="'plusDivs(-1, \''+${iterator.index}+'\');'"
+                         src="../../resources/static/imagens/arrow_back.png" th:src="@{/imagens/arrow_back.png}">
+                    <img class="w3-button w3-black w3-display-right" th:onclick="'plusDivs(1, \''+${iterator.index}+'\');'"
+                         src="../../resources/static/imagens/arrow_after.png" th:src="@{/imagens/arrow_after.png}">
                 </div>
 
                 <img src="../../resources/static/imagens/no-image.jpg" th:src="@{/imagens/no-image.jpg}" width="100%"
