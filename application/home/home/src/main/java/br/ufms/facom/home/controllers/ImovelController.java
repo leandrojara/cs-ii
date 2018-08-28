@@ -24,7 +24,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -100,9 +99,9 @@ public class ImovelController {
         imovelServices.addAdicionais(imovel, adicionais);
         Anunciante anunciante = anuncianteRepository.findById(Long.parseLong(usuario.getAuthorities().iterator().next().getAuthority())).get();
         imovel.setAnunciante(anunciante);
-        imovelRepository.save(imovel);//salva pois precisa do id do imovel para criar a estrutura dos arquivos de imagem
-        imovelServices.addUploadedFiles(imovel, uploadingFiles);
-        imovelRepository.save(imovel);//salva novamente para salvar as referencias das imagens no bd
+        imovelServices.createImagemEntities(imovel, uploadingFiles);
+        imovelRepository.save(imovel);
+        imovelServices.saveUploadedFiles(imovel);
 
         model.addAttribute("onSave", "Imóvel salvo com sucesso!");
         return anunciarImovel(model);

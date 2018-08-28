@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,28 +36,39 @@ public class ImovelServicesImpl implements ImovelServices {
     }
 
     @Override
-    public void addUploadedFiles(Imovel imovel, MultipartFile[] uploadingFiles) throws IOException {
-        if (uploadingFiles != null) {
+    public void createImagemEntities(Imovel imovel, MultipartFile[] uploadingFiles) throws IOException {
+        if (uploadingFiles != null && imovel != null) {
             imovel.setImagens(new ArrayList<>());
 
             for (MultipartFile uploadedFile : uploadingFiles) {
                 if (!uploadedFile.isEmpty()) {
-                    File file = new File(uploadingdir);
-                    if (!file.exists()) {
-                        file.mkdir();
-                    }
-                    file = new File(uploadingdir + imovel.getId());
-                    if (!file.exists()) {
-                        file.mkdir();
-                    }
-                    file = new File(uploadingdir + imovel.getId() + fileSeparator + uploadedFile.getOriginalFilename());
-                    uploadedFile.transferTo(file);
-
                     ImovelImagem imovelImagem = new ImovelImagem();
                     imovelImagem.setImovel(imovel);
-                    imovelImagem.setDiretorio(file.getPath());
+                    imovelImagem.setDiretorio(uploadedFile.getOriginalFilename());
+                    imovelImagem.setBytesImg(uploadedFile.getBytes());
                     imovel.getImagens().add(imovelImagem);
                 }
+            }
+        }
+    }
+
+    @Override
+    public void saveUploadedFiles(Imovel imovel) throws IOException {
+        if (imovel != null && imovel.getId() != null) {
+            for (ImovelImagem imovelImagem : imovel.getImagens()) {
+                File file = new File(uploadingdir);
+                if (!file.exists()) {
+                    file.mkdir();
+                }
+                file = new File(uploadingdir + imovel.getId());
+                if (!file.exists()) {
+                    file.mkdir();
+                }
+                file = new File(uploadingdir + imovel.getId() + fileSeparator + imovelImagem.getDiretorio());
+
+                OutputStream outputStream = new FileOutputStream(file);
+                outputStream.write(imovelImagem.getBytesImg());
+                outputStream.close();
             }
         }
     }
@@ -73,7 +86,7 @@ public class ImovelServicesImpl implements ImovelServices {
     public void findUploadedFiles(Imovel imovel) throws IOException {
         if (imovel != null && imovel.getImagens() != null) {
             for (ImovelImagem imagem : imovel.getImagens()) {
-                File file = new File(imagem.getDiretorio());
+                File file = new File(uploadingdir + imovel.getId() + fileSeparator + imagem.getDiretorio());
                 if (file.exists()) {
                     imagem.setBytesImg(Files.readAllBytes(file.toPath()));
                 }

@@ -10,7 +10,9 @@ public interface ImovelServices {
 
     void addAdicionais(Imovel imovel, long[] adicionais);
 
-    void addUploadedFiles(Imovel imovel, MultipartFile[] multipartFiles) throws IOException;
+    void createImagemEntities(Imovel imovel, MultipartFile[] multipartFiles) throws IOException;
+
+    void saveUploadedFiles(Imovel imovel) throws IOException;
 
     void findUploadedFiles(List<Imovel> imoveis) throws IOException;
 
