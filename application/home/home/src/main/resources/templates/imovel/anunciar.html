@@ -72,7 +72,8 @@
         </div>
         <h1>Anunciar Imóvel</h1>
         <div class="form">
-            <form th:action="@{/imovel/salvar}" id="formAnunciar" method="POST" th:object="${imovel}" enctype="multipart/form-data">
+            <form th:action="@{/imovel/salvar}" id="formAnunciar" method="POST" th:object="${imovel}"
+                  enctype="multipart/form-data">
 
                 <input type="text" name="descricao" th:field="*{descricao}" style="width:100%" placeholder="Descrição"/>
                 <input type="text" name="rua" th:field="*{rua}" style="width:500px" placeholder="Rua" required/>
@@ -129,7 +130,8 @@
                 <h2>Adicionais</h2>
 
                 <div class="checkbox" th:each="adicional : *{adicionais}">
-                    <input type="checkbox" name="adicionais" th:value="${adicional.id}"/>
+                    <input type="checkbox" name="adicionais" th:value="${adicional.id}"
+                           th:checked="${adicional.selecionado}"/>
                     <label th:text="${adicional.descricao}"></label>
                 </div>
 

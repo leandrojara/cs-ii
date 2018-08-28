@@ -5,6 +5,7 @@ import br.ufms.facom.home.domain.ImovelImagem;
 import br.ufms.facom.home.domain.Usuario;
 import br.ufms.facom.home.repository.ImovelRepository;
 import br.ufms.facom.home.repository.UsuarioRepository;
+import br.ufms.facom.home.services.ImovelServices;
 import br.ufms.facom.home.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -31,6 +32,8 @@ public class UsuarioController implements UserDetailsService {
     private UsuarioRepository usuarioRepository;
     @Autowired
     private ImovelRepository imovelRepository;
+    @Autowired
+    private ImovelServices imovelServices;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -57,18 +60,7 @@ public class UsuarioController implements UserDetailsService {
         model.addAttribute("usuarioLogado", Utils.getUsuarioLogado());
 
         List<Imovel> imoveis = imovelRepository.findAll();
-        if (imoveis != null) {
-            for (Imovel imovel : imoveis) {
-                if (imovel.getImagens() != null) {
-                    for (ImovelImagem imagem : imovel.getImagens()) {
-                        File file = new File(imagem.getDiretorio());
-                        if (file.exists()) {
-                            imagem.setBytesImg(Files.readAllBytes(file.toPath()));
-                        }
-                    }
-                }
-            }
-        }
+        imovelServices.findUploadedFiles(imoveis);
 
         model.addAttribute("imoveis", imoveis);
         return "index";
