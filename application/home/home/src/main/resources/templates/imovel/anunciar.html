@@ -17,7 +17,7 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#formAnunciar input[name=cep]").mask('00000-000');
+            $(".cep").mask('00000-000');
         });
     </script>
 </head>
@@ -81,7 +81,7 @@
                 <input type="text" name="complemento" th:field="*{complemento}" style="width:300px"
                        placeholder="Complemento"/>
                 <input type="text" name="bairro" th:field="*{bairro}" placeholder="Bairro" required/>
-                <input type="text" name="cep" th:field="*{cep}" placeholder="CEP" required/>
+                <input type="text" class="cep" name="cep" th:field="*{cep}" placeholder="CEP" required/>
                 <input type="text" name="cidade" th:field="*{cidade}" placeholder="Cidade" required/>
                 <input type="text" name="estado" th:field="*{estado}" style="width:100px" placeholder="Estado"
                        required/>

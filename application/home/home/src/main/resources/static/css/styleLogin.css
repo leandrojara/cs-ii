@@ -7,6 +7,13 @@
 
 */
 
+body {
+  background: #d3d3d3; /* fallback for old browsers */
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;      
+}
+
 .login-page {
   width: 360px;
   padding: 8% 0 0;
@@ -93,10 +100,4 @@
 }
 .container .info span .fa {
   color: #EF3B3A;
-}
-body {
-  background: #d3d3d3; /* fallback for old browsers */
-  font-family: "Roboto", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;      
 }

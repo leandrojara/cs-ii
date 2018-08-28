@@ -1,0 +1,65 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+/* cores da identidade:
+
+#C71218 vermelho
+#071075 azul
+
+*/
+
+body {
+  background: #d3d3d3; /* fallback for old browsers */
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;      
+}
+
+.quadro-menu-user {
+	width: 250px;
+	height: 450px;
+	margin-left: 80px;
+	margin-top: 100px;
+	float: left;
+	background-color: white;
+	padding: 20px;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.quadro-apresentacao-user {
+	width: 750px;
+	height: 450px;
+	margin-left: 25px;
+	margin-top: 100px;
+	background-color: white;
+	float: left;
+	padding: 20px;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.imagem-user {
+	width: 250px;
+	height: 250px;
+}
+
+.menu-user {
+    width: 100%;
+}
+
+.menu-user a {
+	margin-top: 10px;
+    background-color: #eee;
+    color: black;
+    display: block;
+    padding: 12px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.menu-user a:hover {
+    background-color: #ccc;
+}
+
+.menu-user a.active {
+    background-color: #071075;
+    color: white;
+}
