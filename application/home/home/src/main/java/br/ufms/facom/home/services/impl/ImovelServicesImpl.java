@@ -23,7 +23,7 @@ public class ImovelServicesImpl implements ImovelServices {
     private AdicionalImovelRepository adicionalImovelRepository;
 
     private static final String fileSeparator = System.getProperty("file.separator");
-    private static final String uploadingdir = System.getProperty("user.dir") + fileSeparator + "uploadingdir" + fileSeparator;
+    private static final String uploadingdir = System.getProperty("user.dir") + fileSeparator + "uploadingdir" + fileSeparator + "anuncios" + fileSeparator;
 
     @Override
     public void addAdicionais(Imovel imovel, long[] adicionais) {
