@@ -64,13 +64,18 @@ public class ImovelServicesImpl implements ImovelServices {
     public void findUploadedFiles(List<Imovel> imoveis) throws IOException {
         if (imoveis != null) {
             for (Imovel imovel : imoveis) {
-                if (imovel.getImagens() != null) {
-                    for (ImovelImagem imagem : imovel.getImagens()) {
-                        File file = new File(imagem.getDiretorio());
-                        if (file.exists()) {
-                            imagem.setBytesImg(Files.readAllBytes(file.toPath()));
-                        }
-                    }
+                findUploadedFiles(imovel);
+            }
+        }
+    }
+
+    @Override
+    public void findUploadedFiles(Imovel imovel) throws IOException {
+        if (imovel != null && imovel.getImagens() != null) {
+            for (ImovelImagem imagem : imovel.getImagens()) {
+                File file = new File(imagem.getDiretorio());
+                if (file.exists()) {
+                    imagem.setBytesImg(Files.readAllBytes(file.toPath()));
                 }
             }
         }

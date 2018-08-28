@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -60,12 +61,13 @@ public class ImovelController {
 
     @RequestMapping(value = "/imovel/editar", method = RequestMethod.GET)
     public String editarImovel(@RequestParam("idImovel") Long idImovel,
-                               Model model) {
+                               Model model) throws IOException {
         Optional<Imovel> imovel = imovelRepository.findById(idImovel);
         if (imovel.isPresent()) {
             adicionalImovelServices.setSelecionado(imovel.get().getAdicionais(), true);
             List<AdicionalImovel> adicionais = adicionalImovelRepository.findAll();
             adicionalImovelServices.unificaLista(imovel.get().getAdicionais(), adicionais);
+            imovelServices.findUploadedFiles(imovel.get());
             model.addAttribute("imovel", imovel.get());
             addFormAttributes(model);
             return "imovel/anunciar";

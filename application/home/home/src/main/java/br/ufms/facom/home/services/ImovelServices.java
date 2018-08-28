@@ -13,4 +13,6 @@ public interface ImovelServices {
     void addUploadedFiles(Imovel imovel, MultipartFile[] multipartFiles) throws IOException;
 
     void findUploadedFiles(List<Imovel> imoveis) throws IOException;
+
+    void findUploadedFiles(Imovel imovel) throws IOException;
 }
