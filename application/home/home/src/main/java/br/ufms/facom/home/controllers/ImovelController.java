@@ -1,5 +1,6 @@
 package br.ufms.facom.home.controllers;
 
+import br.ufms.facom.home.domain.AdicionalImovel;
 import br.ufms.facom.home.domain.Anunciante;
 import br.ufms.facom.home.domain.Imovel;
 import br.ufms.facom.home.domain.Usuario;
@@ -9,6 +10,7 @@ import br.ufms.facom.home.domain.enums.TipoNegocio;
 import br.ufms.facom.home.repository.AdicionalImovelRepository;
 import br.ufms.facom.home.repository.AnuncianteRepository;
 import br.ufms.facom.home.repository.ImovelRepository;
+import br.ufms.facom.home.services.AdicionalImovelServices;
 import br.ufms.facom.home.services.ImovelServices;
 import br.ufms.facom.home.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class ImovelController {
@@ -35,17 +39,39 @@ public class ImovelController {
     private AnuncianteRepository anuncianteRepository;
     @Autowired
     private ImovelServices imovelServices;
+    @Autowired
+    private AdicionalImovelServices adicionalImovelServices;
+
+    private void addFormAttributes(Model model) {
+        model.addAttribute("tiposImovel", TipoImovel.values());
+        model.addAttribute("tiposNegocio", TipoNegocio.values());
+        model.addAttribute("tiposConservacao", TipoConservacao.values());
+        model.addAttribute("usuarioLogado", Utils.getUsuarioLogado());
+    }
 
     @RequestMapping(value = "/imovel/anunciar", method = RequestMethod.GET)
     public String anunciarImovel(Model model) {
         Imovel imovel = new Imovel();
         imovel.setAdicionais(adicionalImovelRepository.findAll());
         model.addAttribute("imovel", imovel);
-        model.addAttribute("tiposImovel", TipoImovel.values());
-        model.addAttribute("tiposNegocio", TipoNegocio.values());
-        model.addAttribute("tiposConservacao", TipoConservacao.values());
-        model.addAttribute("usuarioLogado", Utils.getUsuarioLogado());
+        addFormAttributes(model);
         return "imovel/anunciar";
+    }
+
+    @RequestMapping(value = "/imovel/editar", method = RequestMethod.GET)
+    public String editarImovel(@RequestParam("idImovel") Long idImovel,
+                               Model model) {
+        Optional<Imovel> imovel = imovelRepository.findById(idImovel);
+        if (imovel.isPresent()) {
+            adicionalImovelServices.setSelecionado(imovel.get().getAdicionais(), true);
+            List<AdicionalImovel> adicionais = adicionalImovelRepository.findAll();
+            adicionalImovelServices.unificaLista(imovel.get().getAdicionais(), adicionais);
+            model.addAttribute("imovel", imovel.get());
+            addFormAttributes(model);
+            return "imovel/anunciar";
+        } else {
+            return "";
+        }
     }
 
     @RequestMapping(value = "/imovel/salvar", method = RequestMethod.POST)
