@@ -14,6 +14,24 @@ body {
   -moz-osx-font-smoothing: grayscale;      
 }
 
+body h1 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #071075;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    font-family: "Ebrima";
+}
+
+body h2 {
+	font-size: 16px;
+    font-weight: bold;
+    color: #071075;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-family: "Ebrima";
+}
+
 .quadro-menu-user {
 	width: 250px;
 	height: 450px;
@@ -21,7 +39,7 @@ body {
 	margin-top: 100px;
 	float: left;
 	background-color: white;
-	padding: 20px;
+	padding: 25px;
 	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
@@ -32,7 +50,7 @@ body {
 	margin-top: 100px;
 	background-color: white;
 	float: left;
-	padding: 20px;
+	padding: 25px;
 	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
@@ -62,4 +80,39 @@ body {
 .menu-user a.active {
     background-color: #071075;
     color: white;
+}
+
+.form {
+  position: relative;
+}
+.form input {
+  outline: 0;
+  background: #f2f2f2;
+  width: 250px;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.form button {
+  text-transform: uppercase;
+  outline: 0;
+  background: #071075;
+
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+  position: absolute;
+  right: 70px;
+  bottom: -120px;
+  width: 140px;
+  height: 48px;
+}
+.form button:hover,.form button:active,.form button:focus {
+  background: #0a2b8b;
 }
