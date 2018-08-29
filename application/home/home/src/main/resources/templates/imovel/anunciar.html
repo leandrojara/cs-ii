@@ -29,7 +29,17 @@
                 cache: false,
                 timeout: 600000,
                 success: function (data) {
+                    //removendo o objeto da lista de imagens
+                    var imagens = [[${imovel.imagens}]];
+                    for (i = 0; i < imagens.length; i++) {
+                        if (imagens[i].id == n) {
+                            imagens = imagens.splice(i, 1);
+                            break;
+                        }
+                    }
 
+                    //removendo o quadro da imagem da tela
+                    $('#anuncioImagem' + n).remove();
                 },
                 error: function (e) {
                     console.log("ERROR : ", e);
@@ -159,7 +169,7 @@
                 <br th:if="${isEdit}">
                 <h2 th:if="${isEdit}">Imagens do Imóvel</h2>
 
-                <div class="quadro-anuncio-imagem"
+                <div th:id="${'anuncioImagem' + imagem.id}" class="quadro-anuncio-imagem"
                      th:if="${isEdit} and !${imovel.imagens.isEmpty()}"
                      th:each="imagem : ${imovel.imagens}">
                     <img class="imgAnuncio" th:src="${imagem.getBytesImgFormatted()}">
