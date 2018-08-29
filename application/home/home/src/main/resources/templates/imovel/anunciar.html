@@ -30,11 +30,13 @@
                 timeout: 600000,
                 success: function (data) {
                     //removendo o objeto da lista de imagens
-                    var imagens = [[${imovel.imagens}]];
-                    for (i = 0; i < imagens.length; i++) {
-                        if (imagens[i].id == n) {
-                            imagens = imagens.splice(i, 1);
-                            break;
+                    var imovel = /*[[${imovel}]]*/ null;
+                    if (imovel != null && imovel.imagens != null) {
+                        for (i = 0; i < imovel.imagens.length; i++) {
+                            if (imovel.imagens[i].id == n) {
+                                imovel.imagens = imovel.imagens.splice(i, 1);
+                                break;
+                            }
                         }
                     }
 
@@ -166,14 +168,14 @@
 
                 <input id="fileInput" type="file" name="uploadingFiles" accept="image/*" multiple>
 
-                <br th:if="${isEdit}">
-                <h2 th:if="${isEdit}">Imagens do Imóvel</h2>
+                <br th:if="${isEdit} and !${imovel.imagens.isEmpty()}">
+                <h2 th:if="${isEdit} and !${imovel.imagens.isEmpty()}">Imagens do Imóvel</h2>
 
                 <div th:id="${'anuncioImagem' + imagem.id}" class="quadro-anuncio-imagem"
                      th:if="${isEdit} and !${imovel.imagens.isEmpty()}"
                      th:each="imagem : ${imovel.imagens}">
                     <img class="imgAnuncio" th:src="${imagem.getBytesImgFormatted()}">
-                    <a th:onclick="'removeImagem(' + ${imagem.id} + ')'" href="#">Remover</a>
+                    <a href="#" th:onclick="'removeImagem(' + ${imagem.id} + ');'">Remover</a>
                 </div>
 
                 <br>
