@@ -68,7 +68,7 @@ public class ImovelServicesImpl implements ImovelServices {
                 if (imovelImagem.getBytesImg() != null) {
                     File file = new File(uploadingdir);
                     if (!file.exists()) {
-                        file.mkdir();
+                        file.mkdirs();
                     }
                     file = new File(uploadingdir + imovel.getId());
                     if (!file.exists()) {

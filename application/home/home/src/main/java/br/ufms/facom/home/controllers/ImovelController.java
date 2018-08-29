@@ -16,14 +16,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.beans.PropertyEditorSupport;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -80,10 +81,28 @@ public class ImovelController {
         }
     }
 
+    @InitBinder
+    public void initBinder(WebDataBinder dataBinder) {
+        dataBinder.setDisallowedFields("dataCadastro");
+
+        dataBinder.registerCustomEditor(Date.class, new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String value) {
+                try {
+                    setValue(new SimpleDateFormat("yyyy-MM-dd").parse(value));
+                } catch (ParseException e) {
+                    setValue(null);
+                }
+            }
+        });
+
+    }
+
     @RequestMapping(value = "/imovel/salvar", method = RequestMethod.POST)
     public String salvarImovel(@Valid Imovel imovel,
                                @RequestParam(value = "adicionais", required = false) long[] adicionais,
                                @RequestParam("uploadingFiles") MultipartFile[] uploadingFiles,
+                               @RequestParam("dataCadastro") Date dataCadastro,
                                BindingResult bindingResult, Model model) throws IOException {
         Usuario usuario = Utils.getUsuarioLogado();
 
@@ -95,7 +114,7 @@ public class ImovelController {
             return "imovel/anunciar";
         }
 
-        imovel.setDataCadastro(new Date());
+        imovel.setDataCadastro(dataCadastro != null ? dataCadastro : new Date());
         imovelServices.addAdicionais(imovel, adicionais);
         Anunciante anunciante = anuncianteRepository.findById(Long.parseLong(usuario.getAuthorities().iterator().next().getAuthority())).get();
         imovel.setAnunciante(anunciante);
