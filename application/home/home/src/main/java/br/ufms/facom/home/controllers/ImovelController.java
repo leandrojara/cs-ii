@@ -91,12 +91,7 @@ public class ImovelController {
             model.addAttribute("erros", Utils.criarListaDeErrosDaValidacao(bindingResult.getAllErrors()));
             imovel.setAdicionais(adicionalImovelRepository.findAll());
             model.addAttribute("imovel", imovel);
-            model.addAttribute("tiposImovel", TipoImovel.values());
-            model.addAttribute("tiposNegocio", TipoNegocio.values());
-            model.addAttribute("tiposConservacao", TipoConservacao.values());
-            if (usuario != null) {
-                model.addAttribute("usuarioLogado", usuario);
-            }
+            addFormAttributes(model);
             return "imovel/anunciar";
         }
 

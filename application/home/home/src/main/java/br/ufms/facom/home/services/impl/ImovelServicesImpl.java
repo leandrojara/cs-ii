@@ -3,6 +3,7 @@ package br.ufms.facom.home.services.impl;
 import br.ufms.facom.home.domain.Imovel;
 import br.ufms.facom.home.domain.ImovelImagem;
 import br.ufms.facom.home.repository.AdicionalImovelRepository;
+import br.ufms.facom.home.repository.ImagemImovelRepository;
 import br.ufms.facom.home.services.ImovelServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,8 @@ public class ImovelServicesImpl implements ImovelServices {
 
     @Autowired
     private AdicionalImovelRepository adicionalImovelRepository;
+    @Autowired
+    private ImagemImovelRepository imagemImovelRepository;
 
     private static final String fileSeparator = System.getProperty("file.separator");
     private static final String uploadingdir = System.getProperty("user.dir") + fileSeparator + "uploadingdir" + fileSeparator + "anuncios" + fileSeparator;
@@ -37,16 +40,22 @@ public class ImovelServicesImpl implements ImovelServices {
 
     @Override
     public void createImagemEntities(Imovel imovel, MultipartFile[] uploadingFiles) throws IOException {
-        if (uploadingFiles != null && imovel != null) {
-            imovel.setImagens(new ArrayList<>());
+        if (imovel != null) {
+            if (imovel.getId() != null) {
+                imovel.setImagens(imagemImovelRepository.findByImovelId(imovel.getId()));
+            } else {
+                imovel.setImagens(new ArrayList<>());
+            }
 
-            for (MultipartFile uploadedFile : uploadingFiles) {
-                if (!uploadedFile.isEmpty()) {
-                    ImovelImagem imovelImagem = new ImovelImagem();
-                    imovelImagem.setImovel(imovel);
-                    imovelImagem.setDiretorio(uploadedFile.getOriginalFilename());
-                    imovelImagem.setBytesImg(uploadedFile.getBytes());
-                    imovel.getImagens().add(imovelImagem);
+            if (uploadingFiles != null) {
+                for (MultipartFile uploadedFile : uploadingFiles) {
+                    if (!uploadedFile.isEmpty()) {
+                        ImovelImagem imovelImagem = new ImovelImagem();
+                        imovelImagem.setImovel(imovel);
+                        imovelImagem.setDiretorio(uploadedFile.getOriginalFilename());
+                        imovelImagem.setBytesImg(uploadedFile.getBytes());
+                        imovel.getImagens().add(imovelImagem);
+                    }
                 }
             }
         }
@@ -56,19 +65,21 @@ public class ImovelServicesImpl implements ImovelServices {
     public void saveUploadedFiles(Imovel imovel) throws IOException {
         if (imovel != null && imovel.getId() != null) {
             for (ImovelImagem imovelImagem : imovel.getImagens()) {
-                File file = new File(uploadingdir);
-                if (!file.exists()) {
-                    file.mkdir();
-                }
-                file = new File(uploadingdir + imovel.getId());
-                if (!file.exists()) {
-                    file.mkdir();
-                }
-                file = new File(uploadingdir + imovel.getId() + fileSeparator + imovelImagem.getDiretorio());
+                if (imovelImagem.getBytesImg() != null) {
+                    File file = new File(uploadingdir);
+                    if (!file.exists()) {
+                        file.mkdir();
+                    }
+                    file = new File(uploadingdir + imovel.getId());
+                    if (!file.exists()) {
+                        file.mkdir();
+                    }
+                    file = new File(uploadingdir + imovel.getId() + fileSeparator + imovelImagem.getDiretorio());
 
-                OutputStream outputStream = new FileOutputStream(file);
-                outputStream.write(imovelImagem.getBytesImg());
-                outputStream.close();
+                    OutputStream outputStream = new FileOutputStream(file);
+                    outputStream.write(imovelImagem.getBytesImg());
+                    outputStream.close();
+                }
             }
         }
     }
