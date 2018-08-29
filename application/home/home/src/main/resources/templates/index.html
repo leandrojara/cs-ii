@@ -73,13 +73,13 @@
             <div class="quadro-anuncio" th:each="imovel, iterator : ${imoveis}">
 
                 <div class="w3-content w3-display-container" th:if="!${imovel.imagens.isEmpty()}">
-                    <a th:href="@{'/imovel/editar/' + ${imovel.id}}">
+                    <!--<a th:href="@{'/imovel/editar/' + ${imovel.id}}">-->
                         <img th:class="${'imgAnuncio mySlides'+iterator.index}"
                              th:src="${imagem.getBytesImgFormatted()}"
                              style="width:100%;"
                              th:styleappend="${iteratorImg.index} > 0 ? 'display:none;' : 'display:block;'"
                              th:each="imagem, iteratorImg: ${imovel.imagens}">
-                    </a>
+                    <!--</a>-->
 
                     <img class="w3-button w3-black w3-display-left"
                          th:onclick="'plusDivs(-1, \''+${iterator.index}+'\');'"
