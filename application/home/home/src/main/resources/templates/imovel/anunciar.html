@@ -17,8 +17,25 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $(".cep").mask('00000-000');
+            $('.cep').mask('00000-000');
         });
+
+        function removeImagem(n) {
+            $.ajax({
+                type: "DELETE",
+                contentType: "application/json",
+                url: "/imovel/imagem/excluir/" + n,
+                dataType: 'json',
+                cache: false,
+                timeout: 600000,
+                success: function (data) {
+
+                },
+                error: function (e) {
+                    console.log("ERROR : ", e);
+                }
+            });
+        }
     </script>
 </head>
 
@@ -70,7 +87,7 @@
             <strong>Sucesso!</strong>
             <span th:text="${onSave}">Test</span>
         </div>
-        <h1>Anunciar Imóvel</h1>
+        <h1 th:text="${title}"></h1>
         <div class="form">
             <form th:action="@{/imovel/salvar}" id="formAnunciar" method="POST" th:object="${imovel}"
                   enctype="multipart/form-data">
@@ -82,7 +99,7 @@
                 <input type="text" name="complemento" th:field="*{complemento}" style="width:300px"
                        placeholder="Complemento"/>
                 <input type="text" name="bairro" th:field="*{bairro}" placeholder="Bairro" required/>
-                <input type="text" class="cep" name="cep" th:field="*{cep}" placeholder="CEP" required/>
+                <input type="text" class="cep" th:field="*{cep}" placeholder="CEP" required/>
                 <input type="text" name="cidade" th:field="*{cidade}" placeholder="Cidade" required/>
                 <input type="text" name="estado" th:field="*{estado}" style="width:100px" placeholder="Estado"
                        required/>
@@ -138,10 +155,19 @@
                 <h2>Adicione imagens do imóvel</h2>
 
                 <input id="fileInput" type="file" name="uploadingFiles" accept="image/*" multiple>
+
+                <br th:if="${isEdit}">
+                <h2 th:if="${isEdit}">Imagens do Imóvel</h2>
+
+                <div class="quadro-anuncio-imagem"
+                     th:if="${isEdit} and !${imovel.imagens.isEmpty()}"
+                     th:each="imagem : ${imovel.imagens}">
+                    <img class="imgAnuncio" th:src="${imagem.getBytesImgFormatted()}">
+                    <a th:onclick="'removeImagem(' + ${imagem.id} + ')'" href="#">Remover</a>
+                </div>
+
                 <br>
-
                 <button type="submit">Anunciar</button>
-
             </form>
         </div>
     </section>

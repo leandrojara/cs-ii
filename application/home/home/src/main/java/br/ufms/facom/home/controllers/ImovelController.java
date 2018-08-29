@@ -1,22 +1,22 @@
 package br.ufms.facom.home.controllers;
 
-import br.ufms.facom.home.domain.AdicionalImovel;
-import br.ufms.facom.home.domain.Anunciante;
-import br.ufms.facom.home.domain.Imovel;
-import br.ufms.facom.home.domain.Usuario;
+import br.ufms.facom.home.domain.*;
 import br.ufms.facom.home.domain.enums.TipoConservacao;
 import br.ufms.facom.home.domain.enums.TipoImovel;
 import br.ufms.facom.home.domain.enums.TipoNegocio;
 import br.ufms.facom.home.repository.AdicionalImovelRepository;
 import br.ufms.facom.home.repository.AnuncianteRepository;
+import br.ufms.facom.home.repository.ImagemImovelRepository;
 import br.ufms.facom.home.repository.ImovelRepository;
 import br.ufms.facom.home.services.AdicionalImovelServices;
 import br.ufms.facom.home.services.ImovelServices;
 import br.ufms.facom.home.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,6 +41,8 @@ public class ImovelController {
     private ImovelServices imovelServices;
     @Autowired
     private AdicionalImovelServices adicionalImovelServices;
+    @Autowired
+    private ImagemImovelRepository imagemImovelRepository;
 
     private void addFormAttributes(Model model) {
         model.addAttribute("tiposImovel", TipoImovel.values());
@@ -54,12 +56,13 @@ public class ImovelController {
         Imovel imovel = new Imovel();
         imovel.setAdicionais(adicionalImovelRepository.findAll());
         model.addAttribute("imovel", imovel);
+        model.addAttribute("title", "Anunciar Imóvel");
         addFormAttributes(model);
         return "imovel/anunciar";
     }
 
-    @RequestMapping(value = "/imovel/editar", method = RequestMethod.GET)
-    public String editarImovel(@RequestParam("idImovel") Long idImovel,
+    @RequestMapping(value = "/imovel/editar/{idImovel}", method = RequestMethod.GET)
+    public String editarImovel(@PathVariable("idImovel") Long idImovel,
                                Model model) throws IOException {
         Optional<Imovel> imovel = imovelRepository.findById(idImovel);
         if (imovel.isPresent()) {
@@ -68,6 +71,8 @@ public class ImovelController {
             adicionalImovelServices.unificaLista(imovel.get().getAdicionais(), adicionais);
             imovelServices.findUploadedFiles(imovel.get());
             model.addAttribute("imovel", imovel.get());
+            model.addAttribute("isEdit", true);
+            model.addAttribute("title", "Editar Imóvel");
             addFormAttributes(model);
             return "imovel/anunciar";
         } else {
@@ -103,7 +108,19 @@ public class ImovelController {
         imovelRepository.save(imovel);
         imovelServices.saveUploadedFiles(imovel);
 
-        model.addAttribute("onSave", "Imóvel salvo com sucesso!");
+        model.addAttribute("onSave", "As informações foram salvas!");
         return anunciarImovel(model);
+    }
+
+    @RequestMapping(value = "/imovel/imagem/excluir/{idImagem}", method = RequestMethod.DELETE)
+    public ResponseEntity removerImagem(@PathVariable("idImagem") Long idImagem) {
+        Optional<ImovelImagem> imovelImagem = imagemImovelRepository.findById(idImagem);
+        if (imovelImagem.isPresent()) {
+            imagemImovelRepository.deleteById(idImagem);
+            imovelServices.removeImagem(imovelImagem.get());
+            return ResponseEntity.ok(true);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

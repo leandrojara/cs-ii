@@ -12,7 +12,7 @@ public class ImovelImagem {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_imovel", referencedColumnName = "id")
     private Imovel imovel;
 

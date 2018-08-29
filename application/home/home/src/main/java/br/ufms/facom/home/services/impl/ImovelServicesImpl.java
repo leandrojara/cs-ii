@@ -93,4 +93,12 @@ public class ImovelServicesImpl implements ImovelServices {
             }
         }
     }
+
+    @Override
+    public void removeImagem(ImovelImagem imovelImagem) {
+        File file = new File(uploadingdir + imovelImagem.getImovel().getId() + fileSeparator + imovelImagem.getDiretorio());
+        if (file.exists()) {
+            file.delete();
+        }
+    }
 }
