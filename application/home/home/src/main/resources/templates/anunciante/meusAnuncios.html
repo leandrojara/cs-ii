@@ -46,24 +46,36 @@
     <div class="quadro-apresentacao-user">
         <h1>Meus Anúncios</h1>
 
-        <div>
-            <form th:action="@{/anuncio/vizualizar}" method="POST" th:object="${anunciante}">
-                
-                <button type="submit">Ver</button>
+        <div style="overflow-y: scroll; background-color: #d3d3d3">
 
-            </form>
-            <form th:action="@{/anuncio/editar}" method="POST" th:object="${anunciante}">
-                
-                <button type="submit">Editar</button>
+            <div class="div-anuncio">
 
-            </form>
-            <form th:action="@{/anuncio/excluir}" method="POST" th:object="${anunciante}">
-                
-                <button type="submit">Excluir</button>
+                <div class="div-area-anuncio">
+                    <h2>Anuncio</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean aliquam metus eget auctor fringilla. Donec tempor enim ex, a vestibulum lectus elementum ac.</p>
+                </div>
+                <div class="div-botoes-anuncio">
+                    <form th:action="@{/anuncio/vizualizar}" method="POST" th:object="${anunciante}">
+                        
+                        <button type="submit" id="vizualizar-button">Ver</button>
 
-            </form>
+                    </form>
+                    <form th:action="@{/anuncio/editar}" method="POST" th:object="${anunciante}">
+                        
+                        <button type="submit" id="editar-button">Editar</button>
+
+                    </form>
+                    <form th:action="@{/anuncio/excluir}" method="POST" th:object="${anunciante}">
+                        
+                        <button type="submit" id="excluir-button">Excluir</button>
+
+                    </form>
+                </div>
+
+            </div>
+
         </div>
-        
+
     </div>
 
 </body>
