@@ -109,14 +109,26 @@ body p {
   -webkit-transition: all 0.3 ease;
   transition: all 0.3 ease;
   cursor: pointer;
+}
+
+#button-salvar-anunciante {
   position: absolute;
   right: 70px;
   bottom: -120px;
   width: 140px;
   height: 48px;
 }
+
 .form button:hover,.form button:active,.form button:focus {
   background: #0a2b8b;
+}
+
+#button-excluir-anunciante {
+  background: #C71218;
+}
+
+#button-excluir-anunciante:hover {
+  background-color: #A60107;
 }
 
 #vizualizar-button {
