@@ -55,17 +55,17 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean aliquam metus eget auctor fringilla. Donec tempor enim ex, a vestibulum lectus elementum ac.</p>
                 </div>
                 <div class="div-botoes-anuncio">
-                    <form th:action="@{/anuncio/vizualizar}" method="POST" th:object="${anunciante}">
+                    <form th:action="@{/imovel/ver}" method="POST" th:object="${anunciante}">
                         
                         <button type="submit" id="vizualizar-button">Ver</button>
 
                     </form>
-                    <form th:action="@{/anuncio/editar}" method="POST" th:object="${anunciante}">
+                    <form th:action="@{/imovel/editar/imovel.id}" method="POST" th:object="${anunciante}">
                         
                         <button type="submit" id="editar-button">Editar</button>
 
                     </form>
-                    <form th:action="@{/anuncio/excluir}" method="POST" th:object="${anunciante}">
+                    <form th:action="@{/imovel/excluir}" method="POST" th:object="${anunciante}">
                         
                         <button type="submit" id="excluir-button">Excluir</button>
 
