@@ -24,6 +24,17 @@
                 }
             });
             $('.cnpj').mask('00.000.000/0000-00');
+
+            $('.submit').click(function(){
+                validateForm();   
+            });
+
+            function validateForm(){
+                if( $('.inputsenha').val() != $('.inputrepetirsenha').val() ){
+                    alert("Senhas não conferem.")
+                }
+            }
+
         });
     </script>
 </head>
@@ -32,7 +43,7 @@
 
     <div class="quadro-menu-user">
 
-        <img src="../../../resources/static/imagens/no-image.jpg" class="imagem-user" />
+        <img src="../../../resources/static/imagens/no-image.jpg" th:src="@{/imagens/no-image.jpg}" class="imagem-user" />
 
         <div class="menu-user">
           <a href="#" class="active">Editar Dados</a>
@@ -57,13 +68,13 @@
                 <br>
 
                 <span>CNPJ: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <input type="text" th:field="*{cnpj}" class="cnpj" placeholder="CNPJ(Opcional)"/>
-                <span>&nbsp;Nova Senha: &nbsp;&nbsp;</span><input type="password" th:field="*{senha}" placeholder="Senha" required/>
+                <span>&nbsp;Nova Senha: &nbsp;&nbsp;</span><input type="password" id="inputsenha" th:field="*{senha}" placeholder="Senha" required/>
                 <br>
 
                 <span>CRECI: &nbsp;&nbsp;&nbsp;&nbsp;</span><input type="text" th:field="*{creci}" placeholder="CRECI(Opcional)"/>
-                <span>&nbsp;Repetir Senha: </span><input type="password" placeholder="Repetir Senha" required/>
+                <span>&nbsp;Repetir Senha: </span><input type="password" id="inputrepetirsenha" placeholder="Repetir Senha" required/>
                 <!--input type="password" placeholder="Repetir Senha"/-->
-                <button type="submit" id="button-salvar-anunciante">Salvar</button>
+                <button type="submit" class="submit" id="button-salvar-anunciante">Salvar</button>
 
             </form>
         </div>
