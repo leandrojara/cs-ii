@@ -22,7 +22,7 @@ public class Imovel {
     @Column(name = "data_cadastro")
     private Date dataCadastro;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_anunciante", referencedColumnName = "id")
     private Anunciante anunciante;
 
@@ -101,7 +101,7 @@ public class Imovel {
     @Column(name = "vagasGaragem")
     private Integer vagasGaragem;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "join_imovel_adicional",
             joinColumns = {@JoinColumn(name = "id_imovel")},
             inverseJoinColumns = {@JoinColumn(name = "id_adicional")})
