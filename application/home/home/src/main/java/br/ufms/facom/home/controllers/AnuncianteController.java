@@ -29,6 +29,12 @@ public class AnuncianteController {
         return "anunciante/cadastrar";
     }
 
+    @RequestMapping(value = "/anunciante/editar/", method = RequestMethod.GET)
+    public String editarAnunciante(Model model) {
+        model.addAttribute("anunciante", anuncianteRepository.findById(Utils.getUsuarioLogado().getId()).get());
+        return "anunciante/editar";
+    }
+
     @RequestMapping(value = "/anunciante/salvar", method = RequestMethod.POST)
     public String salvarAnunciante(@Valid Anunciante anunciante, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
@@ -37,10 +43,12 @@ public class AnuncianteController {
             return "anunciante/cadastrar";
         }
 
-        Optional<Usuario> usuario = usuarioRepository.findByEmail(anunciante.getEmail());
-        if (usuario.isPresent()) {
-            model.addAttribute("erro", "Usuário já cadastrado no sistema");
-            return cadastrarAnunciante(model);
+        if (anunciante.getId() == null) {
+            Optional<Usuario> usuario = usuarioRepository.findByEmail(anunciante.getEmail());
+            if (usuario.isPresent()) {
+                model.addAttribute("erro", "Usuário já cadastrado no sistema");
+                return cadastrarAnunciante(model);
+            }
         }
 
         anunciante.setSenha(Utils.encrypt(anunciante.getSenha()));

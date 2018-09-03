@@ -43,8 +43,9 @@ public class UsuarioController implements UserDetailsService {
             GrantedAuthority authority = new SimpleGrantedAuthority(usuario.get().getId().toString());
             grantList.add(authority);
 
-            UserDetails userDetails = new Usuario(usuario.get().getNome(), usuario.get().getSenha(), grantList);
-            return userDetails;
+            Usuario user = usuario.get();
+            user.setGrantList(grantList);
+            return user;
         } else {
             throw new UsernameNotFoundException("Usuário não cadastrado no sistema.");
         }

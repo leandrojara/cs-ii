@@ -124,4 +124,20 @@ public class Usuario implements UserDetails {
     public boolean isEnabled() {
         return !bloqueado;
     }
+
+    public boolean isBloqueado() {
+        return bloqueado;
+    }
+
+    public void setBloqueado(boolean bloqueado) {
+        this.bloqueado = bloqueado;
+    }
+
+    public List<GrantedAuthority> getGrantList() {
+        return grantList;
+    }
+
+    public void setGrantList(List<GrantedAuthority> grantList) {
+        this.grantList = grantList;
+    }
 }

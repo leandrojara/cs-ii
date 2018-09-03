@@ -35,10 +35,10 @@
         <img src="../../../resources/static/imagens/no-image.jpg" class="imagem-user" />
 
         <div class="menu-user">
-          <a href="editar.html">Editar Dados</a>
+          <a href="/anunciante/editar/">Editar Dados</a>
           <a href="#" class="active">Meus Anuncios</a>
           <a href="configuracoes.html">Configurações</a>
-          <a href="#">Logout</a>
+          <a href="/logout">Logout</a>
         </div>
 
     </div>
@@ -48,24 +48,24 @@
 
         <div style="overflow-y: scroll; background-color: #d3d3d3">
 
-            <div class="div-anuncio">
+            <div class="div-anuncio" th:each="imovel, iterator : ${imoveis}">
 
                 <div class="div-area-anuncio">
                     <h2>Anuncio</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean aliquam metus eget auctor fringilla. Donec tempor enim ex, a vestibulum lectus elementum ac.</p>
                 </div>
                 <div class="div-botoes-anuncio">
-                    <form th:action="@{/imovel/ver}" method="POST" th:object="${anunciante}">
-                        
-                        <button type="submit" id="vizualizar-button">Ver</button>
+                    <!--<form th:action="@{/imovel/ver}" method="POST" th:object="${anunciante}">-->
+                        <!---->
+                        <!--<button type="submit" id="vizualizar-button">Ver</button>-->
 
-                    </form>
-                    <form th:action="@{/imovel/editar/imovel.id}" method="POST" th:object="${anunciante}">
+                    <!--</form>-->
+                    <form th:action="@{'/imovel/editar/' + ${imovel.id}}" method="GET" th:object="${imovel}">
                         
                         <button type="submit" id="editar-button">Editar</button>
 
                     </form>
-                    <form th:action="@{/imovel/excluir}" method="POST" th:object="${anunciante}">
+                    <form th:action="@{'/imovel/excluir/' + ${imovel.id}}" method="DELETE" th:object="${imovel}">
                         
                         <button type="submit" id="excluir-button">Excluir</button>
 

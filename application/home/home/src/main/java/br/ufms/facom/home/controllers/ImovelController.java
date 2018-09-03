@@ -81,6 +81,13 @@ public class ImovelController {
         }
     }
 
+    @RequestMapping(value = "/imovel/buscar/", method = RequestMethod.GET)
+    public String buscarDoAnunciante(Model model) {
+        List<Imovel> imoveis = imovelRepository.findByAnuncianteId(Utils.getUsuarioLogado().getId());
+        model.addAttribute("imoveis", imoveis);
+        return "anunciante/meusAnuncios";
+    }
+
     @InitBinder
     public void initBinder(WebDataBinder dataBinder) {
         dataBinder.setDisallowedFields("dataCadastro");
@@ -132,6 +139,21 @@ public class ImovelController {
         if (imovelImagem.isPresent()) {
             imagemImovelRepository.deleteById(idImagem);
             imovelServices.removeImagem(imovelImagem.get());
+            return ResponseEntity.ok(true);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @RequestMapping(value = "/imovel/excluir/{idImovel}", method = RequestMethod.DELETE)
+    public ResponseEntity removerImovel(@PathVariable("idImovel") Long idImovel) {
+        Optional<Imovel> imovel = imovelRepository.findById(idImovel);
+        if (imovel.isPresent()) {
+            imovelRepository.delete(imovel.get());
+            for (ImovelImagem imovelImagem : imovel.get().getImagens()) {
+                imovelServices.removeImagem(imovelImagem);
+            }
+
             return ResponseEntity.ok(true);
         } else {
             return ResponseEntity.notFound().build();

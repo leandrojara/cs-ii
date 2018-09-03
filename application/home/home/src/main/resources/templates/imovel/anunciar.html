@@ -62,7 +62,7 @@
 
         <div class="div-secao-login">
             <div th:if="${usuarioLogado}">
-                Olá, <a href="#" title="Editar" th:text="${usuarioLogado.nome}"></a>&nbsp;
+                Olá, <a href="/anunciante/editar/" title="Editar" th:text="${usuarioLogado.nome}"></a>&nbsp;
                 <div id="div-botao-sair">
                     <a href="/logout" title="Logout">
                         x
