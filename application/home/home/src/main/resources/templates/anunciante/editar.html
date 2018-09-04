@@ -27,15 +27,12 @@
             });
             $('.cnpj').mask('00.000.000/0000-00');
 
-            $('.submit').click(function(){
-                validateForm();   
-            });
-
-            function validateForm(){
-                if( $('.inputsenha').val() != $('.inputrepetirsenha').val() ){
-                    alert("Senhas não conferem.")
+            $('#formEditar').submit(function( event ) {
+                if( $('#inputsenha').val() != $('#inputrepetirsenha').val() ){
+                    alert("Senhas não conferem.");
+                    event.preventDefault();
                 }
-            }
+            });
 
         });
     </script>
@@ -83,7 +80,7 @@
                 <span>CRECI: &nbsp;&nbsp;&nbsp;&nbsp;</span><input type="text" th:field="*{creci}" placeholder="CRECI(Opcional)"/>
                 <span>&nbsp;Repetir Senha: </span><input type="password" id="inputrepetirsenha" placeholder="Repetir Senha" required/>
                 <!--input type="password" placeholder="Repetir Senha"/-->
-                <button type="submit" class="submit" id="button-salvar-anunciante">Salvar</button>
+                <button type="submit" id="button-salvar-anunciante">Salvar</button>
 
             </form>
         </div>
