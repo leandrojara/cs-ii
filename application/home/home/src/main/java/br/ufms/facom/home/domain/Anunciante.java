@@ -1,8 +1,7 @@
 package br.ufms.facom.home.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "anunciante")
@@ -13,6 +12,9 @@ public class Anunciante extends Usuario {
 
     @Column(name = "creci")
     private String creci;
+
+    @OneToMany(mappedBy = "anunciante", fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Imovel> imoveis;
 
     public Anunciante() {
     }
@@ -35,5 +37,13 @@ public class Anunciante extends Usuario {
 
     public void setCreci(String creci) {
         this.creci = creci;
+    }
+
+    public List<Imovel> getImoveis() {
+        return imoveis;
+    }
+
+    public void setImoveis(List<Imovel> imoveis) {
+        this.imoveis = imoveis;
     }
 }

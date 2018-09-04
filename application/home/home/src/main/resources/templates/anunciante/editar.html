@@ -35,6 +35,12 @@
             });
 
         });
+
+        function excluirAnunciante(){
+            if (confirm("Deseja realmente excluir sua conta?")) {
+                window.location.href = '/anunciante/excluir/';
+            }
+        }
     </script>
 </head>
 
@@ -81,8 +87,10 @@
                 <span>&nbsp;Repetir Senha: </span><input type="password" id="inputrepetirsenha" placeholder="Repetir Senha" required/>
                 <!--input type="password" placeholder="Repetir Senha"/-->
                 <button type="submit" id="button-salvar-anunciante">Salvar</button>
-
             </form>
+            <a href="#" onclick="excluirAnunciante();">
+                <div id="button-excluir-anunciante">Excluir Conta</div>
+            </a>
         </div>
 
     </div>
