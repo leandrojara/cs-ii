@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.Optional;
@@ -36,7 +38,9 @@ public class AnuncianteController {
     }
 
     @RequestMapping(value = "/anunciante/salvar", method = RequestMethod.POST)
-    public String salvarAnunciante(@Valid Anunciante anunciante, BindingResult bindingResult, Model model) {
+    public String salvarAnunciante(@Valid Anunciante anunciante,
+                                   @RequestParam(value = "nextPage", required = false) String nextPage,
+                                   BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("erros", Utils.criarListaDeErrosDaValidacao(bindingResult.getAllErrors()));
             model.addAttribute("anunciante", anunciante);
@@ -54,6 +58,9 @@ public class AnuncianteController {
         anunciante.setSenha(Utils.encrypt(anunciante.getSenha()));
         anuncianteRepository.save(anunciante);
         model.addAttribute("anunciante", anunciante);
+        if (nextPage != null && !nextPage.trim().isEmpty()) {
+            return nextPage;
+        }
         return "login";
     }
 }

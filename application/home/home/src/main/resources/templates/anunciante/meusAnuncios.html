@@ -61,38 +61,36 @@
 <body>
 
 <div class="quadro-menu-user">
-    <div class="quadro-menu-user">
+    <img src="../../../resources/static/imagens/no-image.jpg" th:src="@{/imagens/no-image.jpg}"
+         class="imagem-user"/>
 
-        <img src="../../../resources/static/imagens/no-image.jpg" th:src="@{/imagens/no-image.jpg}"
-             class="imagem-user"/>
-
-        <div class="menu-user">
-            <a href="/anunciante/editar/">Editar Dados</a>
-            <a href="#" class="active">Meus Anuncios</a>
-            <a href="configuracoes.html">Configurações</a>
-            <a href="/logout">Logout</a>
-        </div>
-
+    <div class="menu-user">
+        <a href="/anunciante/editar/">Editar Dados</a>
+        <a href="#" class="active">Meus Anuncios</a>
+        <a href="configuracoes.html">Configurações</a>
+        <a href="/logout">Logout</a>
     </div>
 
-    <div class="quadro-apresentacao-user">
-        <h1>Meus Anúncios</h1>
-        <div style="overflow-y: scroll; background-color: #d3d3d3">
-            <div th:id="'anuncioImovel' + ${imovel.id}" class="div-anuncio" th:each="imovel : ${imoveis}">
-                <div class="div-area-anuncio">
-                    <h2 th:text="${imovel.getDescription()}">Anúncio</h2>
-                    <p th:text="${imovel.descricao}"></p>
-                </div>
-                <div class="div-botoes-anuncio">
-                    <a th:href="@{'/imovel/editar/' + ${imovel.id}}">
-                        <div id="editar-button">Editar</div>
-                    </a>
-                    <button type="button" id="excluir-button" th:onclick="'removeImovel(' + ${imovel.id} + ');'">
-                        Excluir
-                    </button>
-                </div>
+</div>
+
+<div class="quadro-apresentacao-user">
+    <h1>Meus Anúncios</h1>
+    <div style="overflow-y: scroll; background-color: #d3d3d3">
+        <div th:id="'anuncioImovel' + ${imovel.id}" class="div-anuncio" th:each="imovel : ${imoveis}">
+            <div class="div-area-anuncio">
+                <h2 th:text="${imovel.getDescription()}">Anúncio</h2>
+                <p th:text="${imovel.descricao}"></p>
+            </div>
+            <div class="div-botoes-anuncio">
+                <a th:href="@{'/imovel/editar/' + ${imovel.id}}">
+                    <div id="editar-button">Editar</div>
+                </a>
+                <button type="button" id="excluir-button" th:onclick="'removeImovel(' + ${imovel.id} + ');'">
+                    Excluir
+                </button>
             </div>
         </div>
     </div>
+</div>
 </body>
 </html>
