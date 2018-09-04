@@ -57,6 +57,8 @@ public class AnuncianteController {
 
         anunciante.setSenha(Utils.encrypt(anunciante.getSenha()));
         anuncianteRepository.save(anunciante);
+
+        model.addAttribute("onSave", "Informações salvas!");
         model.addAttribute("anunciante", anunciante);
         if (nextPage != null && !nextPage.trim().isEmpty()) {
             return nextPage;

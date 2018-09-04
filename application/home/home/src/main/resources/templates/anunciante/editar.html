@@ -8,6 +8,8 @@
     <link rel="stylesheet" type="text/css" href="../../../resources/static/css/anunciante.css" th:href="@{/css/anunciante.css}">
     <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
     <script th:src="@{/js/jquery.mask.js}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <title>
         House Catalog - Cadastro
     </title>
@@ -55,11 +57,17 @@
     </div>
 
     <div class="quadro-apresentacao-user">
+        <div class="alert alert-success alert-dismissible" th:if="${onSave}">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Sucesso!</strong>
+            <span th:text="${onSave}">Test</span>
+        </div>
+
         <h1>Editar Informações de Cadastro</h1>
 
         <div class="form">
             <form th:action="@{/anunciante/salvar}" id="formEditar" method="POST" th:object="${anunciante}" enctype="multipart/form-data">
-                <input type="hidden" name="nextPage" value="/anunciante/editar/"/>
+                <input type="hidden" name="nextPage" value="anunciante/editar"/>
                 <input type="hidden" name="id" th:field="*{id}"/>
                 <span>Nome: &nbsp;&nbsp;&nbsp;&nbsp;</span><input type="text" style="width: 608px" th:field="*{nome}" placeholder="Nome de Usuário" required/>
                 <br>
