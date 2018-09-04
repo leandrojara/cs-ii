@@ -71,6 +71,13 @@
         <a href="/logout">Logout</a>
     </div>
 
+    <div class="menu-user">
+        <a href="/anunciante/editar/">Editar Dados</a>
+        <a href="#" class="active">Meus Anuncios</a>
+        <a href="configuracoes.html">Configurações</a>
+        <a href="/logout">Logout</a>
+    </div>
+
 </div>
 
 <div class="quadro-apresentacao-user">
@@ -85,9 +92,9 @@
                 <a th:href="@{'/imovel/editar/' + ${imovel.id}}">
                     <div id="editar-button">Editar</div>
                 </a>
-                <button type="button" id="excluir-button" th:onclick="'removeImovel(' + ${imovel.id} + ');'">
-                    Excluir
-                </button>
+                <a th:href="'removeImovel(' + ${imovel.id} + ');'">
+                    <div id="excluir-button">Excluir</div>
+                </a>
             </div>
         </div>
     </div>

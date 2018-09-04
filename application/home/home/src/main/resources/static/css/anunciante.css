@@ -58,6 +58,7 @@ body p {
 }
 
 .imagem-user {
+	border-radius: 50%;
 	width: 250px;
 	height: 250px;
 }
@@ -132,7 +133,7 @@ body p {
 }
 
 #vizualizar-button {
-  width: 80px;
+  width: 70px;
   margin: 9px 5px 5px 5px;
   background: #32cd32 ;
   border: 0;
@@ -142,11 +143,12 @@ body p {
   -webkit-transition: all 0.3 ease;
   transition: all 0.3 ease;
   cursor: pointer;
+  text-align: center;
 }
 
 #editar-button {
-  width: 80px;
-  margin: 5px;
+  width: 70px;
+  margin: 9px 5px 5px 5px;
   background: #071075;
   border: 0;
   padding: 7px;
@@ -155,10 +157,11 @@ body p {
   -webkit-transition: all 0.3 ease;
   transition: all 0.3 ease;
   cursor: pointer;
+  text-align: center;
 }
 
 #excluir-button {
-  width: 80px;
+  width: 70px;
   margin: 5px;
   background: #C71218;
   border: 0;
@@ -168,6 +171,7 @@ body p {
   -webkit-transition: all 0.3 ease;
   transition: all 0.3 ease;
   cursor: pointer;
+  text-align: center;
 }
 
 #vizualizar-button:hover {
