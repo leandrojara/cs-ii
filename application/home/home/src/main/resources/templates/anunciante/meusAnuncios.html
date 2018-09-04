@@ -60,7 +60,6 @@
 
 <body>
 
-<div class="quadro-menu-user">
     <div class="quadro-menu-user">
 
         <img src="../../../resources/static/imagens/no-image.jpg" th:src="@{/imagens/no-image.jpg}"
@@ -87,12 +86,13 @@
                     <a th:href="@{'/imovel/editar/' + ${imovel.id}}">
                         <div id="editar-button">Editar</div>
                     </a>
-                    <button type="button" id="excluir-button" th:onclick="'removeImovel(' + ${imovel.id} + ');'">
-                        Excluir
-                    </button>
+                    <a th:href="'removeImovel(' + ${imovel.id} + ');'">
+                        <div id="excluir-button">Excluir</div>  
+                    </a>
                 </div>
             </div>
         </div>
     </div>
+
 </body>
 </html>
