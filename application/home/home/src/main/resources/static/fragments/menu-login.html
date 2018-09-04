@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+  </head>
+  <body>
+    <div th:fragment="menu-login" >
+
+        <div class="div-secao-login">
+            <div th:if="${usuarioLogado}">
+                Olá, <a href="/anunciante/editar/" title="Editar" th:text="${usuarioLogado.nome}"></a>&nbsp;
+                <div id="div-botao-sair">
+                    <a href="/logout" title="Logout">
+                        x
+                    </a>
+                </div>
+            </div>
+            <div th:if="!${usuarioLogado}">
+                <span class="botao-entrar">
+                    <a href="/login" title="Entrar">
+                        Login
+                    </a>
+                </span>
+                <span class="botao-cadastrar">
+                    <a href="/anunciante/cadastrar" title="Fazer Cadastro">
+                        Registrar
+                    </a>
+                </span>
+            </div>
+        </div>
+
+    </div>
+  </body>
+</html>
