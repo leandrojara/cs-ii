@@ -145,9 +145,9 @@ body p {
 #button-salvar-anunciante {
   position: absolute;
   right: 70px;
-  bottom: -120px;
+  bottom: -100px;
   width: 140px;
-  height: 48px;
+  height: 43px;
 }
 
 .form button:hover,.form button:active,.form button:focus {
@@ -155,7 +155,18 @@ body p {
 }
 
 #button-excluir-anunciante {
+  text-transform: uppercase;
+  outline: 0;
+  border: 0;
+  padding: 15px 10px 15px 10px;
+  color: #FFFFFF;
+  font-size: 14px;
+  text-align: center;
   background: #C71218;
+  position: absolute;
+  right: 225px;
+  bottom: -100px;
+  width: 140px;
 }
 
 #button-excluir-anunciante:hover {
