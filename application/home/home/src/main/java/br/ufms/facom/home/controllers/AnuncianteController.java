@@ -3,6 +3,7 @@ package br.ufms.facom.home.controllers;
 import br.ufms.facom.home.domain.Anunciante;
 import br.ufms.facom.home.domain.Usuario;
 import br.ufms.facom.home.repository.AnuncianteRepository;
+import br.ufms.facom.home.repository.ImovelRepository;
 import br.ufms.facom.home.repository.UsuarioRepository;
 import br.ufms.facom.home.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class AnuncianteController {
     private AnuncianteRepository anuncianteRepository;
     @Autowired
     private UsuarioRepository usuarioRepository;
+    @Autowired
+    private ImovelRepository imovelRepository;
 
     @RequestMapping(value = "/anunciante/cadastrar", method = RequestMethod.GET)
     public String cadastrarAnunciante(Model model) {
@@ -58,6 +61,8 @@ public class AnuncianteController {
                 model.addAttribute("erro", "Usuário já cadastrado no sistema");
                 return cadastrarAnunciante(model);
             }
+        } else {
+            anunciante.setImoveis(imovelRepository.findByAnuncianteId(anunciante.getId()));
         }
 
         anunciante.setSenha(Utils.encrypt(anunciante.getSenha()));
