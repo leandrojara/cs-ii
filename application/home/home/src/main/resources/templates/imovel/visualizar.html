@@ -11,43 +11,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <title>
-        House Catalog - Anunciar Imóvel
+        House Catalog - Visualizar Imóvel
     </title>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('.cep').mask('00000-000');
-        });
-
-        function removeImagem(n) {
-            $.ajax({
-                type: "DELETE",
-                contentType: "application/json",
-                url: "/imovel/imagem/excluir/" + n,
-                dataType: 'json',
-                cache: false,
-                timeout: 600000,
-                success: function (data) {
-                    //removendo o objeto da lista de imagens
-                    var imovel = /*[[${imovel}]]*/ null;
-                    if (imovel != null && imovel.imagens != null) {
-                        for (i = 0; i < imovel.imagens.length; i++) {
-                            if (imovel.imagens[i].id == n) {
-                                imovel.imagens = imovel.imagens.splice(i, 1);
-                                break;
-                            }
-                        }
-                    }
-
-                    //removendo o quadro da imagem da tela
-                    $('#anuncioImagem' + n).remove();
-                },
-                error: function (e) {
-                    console.log("ERROR : ", e);
-                }
-            });
-        }
-    </script>
 </head>
 
 <body>
@@ -89,36 +55,70 @@
 
         <h1 th:text="${title}">Titulo</h1>
 
-        <p th:text="*{descricao}"> descricao</p>
-        <p th:text="*{rua}"> rua</p>
-        <p th:text="*{numero}"> numero</p>
-        <p th:text="*{complemento}"> complemento</p>
-        <p th:text="*{bairro}"> bairro</p>
-        <p th:text="*{cep}"> cep</p>
-        <p th:text="*{cidade}"> cidade</p>
-        <p th:text="*{estado}"> estado</p>
+        <h2>Descrição</h2>
+        <p th:text="*{descricao}">Descrição</p>
 
-        <p th:text="*{tipoImovel}"> tipoImovel</p>
-        <p th:text="*{tipoNegocio}"> tipoNegocio</p>
-        <p th:text="*{tipoConservacao}"> tipoConservacao</p>
-        <p th:text="*{valorImovel}"> valorImovel</p>
-        <p th:text="*{valorCondominio}"> valorCondominio</p>
-        <p th:text="*{largura}"> largura</p>
-        <p th:text="*{comprimento}"> comprimento</p>
-        <p th:text="*{areaTotal}"> areaTotal</p>
-        <p th:text="*{areaConstruida}"> areaConstruida</p>
-        <p th:text="*{comodos}"> comodos</p>
-        <p th:text="*{quartosSimples}"> quartosSimples</p>
-        <p th:text="*{banheirosSimples}"> banheirosSimples</p>
-        <p th:text="*{suites}"> suites</p>
-        <p th:text="*{vagasGaragem}"> vagasGaragem</p>
+        <h2>Endereço</h2>
+        <p th:text="*{rua}, *{numero}, *{complemento}">Endereço</p>
+
+        <h2>Bairro</h2>
+        <p th:text="*{bairro}">Bairro</p>
+
+        <h2>CEP</h2>
+        <p th:text="*{cep}">CEP</p>
+
+        <h2>Cidade</h2>
+        <p th:text="*{cidade}">Cidade</p>
+
+        <h2>Estado</h2>
+        <p th:text="*{estado}">Estado</p>
+
+        <h2>Tipo de Imóvel</h2>
+        <p th:text="*{tipoImovel}">Tipo de Imóvel</p>
+
+        <h2>Tipo de Negócio</h2>
+        <p th:text="*{tipoNegocio}">Tipo de Negócio</p>
+
+        <h2>Conservação</h2>
+        <p th:text="*{tipoConservacao}">Conservação</p>
+
+        <h2>Valor</h2>
+        <p th:text="*{valorImovel}">Valor</p>
+
+        <h2>Valor Condomínio</h2>
+        <p th:text="*{valorCondominio}">Valor Condomínio</p>
+
+        <h2>Largura</h2>
+        <p th:text="*{largura}">Largura</p>
+
+        <h2>Comprimento</h2>
+        <p th:text="*{comprimento}">Comprimento</p>
+
+        <h2>Área Total</h2>
+        <p th:text="*{areaTotal}">Área Total</p>
+
+        <h2>Área Construída</h2>
+        <p th:text="*{areaConstruida}">Área Construída</p>
+
+        <h2>Cômodos</h2>
+        <p th:text="*{comodos}">Cômodos</p>
+
+        <h2>Quartos Simples</h2>
+        <p th:text="*{quartosSimples}">Quartos Simples</p>
+
+        <h2>Baneiros Simples</h2>
+        <p th:text="*{banheirosSimples}">Baneiros Simples</p>
+
+        <h2>Suítes</h2>
+        <p th:text="*{suites}">Suítes</p>
+
+        <h2>Vagas na Garagem</h2>
+        <p th:text="*{vagasGaragem}">Vagas na Garagem</p>
 
         <h2>Adicionais</h2>
 
         <div class="checkbox" th:each="adicional : *{adicionais}">
-            <input type="checkbox" name="adicionais" th:value="${adicional.id}"
-                   th:checked="${adicional.selecionado}"/>
-            <label th:text="${adicional.descricao}"></label>
+            <p th:text="${adicional.descricao}"></p>
         </div>
 
 
