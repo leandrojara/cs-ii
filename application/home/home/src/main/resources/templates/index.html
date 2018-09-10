@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../resources/static/css/reset.css" th:href="@{/css/reset.css}">
     <link rel="stylesheet" type="text/css" href="../../resources/static/css/main.css" th:href="@{/css/main.css}">
     <!--link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"-->
+    <th:block th:include="fragments/header.html">
+    </th:block>
 </head>
 
 <body>
@@ -21,47 +23,9 @@
             <img src="../../resources/static/imagens/logo.png" th:src="@{/imagens/logo.png}" id="logo-header"/>
         </div>
 
-        <div class="div-secao-login">
-            <div th:if="${usuarioLogado}">
-                Olá, <a href="/anunciante/editar/" title="Editar" th:text="${usuarioLogado.nome}"></a>&nbsp;
-                <div id="div-botao-sair">
-                    <a href="/logout" title="Logout">
-                        x
-                    </a>
-                </div>
-            </div>
-            <div th:if="!${usuarioLogado}">
-                <span class="botao-entrar">
-                    <a href="/login" title="Entrar">
-                        Login
-                    </a>
-                </span>
-                <span class="botao-cadastrar">
-                    <a href="/anunciante/cadastrar" title="Fazer Cadastro">
-                        Registrar
-                    </a>
-                </span>
-            </div>
-        </div>
+        <div th:insert="fragments/header.html::login"> </div>
 
-        <div id="barraAzul-header">
-
-            <ul id="menu-header-ul">
-                <li>
-                    <a href="/">Home</a>
-                </li>
-                <!--<li>-->
-                <!--<a href="/imovel/comprar">Comprar</a>-->
-                <!--</li>-->
-                <!--<li>-->
-                <!--<a href="/imovel/alugar">Alugar</a>-->
-                <!--</li>-->
-                <li th:if="${usuarioLogado}">
-                    <a href="/imovel/anunciar">Anunciar</a>
-                </li>
-            </ul>
-
-        </div>
+        <div th:insert="fragments/header.html::menu"> </div>
 
     </header>
 

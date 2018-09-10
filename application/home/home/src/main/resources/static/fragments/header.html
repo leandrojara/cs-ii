@@ -1,10 +1,30 @@
 <!DOCTYPE html>
 <html>
-  <head>
+  <head th:fragment="header">
 
   </head>
   <body>
-    <div th:fragment="menu-login" >
+    <div th:fragment="menu" >
+        <div id="barraAzul-header">
+
+            <ul id="menu-header-ul">
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                <!--<li>-->
+                <!--<a href="/imovel/comprar">Comprar</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                <!--<a href="/imovel/alugar">Alugar</a>-->
+                <!--</li>-->
+                <li th:if="${usuarioLogado}">
+                    <a href="/imovel/anunciar">Anunciar</a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+    <div th:fragment="login" >
 
         <div class="div-secao-login">
             <div th:if="${usuarioLogado}">
@@ -30,5 +50,6 @@
         </div>
 
     </div>
+
   </body>
 </html>

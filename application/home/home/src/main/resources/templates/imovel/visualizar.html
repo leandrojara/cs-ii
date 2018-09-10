@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" type="text/css" href="../../../resources/static/css/reset.css" th:href="@{/css/reset.css}">
+    <link rel="stylesheet" type="text/css" href="../../../resources/static/css/main.css" th:href="@{/css/main.css}">
+    <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+    <script th:src="@{/js/jquery.mask.js}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <title>
+        House Catalog - Anunciar Imóvel
+    </title>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.cep').mask('00000-000');
+        });
+
+        function removeImagem(n) {
+            $.ajax({
+                type: "DELETE",
+                contentType: "application/json",
+                url: "/imovel/imagem/excluir/" + n,
+                dataType: 'json',
+                cache: false,
+                timeout: 600000,
+                success: function (data) {
+                    //removendo o objeto da lista de imagens
+                    var imovel = /*[[${imovel}]]*/ null;
+                    if (imovel != null && imovel.imagens != null) {
+                        for (i = 0; i < imovel.imagens.length; i++) {
+                            if (imovel.imagens[i].id == n) {
+                                imovel.imagens = imovel.imagens.splice(i, 1);
+                                break;
+                            }
+                        }
+                    }
+
+                    //removendo o quadro da imagem da tela
+                    $('#anuncioImagem' + n).remove();
+                },
+                error: function (e) {
+                    console.log("ERROR : ", e);
+                }
+            });
+        }
+    </script>
+</head>
+
+<body>
+
+<div id="div-central">
+
+    <header id="header">
+
+        <div id="div-logo">
+            <img src="../../../resources/static/imagens/logo.png" th:src="@{/imagens/logo.png}" id="logo-header"/>
+        </div>
+
+        <div th:insert="fragments/header.html :: login"> </div>
+
+        <div th:insert="fragments/header.html :: menu"> </div>
+
+    </header>
+
+    <section id="section-conteudo">
+
+        <div th:id="${'anuncioImagem' + imagem.id}" class="imagens-anuncio">
+            <div class="w3-content w3-display-container" th:if="!${imovel.imagens.isEmpty()}">
+                <!--<a th:href="@{'/imovel/editar/' + ${imovel.id}}">-->
+                <img th:class="${'imgAnuncio mySlides'+iterator.index}"
+                     th:src="${imagem.getBytesImgFormatted()}"
+                     style="width:100%;"
+                     th:styleappend="${iteratorImg.index} > 0 ? 'display:none;' : 'display:block;'"
+                     th:each="imagem, iteratorImg: ${imovel.imagens}">
+                <!--</a>-->
+
+                <img class="w3-button w3-black w3-display-left"
+                     th:onclick="'plusDivs(-1, \''+${iterator.index}+'\');'"
+                     src="../../resources/static/imagens/arrow_back.png" th:src="@{/imagens/arrow_back.png}">
+                <img class="w3-button w3-black w3-display-right"
+                     th:onclick="'plusDivs(1, \''+${iterator.index}+'\');'"
+                     src="../../resources/static/imagens/arrow_after.png" th:src="@{/imagens/arrow_after.png}">
+            </div>
+        </div>
+
+        <h1 th:text="${title}">Titulo</h1>
+
+        <p th:text="*{descricao}"> descricao</p>
+        <p th:text="*{rua}"> rua</p>
+        <p th:text="*{numero}"> numero</p>
+        <p th:text="*{complemento}"> complemento</p>
+        <p th:text="*{bairro}"> bairro</p>
+        <p th:text="*{cep}"> cep</p>
+        <p th:text="*{cidade}"> cidade</p>
+        <p th:text="*{estado}"> estado</p>
+
+        <p th:text="*{tipoImovel}"> tipoImovel</p>
+        <p th:text="*{tipoNegocio}"> tipoNegocio</p>
+        <p th:text="*{tipoConservacao}"> tipoConservacao</p>
+        <p th:text="*{valorImovel}"> valorImovel</p>
+        <p th:text="*{valorCondominio}"> valorCondominio</p>
+        <p th:text="*{largura}"> largura</p>
+        <p th:text="*{comprimento}"> comprimento</p>
+        <p th:text="*{areaTotal}"> areaTotal</p>
+        <p th:text="*{areaConstruida}"> areaConstruida</p>
+        <p th:text="*{comodos}"> comodos</p>
+        <p th:text="*{quartosSimples}"> quartosSimples</p>
+        <p th:text="*{banheirosSimples}"> banheirosSimples</p>
+        <p th:text="*{suites}"> suites</p>
+        <p th:text="*{vagasGaragem}"> vagasGaragem</p>
+
+        <h2>Adicionais</h2>
+
+        <div class="checkbox" th:each="adicional : *{adicionais}">
+            <input type="checkbox" name="adicionais" th:value="${adicional.id}"
+                   th:checked="${adicional.selecionado}"/>
+            <label th:text="${adicional.descricao}"></label>
+        </div>
+
+
+        <br>
+
+
+
+    </section>
+</div>
+
+</body>
+
+</html>
+
