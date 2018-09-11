@@ -33,9 +33,9 @@
             <img src="../../../resources/static/imagens/logo.png" th:src="@{/imagens/logo.png}" id="logo-header"/>
         </div>
 
-        <div th:insert="fragments/header.html :: login"> </div>
+        <div th:insert="fragments/header.html :: login"></div>
 
-        <div th:insert="fragments/header.html :: menu"> </div>
+        <div th:insert="fragments/header.html :: menu"></div>
 
     </header>
 
@@ -132,17 +132,13 @@
 
         </div>
 
+
         <h2>Adicionais</h2>
 
-        <div class="checkbox" th:each="adicional : *{adicionais}">
+        <div class="checkbox" th:each="adicional : ${imovel.adicionais}">
             <p th:text="${adicional.descricao}"></p>
         </div>
-
-
         <br>
-
-
-
     </section>
 </div>
 
