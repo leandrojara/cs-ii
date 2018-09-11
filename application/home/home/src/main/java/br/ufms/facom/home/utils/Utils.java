@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Utils {
-//    http://www.mkyong.com/spring-boot/spring-boot-file-upload-example/
 
     public static BCryptPasswordEncoder getEncoder() {
         return new BCryptPasswordEncoder(7);
