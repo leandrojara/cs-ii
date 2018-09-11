@@ -20,9 +20,9 @@
             <img src="../../resources/static/imagens/logo.png" th:src="@{/imagens/logo.png}" id="logo-header"/>
         </div>
 
-        <div th:insert="fragments/header.html::login"> </div>
+        <div th:insert="fragments/header.html::login"></div>
 
-        <div th:insert="fragments/header.html::menu"> </div>
+        <div th:insert="fragments/header.html::menu"></div>
 
     </header>
 
@@ -32,33 +32,32 @@
             <h1>Imóveis Recentes</h1>
 
             <div class="quadro-anuncio" th:each="imovel, iterator : ${imoveis}">
-
-                <div class="w3-content w3-display-container" th:if="!${imovel.imagens.isEmpty()}">
-                    <!--<a th:href="@{'/imovel/editar/' + ${imovel.id}}">-->
+                <a th:href="@{'/imovel/visualizar/' + ${imovel.id}}">
+                    <div class="w3-content w3-display-container" th:if="!${imovel.imagens.isEmpty()}">
                         <img th:class="${'imgAnuncio mySlides'+iterator.index}"
                              th:src="${imagem.getBytesImgFormatted()}"
                              style="width:100%;"
                              th:styleappend="${iteratorImg.index} > 0 ? 'display:none;' : 'display:block;'"
                              th:each="imagem, iteratorImg: ${imovel.imagens}">
-                    <!--</a>-->
 
-                    <img class="w3-button w3-black w3-display-left"
-                         th:onclick="'plusDivs(-1, \''+${iterator.index}+'\');'"
-                         src="../../resources/static/imagens/arrow_back.png" th:src="@{/imagens/arrow_back.png}">
-                    <img class="w3-button w3-black w3-display-right"
-                         th:onclick="'plusDivs(1, \''+${iterator.index}+'\');'"
-                         src="../../resources/static/imagens/arrow_after.png" th:src="@{/imagens/arrow_after.png}">
-                </div>
+                        <img class="w3-button w3-black w3-display-left"
+                             th:onclick="'plusDivs(-1, \''+${iterator.index}+'\');'"
+                             src="../../resources/static/imagens/arrow_back.png" th:src="@{/imagens/arrow_back.png}">
+                        <img class="w3-button w3-black w3-display-right"
+                             th:onclick="'plusDivs(1, \''+${iterator.index}+'\');'"
+                             src="../../resources/static/imagens/arrow_after.png" th:src="@{/imagens/arrow_after.png}">
+                    </div>
 
-                <img src="../../resources/static/imagens/no-image.jpg" th:src="@{/imagens/no-image.jpg}" width="100%"
-                     th:if="${imovel.imagens.isEmpty()}"/>
+                    <img src="../../resources/static/imagens/no-image.jpg" th:src="@{/imagens/no-image.jpg}" width="100%"
+                         th:if="${imovel.imagens.isEmpty()}"/>
 
-                <h2 th:text="${imovel.getDescription()}"></h2>
-                <p th:text="${imovel.descricao}"></p>
+                    <h2 th:text="${imovel.getDescription()}"></h2>
+                    <p th:text="${imovel.descricao}"></p>
 
-                <div class="rodape-quadro-anuncio">
-                    <div class="rodape-quadro-anuncio-preco" th:text="${imovel.getValorStr()}">R$ 250.000,00</div>
-                </div>
+                    <div class="rodape-quadro-anuncio">
+                        <div class="rodape-quadro-anuncio-preco" th:text="${imovel.getValorStr()}">R$ 250.000,00</div>
+                    </div>
+                </a>
             </div>
         </div>
     </section>

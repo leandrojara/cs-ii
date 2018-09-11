@@ -26,23 +26,22 @@
             <img src="../../../resources/static/imagens/logo.png" th:src="@{/imagens/logo.png}" id="logo-header"/>
         </div>
 
-        <div th:insert="fragments/header.html :: login"> </div>
+        <div th:insert="fragments/header.html :: login"></div>
 
-        <div th:insert="fragments/header.html :: menu"> </div>
+        <div th:insert="fragments/header.html :: menu"></div>
 
     </header>
 
     <section id="section-conteudo">
 
-        <div th:id="${'anuncioImagem' + imagem.id}" class="imagens-anuncio">
+        <div th:id="${'anuncioImagem' + imagem.id}" class="imagens-anuncio"
+             th:each="imagem, iterator : ${imovel.imagens}">
             <div class="w3-content w3-display-container" th:if="!${imovel.imagens.isEmpty()}">
-                <!--<a th:href="@{'/imovel/editar/' + ${imovel.id}}">-->
                 <img th:class="${'imgAnuncio mySlides'+iterator.index}"
                      th:src="${imagem.getBytesImgFormatted()}"
                      style="width:100%;"
                      th:styleappend="${iteratorImg.index} > 0 ? 'display:none;' : 'display:block;'"
                      th:each="imagem, iteratorImg: ${imovel.imagens}">
-                <!--</a>-->
 
                 <img class="w3-button w3-black w3-display-left"
                      th:onclick="'plusDivs(-1, \''+${iterator.index}+'\');'"
@@ -53,79 +52,74 @@
             </div>
         </div>
 
-        <h1 th:text="${title}">Titulo</h1>
+        <h1>Visualizando o Imóvel</h1>
 
         <h2>Descrição</h2>
-        <p th:text="*{descricao}">Descrição</p>
+        <p th:text="${imovel.descricao}">Descrição</p>
 
         <h2>Endereço</h2>
-        <p th:text="*{rua}, *{numero}, *{complemento}">Endereço</p>
+        <p th:text="${imovel.rua} + ', ' + ${imovel.numero} + ', ' + ${imovel.complemento}">Endereço</p>
 
         <h2>Bairro</h2>
-        <p th:text="*{bairro}">Bairro</p>
+        <p th:text="${imovel.bairro}">Bairro</p>
 
         <h2>CEP</h2>
-        <p th:text="*{cep}">CEP</p>
+        <p th:text="${imovel.cep}">CEP</p>
 
         <h2>Cidade</h2>
-        <p th:text="*{cidade}">Cidade</p>
+        <p th:text="${imovel.cidade}">Cidade</p>
 
         <h2>Estado</h2>
-        <p th:text="*{estado}">Estado</p>
+        <p th:text="${imovel.estado}">Estado</p>
 
         <h2>Tipo de Imóvel</h2>
-        <p th:text="*{tipoImovel}">Tipo de Imóvel</p>
+        <p th:text="${imovel.tipoImovel.descricao}">Tipo de Imóvel</p>
 
         <h2>Tipo de Negócio</h2>
-        <p th:text="*{tipoNegocio}">Tipo de Negócio</p>
+        <p th:text="${imovel.tipoNegocio.descricao}">Tipo de Negócio</p>
 
         <h2>Conservação</h2>
-        <p th:text="*{tipoConservacao}">Conservação</p>
+        <p th:text="${imovel.tipoConservacao.descricao}">Conservação</p>
 
         <h2>Valor</h2>
-        <p th:text="*{valorImovel}">Valor</p>
+        <p th:text="${imovel.valorImovel}">Valor</p>
 
         <h2>Valor Condomínio</h2>
-        <p th:text="*{valorCondominio}">Valor Condomínio</p>
+        <p th:text="${imovel.valorCondominio}">Valor Condomínio</p>
 
         <h2>Largura</h2>
-        <p th:text="*{largura}">Largura</p>
+        <p th:text="${imovel.largura}">Largura</p>
 
         <h2>Comprimento</h2>
-        <p th:text="*{comprimento}">Comprimento</p>
+        <p th:text="${imovel.comprimento}">Comprimento</p>
 
         <h2>Área Total</h2>
-        <p th:text="*{areaTotal}">Área Total</p>
+        <p th:text="${imovel.areaTotal}">Área Total</p>
 
         <h2>Área Construída</h2>
-        <p th:text="*{areaConstruida}">Área Construída</p>
+        <p th:text="${imovel.areaConstruida}">Área Construída</p>
 
         <h2>Cômodos</h2>
-        <p th:text="*{comodos}">Cômodos</p>
+        <p th:text="${imovel.comodos}">Cômodos</p>
 
         <h2>Quartos Simples</h2>
-        <p th:text="*{quartosSimples}">Quartos Simples</p>
+        <p th:text="${imovel.quartosSimples}">Quartos Simples</p>
 
         <h2>Baneiros Simples</h2>
-        <p th:text="*{banheirosSimples}">Baneiros Simples</p>
+        <p th:text="${imovel.banheirosSimples}">Baneiros Simples</p>
 
         <h2>Suítes</h2>
-        <p th:text="*{suites}">Suítes</p>
+        <p th:text="${imovel.suites}">Suítes</p>
 
         <h2>Vagas na Garagem</h2>
-        <p th:text="*{vagasGaragem}">Vagas na Garagem</p>
+        <p th:text="${imovel.vagasGaragem}">Vagas na Garagem</p>
 
         <h2>Adicionais</h2>
 
-        <div class="checkbox" th:each="adicional : *{adicionais}">
+        <div class="checkbox" th:each="adicional : ${imovel.adicionais}">
             <p th:text="${adicional.descricao}"></p>
         </div>
-
-
         <br>
-
-
-
     </section>
 </div>
 

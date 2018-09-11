@@ -62,6 +62,23 @@ public class ImovelController {
         return "imovel/anunciar";
     }
 
+    @RequestMapping(value = "/imovel/visualizar/{idImovel}", method = RequestMethod.GET)
+    public String visualizarImovel(@PathVariable("idImovel") Long idImovel,
+                               Model model) throws IOException {
+        Optional<Imovel> imovel = imovelRepository.findById(idImovel);
+        if (imovel.isPresent()) {
+            adicionalImovelServices.setSelecionado(imovel.get().getAdicionais(), true);
+            List<AdicionalImovel> adicionais = adicionalImovelRepository.findAll();
+            adicionalImovelServices.unificaLista(imovel.get().getAdicionais(), adicionais);
+            imovelServices.findUploadedFiles(imovel.get());
+            model.addAttribute("imovel", imovel.get());
+            addFormAttributes(model);
+            return "imovel/visualizar";
+        } else {
+            return "";
+        }
+    }
+
     @RequestMapping(value = "/imovel/editar/{idImovel}", method = RequestMethod.GET)
     public String editarImovel(@PathVariable("idImovel") Long idImovel,
                                Model model) throws IOException {
