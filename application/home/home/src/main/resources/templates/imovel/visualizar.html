@@ -14,6 +14,13 @@
         House Catalog - Visualizar Imóvel
     </title>
 
+    <style>
+        body p {
+            font-size:14px;
+            color:#555;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -32,88 +39,98 @@
 
     </header>
 
-    <section id="section-conteudo">
+    <div id="section-conteudo">
 
-        <div th:id="${'anuncioImagem' + imagem.id}" class="imagens-anuncio">
-            <div class="w3-content w3-display-container" th:if="!${imovel.imagens.isEmpty()}">
-                <!--<a th:href="@{'/imovel/editar/' + ${imovel.id}}">-->
-                <img th:class="${'imgAnuncio mySlides'+iterator.index}"
-                     th:src="${imagem.getBytesImgFormatted()}"
-                     style="width:100%;"
-                     th:styleappend="${iteratorImg.index} > 0 ? 'display:none;' : 'display:block;'"
-                     th:each="imagem, iteratorImg: ${imovel.imagens}">
-                <!--</a>-->
+        <div style="width: 100%; display: table;">
+            <div style="display: table-row">
+                <div style="display: table-cell;" th:id="${'anuncioImagem' + imagem.id}" class="imagens-anuncio">
+                    <div class="w3-content w3-display-container" th:if="!${imovel.imagens.isEmpty()}">
+                        <!--<a th:href="@{'/imovel/editar/' + ${imovel.id}}">-->
+                        <img th:class="${'imgAnuncio mySlides'+iterator.index}"
+                             th:src="${imagem.getBytesImgFormatted()}"
+                             style="width:100%;"
+                             th:styleappend="${iteratorImg.index} > 0 ? 'display:none;' : 'display:block;'"
+                             th:each="imagem, iteratorImg: ${imovel.imagens}">
+                        <!--</a>-->
 
-                <img class="w3-button w3-black w3-display-left"
-                     th:onclick="'plusDivs(-1, \''+${iterator.index}+'\');'"
-                     src="../../resources/static/imagens/arrow_back.png" th:src="@{/imagens/arrow_back.png}">
-                <img class="w3-button w3-black w3-display-right"
-                     th:onclick="'plusDivs(1, \''+${iterator.index}+'\');'"
-                     src="../../resources/static/imagens/arrow_after.png" th:src="@{/imagens/arrow_after.png}">
+                        <img class="w3-button w3-black w3-display-left"
+                             th:onclick="'plusDivs(-1, \''+${iterator.index}+'\');'"
+                             src="../../resources/static/imagens/arrow_back.png" th:src="@{/imagens/arrow_back.png}">
+                        <img class="w3-button w3-black w3-display-right"
+                             th:onclick="'plusDivs(1, \''+${iterator.index}+'\');'"
+                             src="../../resources/static/imagens/arrow_after.png" th:src="@{/imagens/arrow_after.png}">
+                    </div>
+                </div>
+
+                <div style="display: table-cell; padding:20px">
+                    <h1 th:text="${title}">Titulo</h1>
+
+                    <div class="rodape-quadro-anuncio-preco" th:text="${imovel.getValorStr()}">R$ 250.000,00</div>
+
+                    <p th:text="*{descricao}" style="margin-top:20px;">Descrição</p>
+
+                    <h2>Tipo de Imóvel</h2>
+                    <p th:text="*{tipoImovel}">Apartamento</p>
+
+                    <h2>Tipo de Negócio</h2>
+                    <p th:text="*{tipoNegocio}">Aluguel</p>
+
+                </div>
             </div>
         </div>
 
-        <h1 th:text="${title}">Titulo</h1>
+        <div style="padding-top:30px; padding-bottom:30px">
+            <h2>Endereço</h2>
+            <p th:text="*{rua}, *{numero}, *{complemento}">Endereço</p>
 
-        <h2>Descrição</h2>
-        <p th:text="*{descricao}">Descrição</p>
+            <h2>Bairro</h2>
+            <p th:text="*{bairro}">Bairro</p>
 
-        <h2>Endereço</h2>
-        <p th:text="*{rua}, *{numero}, *{complemento}">Endereço</p>
+            <h2>CEP</h2>
+            <p th:text="*{cep}">CEP</p>
 
-        <h2>Bairro</h2>
-        <p th:text="*{bairro}">Bairro</p>
+            <h2>Cidade</h2>
+            <p th:text="*{cidade}">Cidade</p>
 
-        <h2>CEP</h2>
-        <p th:text="*{cep}">CEP</p>
+            <h2>Estado</h2>
+            <p th:text="*{estado}">Estado</p>
 
-        <h2>Cidade</h2>
-        <p th:text="*{cidade}">Cidade</p>
+            <h2>Conservação</h2>
+            <p th:text="*{tipoConservacao}">Conservação</p>
 
-        <h2>Estado</h2>
-        <p th:text="*{estado}">Estado</p>
 
-        <h2>Tipo de Imóvel</h2>
-        <p th:text="*{tipoImovel}">Tipo de Imóvel</p>
 
-        <h2>Tipo de Negócio</h2>
-        <p th:text="*{tipoNegocio}">Tipo de Negócio</p>
+            <h2>Valor Condomínio</h2>
+            <p th:text="*{valorCondominio}">Valor Condomínio</p>
 
-        <h2>Conservação</h2>
-        <p th:text="*{tipoConservacao}">Conservação</p>
+            <h2>Largura</h2>
+            <p th:text="*{largura}">Largura</p>
 
-        <h2>Valor</h2>
-        <p th:text="*{valorImovel}">Valor</p>
+            <h2>Comprimento</h2>
+            <p th:text="*{comprimento}">Comprimento</p>
 
-        <h2>Valor Condomínio</h2>
-        <p th:text="*{valorCondominio}">Valor Condomínio</p>
+            <h2>Área Total</h2>
+            <p th:text="*{areaTotal}">Área Total</p>
 
-        <h2>Largura</h2>
-        <p th:text="*{largura}">Largura</p>
+            <h2>Área Construída</h2>
+            <p th:text="*{areaConstruida}">Área Construída</p>
 
-        <h2>Comprimento</h2>
-        <p th:text="*{comprimento}">Comprimento</p>
+            <h2>Cômodos</h2>
+            <p th:text="*{comodos}">Cômodos</p>
 
-        <h2>Área Total</h2>
-        <p th:text="*{areaTotal}">Área Total</p>
+            <h2>Quartos Simples</h2>
+            <p th:text="*{quartosSimples}">Quartos Simples</p>
 
-        <h2>Área Construída</h2>
-        <p th:text="*{areaConstruida}">Área Construída</p>
+            <h2>Banheiros Simples</h2>
+            <p th:text="*{banheirosSimples}">Banheiros Simples</p>
 
-        <h2>Cômodos</h2>
-        <p th:text="*{comodos}">Cômodos</p>
+            <h2>Suítes</h2>
+            <p th:text="*{suites}">Suítes</p>
 
-        <h2>Quartos Simples</h2>
-        <p th:text="*{quartosSimples}">Quartos Simples</p>
+            <h2>Vagas na Garagem</h2>
+            <p th:text="*{vagasGaragem}">Vagas na Garagem</p>
 
-        <h2>Baneiros Simples</h2>
-        <p th:text="*{banheirosSimples}">Baneiros Simples</p>
-
-        <h2>Suítes</h2>
-        <p th:text="*{suites}">Suítes</p>
-
-        <h2>Vagas na Garagem</h2>
-        <p th:text="*{vagasGaragem}">Vagas na Garagem</p>
+        </div>
 
         <h2>Adicionais</h2>
 
