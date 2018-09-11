@@ -62,10 +62,10 @@
                     </div>
                 </div>
 
-                <div style="display: table-cell; padding:20px">
+                <div style="display: table-cell; padding:20px; text-align: right">
                     <h1 th:text="${title}">Titulo</h1>
 
-                    <div class="rodape-quadro-anuncio-preco" th:text="${imovel.getValorStr()}">R$ 250.000,00</div>
+                    <p style="color: green; font-weight: bold; font-size: 16px" th:text="${imovel.getValorStr()}">R$ 250.000,00</p>
 
                     <p th:text="*{descricao}" style="margin-top:20px;">Descrição</p>
 
@@ -79,66 +79,112 @@
             </div>
         </div>
 
-        <div style="padding-top:30px; padding-bottom:30px">
-            <h2>Endereço</h2>
-            <p th:text="*{rua}, *{numero}, *{complemento}">Endereço</p>
+        <div style="padding: 50px 0px 30px 0px; display: table;">
+            <div style="display: table-row">
+                <div class="cell-table-visualizar">
+                    <h2>Endereço</h2>
+                    <p th:text="*{rua}, *{numero}, *{complemento}">Endereço</p>
+                </div>
+            </div>
+            <div style="display: table-row">
+                <div class="cell-table-visualizar">
+                    <h2>Bairro</h2>
+                    <p th:text="*{bairro}">Bairro</p>
+                </div>
 
-            <h2>Bairro</h2>
-            <p th:text="*{bairro}">Bairro</p>
+                <div class="cell-table-visualizar">
+                    <h2>CEP</h2>
+                    <p th:text="*{cep}">CEP</p>
+                </div>
 
-            <h2>CEP</h2>
-            <p th:text="*{cep}">CEP</p>
+                <div class="cell-table-visualizar">
+                    <h2>Cidade</h2>
+                    <p th:text="*{cidade}">Cidade</p>
+                </div>
 
-            <h2>Cidade</h2>
-            <p th:text="*{cidade}">Cidade</p>
+                <div class="cell-table-visualizar">
+                    <h2>Estado</h2>
+                    <p th:text="*{estado}">Estado</p>
+                </div>
 
-            <h2>Estado</h2>
-            <p th:text="*{estado}">Estado</p>
+            </div>
 
-            <h2>Conservação</h2>
-            <p th:text="*{tipoConservacao}">Conservação</p>
+            <div style="display: table-row">
+                <div class="cell-table-visualizar">
+                    <h2>Largura</h2>
+                    <p th:text="*{largura}">Largura</p>
+                </div>
+
+                <div class="cell-table-visualizar">
+                    <h2>Comprimento</h2>
+                    <p th:text="*{comprimento}">Comprimento</p>
+                </div>
+
+                <div class="cell-table-visualizar">
+                    <h2>Área Total</h2>
+                    <p th:text="*{areaTotal}">Área Total</p>
+                </div>
+
+                <div class="cell-table-visualizar">
+                    <h2>Área Construída</h2>
+                    <p th:text="*{areaConstruida}">Área Construída</p>
+                </div>
+
+            </div>
+
+            <div style="display: table-row">
+                <div class="cell-table-visualizar">
+                    <h2>Cômodos</h2>
+                    <p th:text="*{comodos}">Cômodos</p>
+                </div>
+
+                <div class="cell-table-visualizar">
+                    <h2>Quartos Simples</h2>
+                    <p th:text="*{quartosSimples}">Quartos Simples</p>
+                </div>
+
+                <div class="cell-table-visualizar">
+                    <h2>Banheiros Simples</h2>
+                    <p th:text="*{banheirosSimples}">Banheiros Simples</p>
+                </div>
+
+                <div class="cell-table-visualizar">
+                    <h2>Suítes</h2>
+                    <p th:text="*{suites}">Suítes</p>
+                </div>
+
+            </div>
 
 
+            <div style="display: table-row">
+                <div class="cell-table-visualizar">
+                    <h2>Estado de Conservação</h2>
+                    <p th:text="*{tipoConservacao}">Conservação</p>
+                </div>
 
-            <h2>Valor Condomínio</h2>
-            <p th:text="*{valorCondominio}">Valor Condomínio</p>
+                <div class="cell-table-visualizar">
+                    <h2>Valor Condomínio</h2>
+                    <p th:text="*{valorCondominio}">Valor Condomínio</p>
+                </div>
 
-            <h2>Largura</h2>
-            <p th:text="*{largura}">Largura</p>
+                <div class="cell-table-visualizar">
+                    <h2>Vagas na Garagem</h2>
+                    <p th:text="*{vagasGaragem}">Vagas na Garagem</p>
+                </div>
 
-            <h2>Comprimento</h2>
-            <p th:text="*{comprimento}">Comprimento</p>
-
-            <h2>Área Total</h2>
-            <p th:text="*{areaTotal}">Área Total</p>
-
-            <h2>Área Construída</h2>
-            <p th:text="*{areaConstruida}">Área Construída</p>
-
-            <h2>Cômodos</h2>
-            <p th:text="*{comodos}">Cômodos</p>
-
-            <h2>Quartos Simples</h2>
-            <p th:text="*{quartosSimples}">Quartos Simples</p>
-
-            <h2>Banheiros Simples</h2>
-            <p th:text="*{banheirosSimples}">Banheiros Simples</p>
-
-            <h2>Suítes</h2>
-            <p th:text="*{suites}">Suítes</p>
-
-            <h2>Vagas na Garagem</h2>
-            <p th:text="*{vagasGaragem}">Vagas na Garagem</p>
+            </div>
 
         </div>
 
 
         <h2>Adicionais</h2>
 
-        <div class="checkbox" th:each="adicional : ${imovel.adicionais}">
-            <p th:text="${adicional.descricao}"></p>
+        <div style="padding-bottom: 100px; display: table;">
+            <div th:each="adicional : ${imovel.adicionais}" class="cell-table-visualizar">
+                <span th:text="${adicional.descricao}"><img src="../../static/imagens/check-blue.png" class="check-icon" />Item</span>
+            </div>
         </div>
-        <br>
+        
     </section>
 </div>
 
