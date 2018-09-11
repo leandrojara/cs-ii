@@ -244,3 +244,10 @@ body p {
 	float: right;
 	height: 130px;
 }
+
+.voltar-link {
+    margin: 15px 0 0;
+    color: #b3b3b3;
+    font-size: 12px;
+    text-align: center
+}

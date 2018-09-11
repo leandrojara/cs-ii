@@ -14,55 +14,7 @@
 
 <div id="div-central">
 
-    <header id="header">
-
-        <div id="div-logo">
-            <img src="../../resources/static/imagens/logo.png" th:src="@{/imagens/logo.png}" id="logo-header"/>
-        </div>
-
-        <div class="div-secao-login">
-            <div th:if="!${usuarioLogado}">
-                <span class="botao-entrar">
-                    <a href="/login" title="Entrar">
-                        Login
-                    </a>
-                </span>
-                <span class="botao-cadastrar">
-                    <a href="/anunciante/cadastrar" title="Fazer Cadastro">
-                        Registrar
-                    </a>
-                </span>
-            </div>
-            <div th:if="${usuarioLogado}">
-                Olá, <a href="#" title="Editar" th:text="${usuarioLogado.nome}"></a>&nbsp;
-                <div id="div-botao-sair">
-                    <a href="/logout" title="Logout">
-                        x
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div id="barraAzul-header">
-
-            <ul id="menu-header-ul">
-                <li>
-                    <a href="/">Home</a>
-                </li>
-                <li>
-                    <a href="comprar.html">Comprar</a>
-                </li>
-                <li>
-                    <a href="alugar.html">Alugar</a>
-                </li>
-                <li th:if="${usuarioLogado}">
-                    <a href="/imovel/anunciar">Anunciar</a>
-                </li>
-            </ul>
-
-        </div>
-
-    </header>
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
 
     <aside id="barra-lateral">
         <h2 style="text-align: center;">Filtro de Busca</h2>

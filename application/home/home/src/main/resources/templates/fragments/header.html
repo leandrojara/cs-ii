@@ -1,55 +1,65 @@
 <!DOCTYPE html>
-<html>
-  <head th:fragment="header">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
 
-  </head>
   <body>
-    <div th:fragment="menu" >
-        <div id="barraAzul-header">
 
-            <ul id="menu-header-ul">
-                <li>
-                    <a href="/">Home</a>
-                </li>
-                <!--<li>-->
-                <!--<a href="/imovel/comprar">Comprar</a>-->
-                <!--</li>-->
-                <!--<li>-->
-                <!--<a href="/imovel/alugar">Alugar</a>-->
-                <!--</li>-->
-                <li th:if="${usuarioLogado}">
-                    <a href="/imovel/anunciar">Anunciar</a>
-                </li>
-            </ul>
+      <div th:fragment="header" >
 
-        </div>
-    </div>
-    <div th:fragment="login" >
+          <header id="header">
 
-        <div class="div-secao-login">
-            <div th:if="${usuarioLogado}">
-                Olá, <a href="/anunciante/editar/" title="Editar" th:text="${usuarioLogado.nome}"></a>&nbsp;
-                <div id="div-botao-sair">
-                    <a href="/logout" title="Logout">
-                        x
-                    </a>
-                </div>
-            </div>
-            <div th:if="!${usuarioLogado}">
-                <span class="botao-entrar">
-                    <a href="/login" title="Entrar">
-                        Login
-                    </a>
-                </span>
-                <span class="botao-cadastrar">
-                    <a href="/anunciante/cadastrar" title="Fazer Cadastro">
-                        Registrar
-                    </a>
-                </span>
-            </div>
-        </div>
+              <div id="div-logo">
+                  <img src="../../../resources/static/imagens/logo.png" th:src="@{/imagens/logo.png}" id="logo-header"/>
+              </div>
 
-    </div>
+              <div class="div-secao-login">
+                  <div th:if="${usuarioLogado}">
+                      Olá, <a href="/anunciante/editar/" title="Editar" th:text="${usuarioLogado.nome}"></a>&nbsp;
+                      <div id="div-botao-sair">
+                          <a href="/logout" title="Logout">
+                              x
+                          </a>
+                      </div>
+                  </div>
+                  <div th:if="!${usuarioLogado}">
+                      <span class="botao-entrar">
+                          <a href="/login" title="Entrar">
+                              Login
+                          </a>
+                      </span>
+                      <span class="botao-cadastrar">
+                          <a href="/anunciante/cadastrar" title="Fazer Cadastro">
+                              Registrar
+                          </a>
+                      </span>
+                  </div>
+              </div>
+
+              <div id="barraAzul-header">
+
+                  <ul id="menu-header-ul">
+                      <li>
+                          <a href="/">Home</a>
+                      </li>
+                      <!--<li>-->
+                      <!--<a href="/imovel/comprar">Comprar</a>-->
+                      <!--</li>-->
+                      <!--<li>-->
+                      <!--<a href="/imovel/alugar">Alugar</a>-->
+                      <!--</li>-->
+                      <li th:if="${usuarioLogado}">
+                          <a href="/imovel/anunciar">Anunciar</a>
+                      </li>
+                  </ul>
+
+              </div>
+
+          </header>
+
+      </div>
+
 
   </body>
 </html>

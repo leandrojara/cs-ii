@@ -14,17 +14,7 @@
 
 <div id="div-central">
 
-    <header id="header">
-
-        <div id="div-logo">
-            <img src="../../resources/static/imagens/logo.png" th:src="@{/imagens/logo.png}" id="logo-header"/>
-        </div>
-
-        <div th:insert="fragments/header.html::login"></div>
-
-        <div th:insert="fragments/header.html::menu"></div>
-
-    </header>
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
 
     <section id="section-conteudo">
         <div th:if="!${imoveis.isEmpty()}">
