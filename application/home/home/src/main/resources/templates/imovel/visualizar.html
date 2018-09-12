@@ -33,8 +33,8 @@
 
         <div style="width: 100%; display: table;">
             <div style="display: table-row">
-                <div style="display: table-cell;" class="imagens-anuncio">
-                    <div class="w3-content w3-display-container" th:if="!${imovel.imagens.isEmpty()}">
+                <div style="display: inline;">
+                    <div style="display: inline-block; width: 450px !important;" class="w3-content w3-display-container" th:if="!${imovel.imagens.isEmpty()}">
 
                         <img th:class="${'imgAnuncioVisualizar mySlides'}"
                              th:src="${imagem.getBytesImgFormatted()}"
@@ -50,7 +50,8 @@
                     </div>
                 </div>
 
-                <div style="display: table-cell; padding:20px; text-align: right">
+                <div style="display: inline-block; padding:20px; text-align: right">
+                    <h1 th:text="${'ANUNCIADO POR: ' + imovel.getAnunciante().getNome()}">Anunciante</h1>
                     <h1 th:text="${imovel.getDescription()}">Titulo</h1>
 
                     <p style="color: green; font-weight: bold; font-size: 16px" th:text="${imovel.getValorStr()}">R$ 250.000,00</p>
