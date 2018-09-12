@@ -71,7 +71,7 @@
             <div style="display: table-row">
                 <div class="cell-table-visualizar">
                     <h2>Endereço</h2>
-                    <p th:text="${imovel.rua} + ', ' + ${imovel.numero} + ', ' + ${imovel.complemento}">Endereço</p>
+                    <p th:text="${imovel.ruaNumeroComplemento()}">Endereço</p>
                 </div>
             </div>
             <div style="display: table-row">
@@ -100,22 +100,22 @@
             <div style="display: table-row">
                 <div class="cell-table-visualizar">
                     <h2>Largura</h2>
-                    <p th:text="*{imovel.largura}">Largura</p>
+                    <p th:text="*{imovel.larguraStr()}">Largura</p>
                 </div>
 
                 <div class="cell-table-visualizar">
                     <h2>Comprimento</h2>
-                    <p th:text="*{imovel.comprimento}">Comprimento</p>
+                    <p th:text="*{imovel.comprimentoStr()}">Comprimento</p>
                 </div>
 
                 <div class="cell-table-visualizar">
                     <h2>Área Total</h2>
-                    <p th:text="*{imovel.areaTotal}">Área Total</p>
+                    <p th:text="*{imovel.areaTotalStr()}">Área Total</p>
                 </div>
 
                 <div class="cell-table-visualizar">
                     <h2>Área Construída</h2>
-                    <p th:text="*{imovel.areaConstruida}">Área Construída</p>
+                    <p th:text="*{imovel.areaConstruidaStr()}">Área Construída</p>
                 </div>
 
             </div>
@@ -152,7 +152,7 @@
 
                 <div class="cell-table-visualizar">
                     <h2>Valor Condomínio</h2>
-                    <p th:text="*{imovel.valorCondominio}">Valor Condomínio</p>
+                    <p th:text="*{imovel.getValorCondominioStr()}">Valor Condomínio</p>
                 </div>
 
                 <div class="cell-table-visualizar">

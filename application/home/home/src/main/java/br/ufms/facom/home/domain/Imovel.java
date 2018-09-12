@@ -349,4 +349,43 @@ public class Imovel {
     public String getValorStr(){
         return NumberFormat.getCurrencyInstance().format(valorImovel);
     }
+
+    public String getValorCondominioStr(){
+        if (valorCondominio != null && !valorCondominio.isNaN()) {
+            return NumberFormat.getCurrencyInstance().format(valorCondominio);
+        }
+        return "";
+    }
+
+    public String larguraStr(){
+        if (largura != null) {
+            return NumberFormat.getNumberInstance().format(largura) + " m";
+        }
+        return "";
+    }
+
+    public String comprimentoStr(){
+        if (comprimento != null) {
+            return NumberFormat.getNumberInstance().format(comprimento) + " m";
+        }
+        return "";
+    }
+
+    public String areaTotalStr(){
+        if (areaTotal != null) {
+            return NumberFormat.getNumberInstance().format(areaTotal) + " m²";
+        }
+        return "";
+    }
+
+    public String areaConstruidaStr(){
+        if (areaConstruida != null) {
+            return NumberFormat.getNumberInstance().format(areaConstruida) + " m²";
+        }
+        return "";
+    }
+
+    public String ruaNumeroComplemento(){
+        return rua + ", " + numero + (complemento != null && !complemento.trim().isEmpty() ? ", " + complemento : "");
+    }
 }
