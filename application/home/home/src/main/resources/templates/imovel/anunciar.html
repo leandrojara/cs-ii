@@ -6,6 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" type="text/css" href="../../../resources/static/css/reset.css" th:href="@{/css/reset.css}">
     <link rel="stylesheet" type="text/css" href="../../../resources/static/css/main.css" th:href="@{/css/main.css}">
+    <link rel="stylesheet" type="text/css" href="../../../resources/static/bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}">
     <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
     <script th:src="@{/js/jquery.mask.js}"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -56,111 +57,117 @@
 
     <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
 
-    <section id="section-conteudo">
-        <div class="alert alert-success alert-dismissible" th:if="${onSave}">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <strong>Sucesso!</strong>
-            <span th:text="${onSave}">Test</span>
-        </div>
-        <h1 th:text="${title}"></h1>
-        <div class="form">
-            <form th:action="@{/imovel/salvar}" id="formAnunciar" method="POST" th:object="${imovel}"
-                  enctype="multipart/form-data">
-
-                <!--hidden inputs-->
-                <input type="hidden" name="id" th:field="*{id}"/>
-                <input type="hidden" name="dataCadastro" th:field="*{dataCadastro}"/>
-
-                <!--inputs-->
-                <input type="text" name="descricao" th:field="*{descricao}" style="width:100%" placeholder="Descrição"/>
-                <input type="text" name="rua" th:field="*{rua}" style="width:500px" placeholder="Rua" required/>
-                <input type="text" name="numero" th:field="*{numero}" style="width:100px" placeholder="Número"
-                       required/>
-                <input type="text" name="complemento" th:field="*{complemento}" style="width:300px"
-                       placeholder="Complemento"/>
-                <input type="text" name="bairro" th:field="*{bairro}" placeholder="Bairro" required/>
-                <input type="text" class="cep" th:field="*{cep}" placeholder="CEP" required/>
-                <input type="text" name="cidade" th:field="*{cidade}" placeholder="Cidade" required/>
-                <input type="text" name="estado" th:field="*{estado}" style="width:100px" placeholder="Estado"
-                       required/>
-
-                <!-- Tipo do imóvel Casa, Apartamento, Terreno, Sobrado -->
-
-                <select class="appearance-select" th:field="*{tipoImovel}" required>
-
-                    <option value="" selected="selected">Tipo do Imóvel</option>
-                    <option th:each="tipoImovel : ${tiposImovel}" th:value="${tipoImovel}"
-                            th:text="${tipoImovel.descricao}"></option>
-                </select>
-
-                <!-- Negócio, venda ou aluguel -->
-                <select class="appearance-select" th:field="*{tipoNegocio}" required>
-
-                    <option value="" selected="selected">Tipo de Negócio</option>
-                    <option th:each="tipoNegocio : ${tiposNegocio}" th:value="${tipoNegocio}"
-                            th:text="${tipoNegocio.descricao}"></option>
-                </select>
-
-                <!-- Estado de Conservação -->
-                <select class="appearance-select" th:field="*{tipoConservacao}" required>
-
-                    <option value="" selected="selected">Estado de Conservação</option>
-                    <option th:each="tipoConservacao : ${tiposConservacao}" th:value="${tipoConservacao}"
-                            th:text="${tipoConservacao.descricao}"></option>
-                </select>
-
-                <input type="number" name="valorImovel" th:field="*{valorImovel}" min="0"
-                       placeholder="Valor" required/>
-                <input type="number" name="valorCondominio" th:field="*{valorCondominio}" min="0"
-                       placeholder="Valor do Condomínio"/>
-                <input type="number" name="largura" th:field="*{largura}" min="0"
-                       placeholder="Largura"/>
-                <input type="number" name="comprimento" th:field="*{comprimento}" min="0"
-                       placeholder="Comprimento"/>
-                <input type="number" name="areaTotal" th:field="*{areaTotal}" min="0"
-                       placeholder="Área Total"/>
-                <input type="number" name="areaConstruida" th:field="*{areaConstruida}" min="0"
-                       placeholder="Área Construída"/>
-                <input type="number" name="comodos" th:field="*{comodos}" min="0"
-                       placeholder="Cômodos" required/>
-                <input type="number" name="quartosSimples" th:field="*{quartosSimples}" min="0"
-                       placeholder="Quartos" required/>
-                <input type="number" name="banheirosSimples" th:field="*{banheirosSimples}" min="0"
-                       placeholder="Banheiros" required/>
-                <input type="number" name="suites" th:field="*{suites}" min="0"
-                       placeholder="Suítes" required/>
-                <input type="number" name="vagasGaragem" th:field="*{vagasGaragem}" min="0"
-                       placeholder="Vagas na Garagem" required/>
-
-                <h2>Adicionais</h2>
-
-                <div class="checkbox" th:each="adicional : *{adicionais}">
-                    <input type="checkbox" name="adicionais" th:value="${adicional.id}"
-                           th:checked="${adicional.selecionado}"/>
-                    <label th:text="${adicional.descricao}"></label>
+    <div class="container">
+        <div class="row">
+            <section id="section-conteudo" class="col-md-12">
+                <div class="alert alert-success alert-dismissible" th:if="${onSave}">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Sucesso!</strong>
+                    <span th:text="${onSave}">Test</span>
                 </div>
+                <h1 th:text="${title}"></h1>
+                <div class="form">
+                    <form th:action="@{/imovel/salvar}" id="formAnunciar" method="POST" th:object="${imovel}"
+                          enctype="multipart/form-data">
 
-                <h2>Adicione imagens do imóvel</h2>
+                        <!--hidden inputs-->
+                        <input type="hidden" name="id" th:field="*{id}"/>
+                        <input type="hidden" name="dataCadastro" th:field="*{dataCadastro}"/>
 
-                <input id="fileInput" type="file" name="uploadingFiles" accept="image/*" multiple>
+                        <!--inputs-->
+                        <input type="text" name="descricao" th:field="*{descricao}" style="width:100%" placeholder="Descrição"/>
+                        <input type="text" name="rua" th:field="*{rua}" style="width:500px" placeholder="Rua" required/>
+                        <input type="text" name="numero" th:field="*{numero}" style="width:100px" placeholder="Número"
+                               required/>
+                        <input type="text" name="complemento" th:field="*{complemento}" style="width:300px"
+                               placeholder="Complemento"/>
+                        <input type="text" name="bairro" th:field="*{bairro}" placeholder="Bairro" required/>
+                        <input type="text" class="cep" th:field="*{cep}" placeholder="CEP" required/>
+                        <input type="text" name="cidade" th:field="*{cidade}" placeholder="Cidade" required/>
+                        <input type="text" name="estado" th:field="*{estado}" style="width:100px" placeholder="Estado"
+                               required/>
 
-                <br th:if="${isEdit} and !${imovel.imagens.isEmpty()}">
-                <h2 th:if="${isEdit} and !${imovel.imagens.isEmpty()}">Imagens do Imóvel</h2>
+                        <!-- Tipo do imóvel Casa, Apartamento, Terreno, Sobrado -->
 
-                <div>
-                    <div th:id="${'anuncioImagem' + imagem.id}" class="quadro-anuncio-imagem"
-                         th:if="${isEdit} and !${imovel.imagens.isEmpty()}"
-                         th:each="imagem : ${imovel.imagens}">
-                        <img class="imgAnuncio" th:src="${imagem.getBytesImgFormatted()}">
-                        <a href="#" th:onclick="'removeImagem(' + ${imagem.id} + ');'">Remover</a>
-                    </div>
+                        <select class="appearance-select" th:field="*{tipoImovel}" required>
+
+                            <option value="" selected="selected">Tipo do Imóvel</option>
+                            <option th:each="tipoImovel : ${tiposImovel}" th:value="${tipoImovel}"
+                                    th:text="${tipoImovel.descricao}"></option>
+                        </select>
+
+                        <!-- Negócio, venda ou aluguel -->
+                        <select class="appearance-select" th:field="*{tipoNegocio}" required>
+
+                            <option value="" selected="selected">Tipo de Negócio</option>
+                            <option th:each="tipoNegocio : ${tiposNegocio}" th:value="${tipoNegocio}"
+                                    th:text="${tipoNegocio.descricao}"></option>
+                        </select>
+
+                        <!-- Estado de Conservação -->
+                        <select class="appearance-select" th:field="*{tipoConservacao}" required>
+
+                            <option value="" selected="selected">Estado de Conservação</option>
+                            <option th:each="tipoConservacao : ${tiposConservacao}" th:value="${tipoConservacao}"
+                                    th:text="${tipoConservacao.descricao}"></option>
+                        </select>
+
+                        <input type="number" name="valorImovel" th:field="*{valorImovel}" min="0"
+                               placeholder="Valor" required/>
+                        <input type="number" name="valorCondominio" th:field="*{valorCondominio}" min="0"
+                               placeholder="Valor do Condomínio"/>
+                        <input type="number" name="largura" th:field="*{largura}" min="0"
+                               placeholder="Largura"/>
+                        <input type="number" name="comprimento" th:field="*{comprimento}" min="0"
+                               placeholder="Comprimento"/>
+                        <input type="number" name="areaTotal" th:field="*{areaTotal}" min="0"
+                               placeholder="Área Total"/>
+                        <input type="number" name="areaConstruida" th:field="*{areaConstruida}" min="0"
+                               placeholder="Área Construída"/>
+                        <input type="number" name="comodos" th:field="*{comodos}" min="0"
+                               placeholder="Cômodos" required/>
+                        <input type="number" name="quartosSimples" th:field="*{quartosSimples}" min="0"
+                               placeholder="Quartos" required/>
+                        <input type="number" name="banheirosSimples" th:field="*{banheirosSimples}" min="0"
+                               placeholder="Banheiros" required/>
+                        <input type="number" name="suites" th:field="*{suites}" min="0"
+                               placeholder="Suítes" required/>
+                        <input type="number" name="vagasGaragem" th:field="*{vagasGaragem}" min="0"
+                               placeholder="Vagas na Garagem" required/>
+
+                        <h2>Adicionais</h2>
+
+                        <div class="checkbox" th:each="adicional : *{adicionais}">
+                            <input type="checkbox" name="adicionais" th:value="${adicional.id}"
+                                   th:checked="${adicional.selecionado}"/>
+                            <label th:text="${adicional.descricao}"></label>
+                        </div>
+
+                        <h2>Adicione imagens do imóvel</h2>
+
+                        <input id="fileInput" type="file" name="uploadingFiles" accept="image/*" multiple>
+
+                        <br th:if="${isEdit} and !${imovel.imagens.isEmpty()}">
+                        <h2 th:if="${isEdit} and !${imovel.imagens.isEmpty()}">Imagens do Imóvel</h2>
+
+                        <div>
+                            <div th:id="${'anuncioImagem' + imagem.id}" class="quadro-anuncio-imagem"
+                                 th:if="${isEdit} and !${imovel.imagens.isEmpty()}"
+                                 th:each="imagem : ${imovel.imagens}">
+                                <img class="imgAnuncio" th:src="${imagem.getBytesImgFormatted()}">
+                                <a href="#" th:onclick="'removeImagem(' + ${imagem.id} + ');'">Remover</a>
+                            </div>
+                        </div>
+
+                        <br>
+                        <button type="submit">Anunciar</button>
+                    </form>
                 </div>
-
-                <br>
-                <button type="submit">Anunciar</button>
-            </form>
+            </section>
         </div>
-    </section>
+    </div>
+
+
 </div>
 
 </body>
