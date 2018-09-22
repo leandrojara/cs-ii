@@ -8,13 +8,16 @@
 
       <div th:fragment="header" >
 
-          <header id="header">
+          <div class="container header">
 
-              <div id="div-logo">
-                  <img src="../../../resources/static/imagens/logo.png" th:src="@{/imagens/logo.png}" id="logo-header"/>
+            <div class="row">
+              <div class="col-md-12 div-logo">
+                <img src="../../resources/static/imagens/logo.png" th:src="@{/imagens/logo.png}" id="logo-header"/>
               </div>
+            </div>
 
-              <div class="div-secao-login">
+            <div class="row div-secao-login">
+              <div class="col-md-12 ">
                   <div th:if="${usuarioLogado}">
                       Olá, <a href="/anunciante/editar/" title="Editar" th:text="${usuarioLogado.nome}"></a>&nbsp;
                       <div id="div-botao-sair">
@@ -36,27 +39,28 @@
                       </span>
                   </div>
               </div>
+            </div>
 
-              <div id="barraAzul-header">
-
-                  <ul id="menu-header-ul">
-                      <li>
-                          <a href="/">Home</a>
-                      </li>
-                      <!--<li>-->
-                      <!--<a href="/imovel/comprar">Comprar</a>-->
-                      <!--</li>-->
-                      <!--<li>-->
-                      <!--<a href="/imovel/alugar">Alugar</a>-->
-                      <!--</li>-->
-                      <li th:if="${usuarioLogado}">
-                          <a href="/imovel/anunciar">Anunciar</a>
-                      </li>
-                  </ul>
-
+            <div class="row" style="background-color: #071075;">
+              <div class="col-md-12">
+                <ul id="menu-header-ul">
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        <!--<li>-->
+                        <!--<a href="/imovel/comprar">Comprar</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                        <!--<a href="/imovel/alugar">Alugar</a>-->
+                        <!--</li>-->
+                        <li th:if="${usuarioLogado}">
+                            <a href="/imovel/anunciar">Anunciar</a>
+                        </li>
+                    </ul>
               </div>
+            </div>
 
-          </header>
+          </div>
 
       </div>
 
