@@ -16,8 +16,18 @@
 
     <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
 
-    <aside id="barra-lateral">
+    <aside id="barra-lateral" class="col-md-3">
         <h2 style="text-align: center;">Filtro de Busca</h2>
+        <form class="form" th:action="@{/imoveis/buscar}" method="POST" th:object="${imoveis}" enctype="multipart/form-data">
+            <input type="hidden" name="tipo" th:field="tipo" value="comprar" />
+            <p>Busca por Rua:</p>
+            <input type="text" th:field="*{rua}" style="width:100%" />
+            <p>Busca por Bairro:</p>
+            <input type="text" th:field="*{bairro}" style="width:100%" />
+            <p>Busca por Cidade:</p>
+            <input type="text" th:field="*{cidade}" style="width:100%" />
+            <button type="submit" style="width:100%; padding: 10px 20px;">Buscar</button>
+        </form>
     </aside>
 
     <section id="section-conteudo">

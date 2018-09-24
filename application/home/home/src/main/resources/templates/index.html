@@ -22,13 +22,14 @@
 
             <aside id="barra-lateral" class="col-md-3">
                 <h2 style="text-align: center;">Filtro de Busca</h2>
-                <form class="form">
+                <form class="form" th:action="@{/imoveis/buscar}" method="POST" th:object="${imoveis}" enctype="multipart/form-data">
+                    <input type="hidden" name="tipo" th:field="tipo" value="todos" />
                     <p>Busca por Rua:</p>
-                    <input type="text" style="width:100%" />
+                    <input type="text" th:field="*{rua}" style="width:100%" />
                     <p>Busca por Bairro:</p>
-                    <input type="text" style="width:100%" />
+                    <input type="text" th:field="*{bairro}" style="width:100%" />
                     <p>Busca por Cidade:</p>
-                    <input type="text" style="width:100%" />
+                    <input type="text" th:field="*{cidade}" style="width:100%" />
                     <button type="submit" style="width:100%; padding: 10px 20px;">Buscar</button>
                 </form>
             </aside>
@@ -69,21 +70,20 @@
                 </div>
 
                 <!--
-                <div th:if="${imoveis.totalPages > 0}" class="pagination"
+                <div th:if="${imoveis.totalPaginas > 0}" class="pagination"
                      th:each="pageNumber : ${pageNumbers}">
                     <a th:href="@{/listarImoveis(size=${imoveis.size}, page=${pageNumber})}"
                        th:text=${pageNumber}
                        th:class="${pageNumber==imoveis.number + 1} ? active"></a>
-                </div>
-                -->
+                </div> -->
 
-                <nav>
+                
+                <nav th:if="${imoveis.totalPaginas > 0}">
                     <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#">Anterior</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Próxima</a></li>
+                        <li th:each="pageNumber : ${pageNumbers}" class="page-item">
+                            <a href="@{/listarImoveis(size=${imoveis.size}, page=${pageNumber})}"
+                            th:text=${pageNumber} th:class="${pageNumber==imoveis.number + 1} ? active" class="page-link"></a>
+                        </li>
                     </ul>
                 </nav>
 
