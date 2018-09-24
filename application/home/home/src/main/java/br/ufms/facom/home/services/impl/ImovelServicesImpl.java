@@ -6,6 +6,7 @@ import br.ufms.facom.home.repository.AdicionalImovelRepository;
 import br.ufms.facom.home.repository.ImagemImovelRepository;
 import br.ufms.facom.home.services.ImovelServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -89,6 +90,15 @@ public class ImovelServicesImpl implements ImovelServices {
         if (imoveis != null) {
             for (Imovel imovel : imoveis) {
                 findUploadedFiles(imovel);
+            }
+        }
+    }
+
+    @Override
+    public void findUploadedFiles(Page<Imovel> imoveis) throws IOException {
+        if (imoveis != null) {
+            while (imoveis.iterator().hasNext()) {
+                findUploadedFiles(imoveis.iterator().next());
             }
         }
     }

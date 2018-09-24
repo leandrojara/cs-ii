@@ -2,6 +2,7 @@ package br.ufms.facom.home.services;
 
 import br.ufms.facom.home.domain.Imovel;
 import br.ufms.facom.home.domain.ImovelImagem;
+import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -16,6 +17,8 @@ public interface ImovelServices {
     void saveUploadedFiles(Imovel imovel) throws IOException;
 
     void findUploadedFiles(List<Imovel> imoveis) throws IOException;
+
+    void findUploadedFiles(Page<Imovel> imoveis) throws IOException;
 
     void findUploadedFiles(Imovel imovel) throws IOException;
 

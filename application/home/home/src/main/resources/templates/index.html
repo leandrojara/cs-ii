@@ -8,7 +8,8 @@
 
     <link rel="stylesheet" type="text/css" href="../../resources/static/css/reset.css" th:href="@{/css/reset.css}">
     <link rel="stylesheet" type="text/css" href="../../resources/static/css/main.css" th:href="@{/css/main.css}">
-    <link rel="stylesheet" type="text/css" href="../../resources/static/bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" href="../../resources/static/bootstrap/css/bootstrap.min.css"
+          th:href="@{/bootstrap/css/bootstrap.min.css}">
 </head>
 
 <body>
@@ -22,14 +23,14 @@
 
             <aside id="barra-lateral" class="col-md-3">
                 <h2 style="text-align: center;">Filtro de Busca</h2>
-                <form class="form" th:action="@{/imoveis/buscar}" method="POST" th:object="${imoveis}" enctype="multipart/form-data">
-                    <input type="hidden" name="tipo" th:field="tipo" value="todos" />
+                <form class="form" th:action="@{/}" method="GET" enctype="multipart/form-data">
+                    <input type="hidden" name="tipo" th:field="tipo" value="todos"/>
                     <p>Busca por Rua:</p>
-                    <input type="text" th:field="*{rua}" style="width:100%" />
+                    <input id="rua" name="rua" type="text" style="width:100%"/>
                     <p>Busca por Bairro:</p>
-                    <input type="text" th:field="*{bairro}" style="width:100%" />
+                    <input id="bairro" name="bairro" type="text" style="width:100%"/>
                     <p>Busca por Cidade:</p>
-                    <input type="text" th:field="*{cidade}" style="width:100%" />
+                    <input id="cidade" name="cidade" type="text" style="width:100%"/>
                     <button type="submit" style="width:100%; padding: 10px 20px;">Buscar</button>
                 </form>
             </aside>
@@ -39,31 +40,35 @@
 
                     <h1>Imóveis Recentes</h1>
 
-                    <div class="quadro-anuncio" th:each="imovel, iterator : ${imoveis}">
+                    <div class="quadro-anuncio" th:each="imovel, iterator : ${imoveis.content}">
                         <a th:href="@{'/imovel/visualizar/' + ${imovel.id}}">
                             <div class="w3-content w3-display-container" th:if="!${imovel.imagens.isEmpty()}">
                                 <img th:class="${'imgAnuncio mySlides'+iterator.index}"
-                                     th:src="${imagem.getBytesImgFormatted()}"
-                                     style="width:100%;"
-                                     th:styleappend="${iteratorImg.index} > 0 ? 'display:none;' : 'display:block;'"
-                                     th:each="imagem, iteratorImg: ${imovel.imagens}">
+                                     th:each="imagem, iteratorImg: ${imovel.imagens}"
+                                     th:src="${imagem.getBytesImgFormatted()}" style="width:100%;"
+                                     th:styleappend="${iteratorImg.index} > 0 ? 'display:none;' : 'display:block;'">
 
                                 <img class="w3-button w3-black w3-display-left"
                                      th:onclick="'plusDivs(-1, \''+${iterator.index}+'\');'"
-                                     src="../../resources/static/imagens/arrow_back.png" th:src="@{/imagens/arrow_back.png}">
+                                     src="../../resources/static/imagens/arrow_back.png"
+                                     th:src="@{/imagens/arrow_back.png}">
                                 <img class="w3-button w3-black w3-display-right"
                                      th:onclick="'plusDivs(1, \''+${iterator.index}+'\');'"
-                                     src="../../resources/static/imagens/arrow_after.png" th:src="@{/imagens/arrow_after.png}">
+                                     src="../../resources/static/imagens/arrow_after.png"
+                                     th:src="@{/imagens/arrow_after.png}">
                             </div>
 
-                            <img src="../../resources/static/imagens/no-image.jpg" th:src="@{/imagens/no-image.jpg}" width="100%"
+                            <img src="../../resources/static/imagens/no-image.jpg" th:src="@{/imagens/no-image.jpg}"
+                                 width="100%"
                                  th:if="${imovel.imagens.isEmpty()}"/>
 
                             <h2 th:text="${imovel.getDescription()}"></h2>
                             <p th:text="${imovel.descricao}"></p>
 
                             <div class="rodape-quadro-anuncio">
-                                <div class="rodape-quadro-anuncio-preco" th:text="${imovel.getValorStr()}">R$ 250.000,00</div>
+                                <div class="rodape-quadro-anuncio-preco" th:text="${imovel.getValorStr()}">R$
+                                    250.000,00
+                                </div>
                             </div>
                         </a>
                     </div>
@@ -77,12 +82,13 @@
                        th:class="${pageNumber==imoveis.number + 1} ? active"></a>
                 </div> -->
 
-                
-                <nav th:if="${imoveis.totalPaginas > 0}">
+
+                <nav th:if="${imoveis.totalPages > 0}">
                     <ul class="pagination">
                         <li th:each="pageNumber : ${pageNumbers}" class="page-item">
-                            <a href="@{/listarImoveis(size=${imoveis.size}, page=${pageNumber})}"
-                            th:text=${pageNumber} th:class="${pageNumber==imoveis.number + 1} ? active" class="page-link"></a>
+                            <a href="@{/(size=${imoveis.size}, page=${pageNumber})}"
+                               th:text="${pageNumber}" th:class="${pageNumber==imoveis.number + 1} ? active"
+                               class="page-link"></a>
                         </li>
                     </ul>
                 </nav>
@@ -91,7 +97,6 @@
 
         </div>
     </div>
-
 
 
 </div>
