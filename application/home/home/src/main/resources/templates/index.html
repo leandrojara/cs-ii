@@ -24,7 +24,7 @@
             <aside id="barra-lateral" class="col-md-3">
                 <h2 style="text-align: center;">Filtro de Busca</h2>
                 <form class="form" th:action="@{/}" method="GET" enctype="multipart/form-data">
-                    <input type="hidden" name="tipo" value="todos"/>
+                    <input type="hidden" id="tipo" name="tipo" value="todos"/>
                     <p>Busca por Rua:</p>
                     <input id="rua" name="rua" type="text" style="width:100%"/>
                     <p>Busca por Bairro:</p>
@@ -38,9 +38,9 @@
             <section id="section-conteudo" class="col-md-9">
                 <div th:if="!${imoveis.isEmpty()}">
 
-                    <h1>Imóveis Recentes</h1>
+                    <h1>Imóveis Encontrados</h1>
 
-                    <div class="quadro-anuncio" th:each="imovel, iterator : ${imoveis.content}">
+                    <div class="quadro-anuncio" th:each="imovel, iterator : ${imoveis}">
                         <a th:href="@{'/imovel/visualizar/' + ${imovel.id}}">
                             <div class="w3-content w3-display-container" th:if="!${imovel.imagens.isEmpty()}">
                                 <img th:class="${'imgAnuncio mySlides'+iterator.index}"
@@ -83,11 +83,11 @@
                 </div> -->
 
 
-                <nav th:if="${imoveis.totalPages > 0}">
+                <nav th:if="${imoveisPage.totalPages > 0}">
                     <ul class="pagination">
                         <li th:each="pageNumber : ${pageNumbers}" class="page-item">
-                            <a href="@{/(size=${imoveis.size}, page=${pageNumber})}"
-                               th:text="${pageNumber}" th:class="${pageNumber==imoveis.number + 1} ? active"
+                            <a href="@{/(size=${imoveisPage.size}, page=${pageNumber})}"
+                               th:text="${pageNumber}" th:class="${pageNumber==imoveisPage.number + 1} ? active"
                                class="page-link"></a>
                         </li>
                     </ul>

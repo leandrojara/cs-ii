@@ -2,7 +2,6 @@ package br.ufms.facom.home.controllers;
 
 import br.ufms.facom.home.domain.Imovel;
 import br.ufms.facom.home.domain.Usuario;
-import br.ufms.facom.home.domain.enums.TipoImovel;
 import br.ufms.facom.home.repository.ImovelRepository;
 import br.ufms.facom.home.repository.UsuarioRepository;
 import br.ufms.facom.home.services.ImovelServices;
@@ -17,7 +16,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -63,24 +61,28 @@ public class UsuarioController implements UserDetailsService {
         return "login";
     }
 
-    @RequestMapping(value = "/{rua}/{bairro}/{cidade}/{tipoImovel}", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Model model,
-                        @RequestParam("page") Optional<Integer> page,
-                        @RequestParam("size") Optional<Integer> size,
-                        @PathVariable(value = "rua", required = false) String rua,
-                        @PathVariable(value = "bairro", required = false) String bairro,
-                        @PathVariable(value = "cidade", required = false) String cidade,
-                        @PathVariable(value = "tipoImovel", required = false) TipoImovel tipoImovel) throws IOException {
+                        @RequestParam(value = "page", required = false) Integer page,
+                        @RequestParam(value = "size", required = false) Integer size,
+                        @RequestParam(value = "rua", required = false) String rua,
+                        @RequestParam(value = "bairro", required = false) String bairro,
+                        @RequestParam(value = "cidade", required = false) String cidade) throws IOException {
         model.addAttribute("usuarioLogado", Utils.getUsuarioLogado());
 
-        page.ifPresent(p -> currentPage = p);
-        size.ifPresent(p -> pageSize = p);
+        if (page != null) {
+            currentPage = page;
+        }
+        if (size != null) {
+            pageSize = size;
+        }
 
         Page<Imovel> imoveis = imovelRepository
                 .findByRuaOrBairroOrCidadeOrTipoImovelAllIgnoreCaseOrderByCidadeAscBairroAscRuaAsc
-                        (rua, bairro, cidade, tipoImovel, PageRequest.of(currentPage - 1, pageSize));
+                        (rua, bairro, cidade, null, PageRequest.of(currentPage - 1, pageSize));
         imovelServices.findUploadedFiles(imoveis);
-        model.addAttribute("imoveis", imoveis);
+        model.addAttribute("imoveisPage", imoveis);
+        model.addAttribute("imoveis", imoveis.getContent());
 
         int totalPages = imoveis.getTotalPages();
         if (totalPages > 0) {

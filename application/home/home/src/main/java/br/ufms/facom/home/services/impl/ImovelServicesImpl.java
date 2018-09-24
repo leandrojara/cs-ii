@@ -17,6 +17,7 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 @Service
 public class ImovelServicesImpl implements ImovelServices {
@@ -95,11 +96,18 @@ public class ImovelServicesImpl implements ImovelServices {
     }
 
     @Override
-    public void findUploadedFiles(Page<Imovel> imoveis) throws IOException {
+    public void findUploadedFiles(Page<Imovel> imoveis) {
         if (imoveis != null) {
-            while (imoveis.iterator().hasNext()) {
-                findUploadedFiles(imoveis.iterator().next());
-            }
+            imoveis.forEach(new Consumer<Imovel>() {
+                @Override
+                public void accept(Imovel imovel) {
+                    try {
+                        findUploadedFiles(imovel);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
         }
     }
 
