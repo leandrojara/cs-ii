@@ -11,5 +11,5 @@ insert into imovel(id, rua, numero, bairro, cidade, estado, id_anunciante, tipo_
 insert into imovel(id, rua, numero, bairro, cidade, estado, id_anunciante, tipo_imovel, valor_imovel) values (3, 'Dr Lelis Espartel 3', 3, 'Caranda', 'Campo Grande', 'MS', 1, 'CASA', 0);
 insert into imovel(id, rua, numero, bairro, cidade, estado, id_anunciante, tipo_imovel, valor_imovel) values (4, 'Dr Lelis Espartel 4', 4, 'Tijuca', 'Sao Paulo', 'MS', 1, 'CASA', 0);
 insert into imovel(id, rua, numero, bairro, cidade, estado, id_anunciante, tipo_imovel, valor_imovel) values (5, 'Dr Lelis Espartel 5', 5, 'Tijuca', 'Campo Grande', 'MS', 1, 'CASA', 0);
-insert into imovel(id, rua, numero, bairro, cidade, estado, id_anunciante, tipo_imovel, valor_imovel) values (6, 'Av Mato Grosso, 6, 'Tijuca', 'Campo Grande', 'MS', 1, 'CASA', 0);
+insert into imovel(id, rua, numero, bairro, cidade, estado, id_anunciante, tipo_imovel, valor_imovel) values (6, 'Av Mato Grosso', 6, 'Tijuca', 'Campo Grande', 'MS', 1, 'CASA', 0);
 insert into imovel(id, rua, numero, bairro, cidade, estado, id_anunciante, tipo_imovel, valor_imovel) values (7, 'Av Afonso Pena 1955', 7, 'Tijuca', 'Campo Grande', 'MS', 1, 'CASA', 0);
