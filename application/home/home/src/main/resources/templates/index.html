@@ -78,7 +78,7 @@
                     <ul class="pagination">
                         <li th:each="pageNumber : ${pageNumbers}" class="page-item">
                             <a th:href="@{/(size=${imoveisPage.size}, page=${pageNumber})}"
-                               th:text="${pageNumber}" th:class="${'page-link'+pageNumber==imoveisPage.number + 1} ? active"></a>
+                               th:text="${pageNumber}" th:class="${'page-link ' + (pageNumber==imoveisPage.number + 1 ? 'active' : '')}"></a>
                         </li>
                     </ul>
                 </nav>
