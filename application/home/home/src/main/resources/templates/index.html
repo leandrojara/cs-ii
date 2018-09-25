@@ -18,10 +18,10 @@
 
     <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
 
-    <div class="container">
+    <div class="container" style="width:1550px">
         <div class="row">
 
-            <aside id="barra-lateral" class="col-md-3">
+            <aside id="barra-lateral" class="col-xs-3 col-md-3">
                 <h2 style="text-align: center;">Filtro de Busca</h2>
                 <form class="form" th:action="@{/}" method="GET" enctype="multipart/form-data">
                     <p>Busca por Rua:</p>
@@ -34,7 +34,7 @@
                 </form>
             </aside>
 
-            <section id="section-conteudo" class="col-md-9">
+            <section id="section-conteudo" class="col-xs-9 col-md-9">
                 <div th:if="!${imoveis.isEmpty()}">
 
                     <h1>Imóveis Encontrados</h1>
@@ -73,21 +73,12 @@
                     </div>
                 </div>
 
-                <!--
-                <div th:if="${imoveis.totalPaginas > 0}" class="pagination"
-                     th:each="pageNumber : ${pageNumbers}">
-                    <a th:href="@{/listarImoveis(size=${imoveis.size}, page=${pageNumber})}"
-                       th:text=${pageNumber}
-                       th:class="${pageNumber==imoveis.number + 1} ? active"></a>
-                </div> -->
-
 
                 <nav th:if="${imoveisPage.totalPages > 0}">
                     <ul class="pagination">
                         <li th:each="pageNumber : ${pageNumbers}" class="page-item">
                             <a th:href="@{/(size=${imoveisPage.size}, page=${pageNumber})}"
-                               th:text="${pageNumber}" th:class="${pageNumber==imoveisPage.number + 1} ? active"
-                               class="page-link"></a>
+                               th:text="${pageNumber}" th:class="${'page-link'+pageNumber==imoveisPage.number + 1} ? active"></a>
                         </li>
                     </ul>
                 </nav>

@@ -78,7 +78,7 @@
 
 <div class="quadro-apresentacao-user">
     <h1>Meus Anúncios</h1>
-    <div style="overflow-y: scroll; background-color: #d3d3d3">
+    <div style="background-color: #d3d3d3">
         <div th:id="${'anuncioImovel' + imovel.id}" class="div-anuncio" th:each="imovel : ${imoveis}">
             <div class="div-area-anuncio">
                 <h2 th:text="${imovel.getDescription()}">Anúncio</h2>
@@ -94,7 +94,7 @@
             </div>
         </div>
     </div>
-</div>
+
 
 <nav th:if="${imoveisPage.totalPages > 0}">
     <ul class="pagination">
@@ -105,5 +105,6 @@
         </li>
     </ul>
 </nav>
+</div>
 </body>
 </html>

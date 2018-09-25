@@ -36,6 +36,13 @@ body h2 {
     box-shadow: 0px 0px 20px #000
 }
 
+@media (min-width: 1400px) {
+    #div-central {
+        margin-left: 200px;
+        margin-right: 200px;
+    }
+}
+
 #header {
     height: 185px;
     width: 100%;

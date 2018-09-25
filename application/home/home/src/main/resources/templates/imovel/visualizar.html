@@ -6,6 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" type="text/css" href="../../../resources/static/css/reset.css" th:href="@{/css/reset.css}">
     <link rel="stylesheet" type="text/css" href="../../../resources/static/css/main.css" th:href="@{/css/main.css}">
+    <link rel="stylesheet" type="text/css" href="../../resources/static/bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}">
     <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
     <script th:src="@{/js/jquery.mask.js}"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -28,152 +29,155 @@
 <div id="div-central">
 
     <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <div class="container" style="width:1550px">
+        <div class="row">
 
-    <div id="section-conteudo">
+            <div id="section-conteudo" class="col-md-12">
 
-        <div style="width: 100%; display: table;">
-            <div style="display: table-row">
-                <div style="display: inline;">
-                    <div style="display: inline-block; width: 450px !important;" class="w3-content w3-display-container" th:if="!${imovel.imagens.isEmpty()}">
+                <div style="width: 100%; display: table;">
+                    <div style="display: table-row">
+                        <div style="display: inline;">
+                            <div style="display: inline-block; width: 450px !important;" class="w3-content w3-display-container" th:if="!${imovel.imagens.isEmpty()}">
 
-                        <img th:class="${'imgAnuncioVisualizar mySlides'}"
-                             th:src="${imagem.getBytesImgFormatted()}"
-                             th:each="imagem: ${imovel.imagens}">
+                                <img th:class="${'imgAnuncioVisualizar mySlides'}"
+                                     th:src="${imagem.getBytesImgFormatted()}"
+                                     th:each="imagem: ${imovel.imagens}">
 
 
-                        <img class="w3-button w3-black w3-display-left"
-                             th:onclick="'plusDivs(-1);'"
-                             src="../../resources/static/imagens/arrow_back.png" th:src="@{/imagens/arrow_back.png}">
-                        <img class="w3-button w3-black w3-display-right"
-                             th:onclick="'plusDivs(1);'"
-                             src="../../resources/static/imagens/arrow_after.png" th:src="@{/imagens/arrow_after.png}">
+                                <img class="w3-button w3-black w3-display-left"
+                                     th:onclick="'plusDivs(-1);'"
+                                     src="../../resources/static/imagens/arrow_back.png" th:src="@{/imagens/arrow_back.png}">
+                                <img class="w3-button w3-black w3-display-right"
+                                     th:onclick="'plusDivs(1);'"
+                                     src="../../resources/static/imagens/arrow_after.png" th:src="@{/imagens/arrow_after.png}">
+                            </div>
+                        </div>
+
+                        <div style="display: inline-block; padding:20px; text-align: right">
+                            <h1 th:text="${'ANUNCIADO POR: ' + imovel.getAnunciante().getNome()}">Anunciante</h1>
+                            <h1 th:text="${imovel.getDescription()}">Titulo</h1>
+
+                            <p style="color: green; font-weight: bold; font-size: 16px" th:text="${imovel.getValorStr()}">R$ 250.000,00</p>
+
+                            <p th:text="*{imovel.descricao}" style="margin-top:20px;">Descrição</p>
+
+                            <h2>Tipo de Imóvel</h2>
+                            <p th:text="*{imovel.tipoImovel}">Apartamento</p>
+
+                            <h2>Tipo de Negócio</h2>
+                            <p th:text="*{imovel.tipoNegocio}">Aluguel</p>
+
+                        </div>
                     </div>
                 </div>
 
-                <div style="display: inline-block; padding:20px; text-align: right">
-                    <h1 th:text="${'ANUNCIADO POR: ' + imovel.getAnunciante().getNome()}">Anunciante</h1>
-                    <h1 th:text="${imovel.getDescription()}">Titulo</h1>
+                <div style="padding: 50px 0px 30px 0px; display: table;">
+                    <div style="display: table-row">
+                        <div class="cell-table-visualizar">
+                            <h2>Endereço</h2>
+                            <p th:text="${imovel.ruaNumeroComplemento()}">Endereço</p>
+                        </div>
+                    </div>
+                    <div style="display: table-row">
+                        <div class="cell-table-visualizar">
+                            <h2>Bairro</h2>
+                            <p th:text="*{imovel.bairro}">Bairro</p>
+                        </div>
 
-                    <p style="color: green; font-weight: bold; font-size: 16px" th:text="${imovel.getValorStr()}">R$ 250.000,00</p>
+                        <div class="cell-table-visualizar">
+                            <h2>CEP</h2>
+                            <p th:text="*{imovel.cep}">CEP</p>
+                        </div>
 
-                    <p th:text="*{imovel.descricao}" style="margin-top:20px;">Descrição</p>
+                        <div class="cell-table-visualizar">
+                            <h2>Cidade</h2>
+                            <p th:text="*{imovel.cidade}">Cidade</p>
+                        </div>
 
-                    <h2>Tipo de Imóvel</h2>
-                    <p th:text="*{imovel.tipoImovel}">Apartamento</p>
+                        <div class="cell-table-visualizar">
+                            <h2>Estado</h2>
+                            <p th:text="*{imovel.estado}">Estado</p>
+                        </div>
 
-                    <h2>Tipo de Negócio</h2>
-                    <p th:text="*{imovel.tipoNegocio}">Aluguel</p>
+                    </div>
 
+                    <div style="display: table-row">
+                        <div class="cell-table-visualizar">
+                            <h2>Largura</h2>
+                            <p th:text="*{imovel.larguraStr()}">Largura</p>
+                        </div>
+
+                        <div class="cell-table-visualizar">
+                            <h2>Comprimento</h2>
+                            <p th:text="*{imovel.comprimentoStr()}">Comprimento</p>
+                        </div>
+
+                        <div class="cell-table-visualizar">
+                            <h2>Área Total</h2>
+                            <p th:text="*{imovel.areaTotalStr()}">Área Total</p>
+                        </div>
+
+                        <div class="cell-table-visualizar">
+                            <h2>Área Construída</h2>
+                            <p th:text="*{imovel.areaConstruidaStr()}">Área Construída</p>
+                        </div>
+
+                    </div>
+
+                    <div style="display: table-row">
+                        <div class="cell-table-visualizar">
+                            <h2>Cômodos</h2>
+                            <p th:text="*{imovel.comodos}">Cômodos</p>
+                        </div>
+
+                        <div class="cell-table-visualizar">
+                            <h2>Quartos Simples</h2>
+                            <p th:text="*{imovel.quartosSimples}">Quartos Simples</p>
+                        </div>
+
+                        <div class="cell-table-visualizar">
+                            <h2>Banheiros Simples</h2>
+                            <p th:text="*{imovel.banheirosSimples}">Banheiros Simples</p>
+                        </div>
+
+                        <div class="cell-table-visualizar">
+                            <h2>Suítes</h2>
+                            <p th:text="*{imovel.suites}">Suítes</p>
+                        </div>
+
+                    </div>
+
+
+                    <div style="display: table-row">
+                        <div class="cell-table-visualizar">
+                            <h2>Estado de Conservação</h2>
+                            <p th:text="*{imovel.tipoConservacao}">Conservação</p>
+                        </div>
+
+                        <div class="cell-table-visualizar">
+                            <h2>Valor Condomínio</h2>
+                            <p th:text="*{imovel.getValorCondominioStr()}">Valor Condomínio</p>
+                        </div>
+
+                        <div class="cell-table-visualizar">
+                            <h2>Vagas na Garagem</h2>
+                            <p th:text="*{imovel.vagasGaragem}">Vagas na Garagem</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <h2>Adicionais</h2>
+
+                <div style="padding-bottom: 100px; display: table;">
+                    <div th:each="adicional : ${imovel.adicionais}" class="cell-table-visualizar">
+                        <span th:text="${adicional.descricao}"><img src="../../static/imagens/check-blue.png" class="check-icon" />Item</span>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <div style="padding: 50px 0px 30px 0px; display: table;">
-            <div style="display: table-row">
-                <div class="cell-table-visualizar">
-                    <h2>Endereço</h2>
-                    <p th:text="${imovel.ruaNumeroComplemento()}">Endereço</p>
-                </div>
-            </div>
-            <div style="display: table-row">
-                <div class="cell-table-visualizar">
-                    <h2>Bairro</h2>
-                    <p th:text="*{imovel.bairro}">Bairro</p>
-                </div>
-
-                <div class="cell-table-visualizar">
-                    <h2>CEP</h2>
-                    <p th:text="*{imovel.cep}">CEP</p>
-                </div>
-
-                <div class="cell-table-visualizar">
-                    <h2>Cidade</h2>
-                    <p th:text="*{imovel.cidade}">Cidade</p>
-                </div>
-
-                <div class="cell-table-visualizar">
-                    <h2>Estado</h2>
-                    <p th:text="*{imovel.estado}">Estado</p>
-                </div>
-
-            </div>
-
-            <div style="display: table-row">
-                <div class="cell-table-visualizar">
-                    <h2>Largura</h2>
-                    <p th:text="*{imovel.larguraStr()}">Largura</p>
-                </div>
-
-                <div class="cell-table-visualizar">
-                    <h2>Comprimento</h2>
-                    <p th:text="*{imovel.comprimentoStr()}">Comprimento</p>
-                </div>
-
-                <div class="cell-table-visualizar">
-                    <h2>Área Total</h2>
-                    <p th:text="*{imovel.areaTotalStr()}">Área Total</p>
-                </div>
-
-                <div class="cell-table-visualizar">
-                    <h2>Área Construída</h2>
-                    <p th:text="*{imovel.areaConstruidaStr()}">Área Construída</p>
-                </div>
-
-            </div>
-
-            <div style="display: table-row">
-                <div class="cell-table-visualizar">
-                    <h2>Cômodos</h2>
-                    <p th:text="*{imovel.comodos}">Cômodos</p>
-                </div>
-
-                <div class="cell-table-visualizar">
-                    <h2>Quartos Simples</h2>
-                    <p th:text="*{imovel.quartosSimples}">Quartos Simples</p>
-                </div>
-
-                <div class="cell-table-visualizar">
-                    <h2>Banheiros Simples</h2>
-                    <p th:text="*{imovel.banheirosSimples}">Banheiros Simples</p>
-                </div>
-
-                <div class="cell-table-visualizar">
-                    <h2>Suítes</h2>
-                    <p th:text="*{imovel.suites}">Suítes</p>
-                </div>
-
-            </div>
-
-
-            <div style="display: table-row">
-                <div class="cell-table-visualizar">
-                    <h2>Estado de Conservação</h2>
-                    <p th:text="*{imovel.tipoConservacao}">Conservação</p>
-                </div>
-
-                <div class="cell-table-visualizar">
-                    <h2>Valor Condomínio</h2>
-                    <p th:text="*{imovel.getValorCondominioStr()}">Valor Condomínio</p>
-                </div>
-
-                <div class="cell-table-visualizar">
-                    <h2>Vagas na Garagem</h2>
-                    <p th:text="*{imovel.vagasGaragem}">Vagas na Garagem</p>
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <h2>Adicionais</h2>
-
-        <div style="padding-bottom: 100px; display: table;">
-            <div th:each="adicional : ${imovel.adicionais}" class="cell-table-visualizar">
-                <span th:text="${adicional.descricao}"><img src="../../static/imagens/check-blue.png" class="check-icon" />Item</span>
-            </div>
-        </div>
-        
     </div>
 </div>
 
