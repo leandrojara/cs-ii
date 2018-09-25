@@ -21,10 +21,12 @@ public interface ImovelRepository extends JpaRepository<Imovel, Long> {
             " and (?2 is null or lower(bairro) like '%'||lower(?2)||'%')" +
             " and (?3 is null or lower(cidade) like '%'||lower(?3)||'%')" +
             " and (?4 is null or tipoImovel = ?4)" +
+            " and (?5 is null or anunciante.id = ?5)" +
             " Order by cidade asc, bairro asc, rua asc")
-    public Page<Imovel> findByRuaOrBairroOrCidadeOrTipoImovelAllIgnoreCaseOrderByCidadeAscBairroAscRuaAsc(@Nullable String rua,
-                                                                                                          @Nullable String bairro,
-                                                                                                          @Nullable String cidade,
-                                                                                                          @Nullable TipoImovel tipoImovel,
-                                                                                                          Pageable pageable);
+    public Page<Imovel> findByRuaOrBairroOrCidadeOrTipoImovelOrAnuncianteIdAllIgnoreCaseOrderByCidadeAscBairroAscRuaAsc(@Nullable String rua,
+                                                                                                                        @Nullable String bairro,
+                                                                                                                        @Nullable String cidade,
+                                                                                                                        @Nullable TipoImovel tipoImovel,
+                                                                                                                        @Nullable Long anuncianteId,
+                                                                                                                        Pageable pageable);
 }

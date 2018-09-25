@@ -12,6 +12,8 @@ import br.ufms.facom.home.services.AdicionalImovelServices;
 import br.ufms.facom.home.services.ImovelServices;
 import br.ufms.facom.home.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +30,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 public class ImovelController {
@@ -44,6 +48,9 @@ public class ImovelController {
     private AdicionalImovelServices adicionalImovelServices;
     @Autowired
     private ImagemImovelRepository imagemImovelRepository;
+
+    private static int currentPage = 1;
+    private static int pageSize = 5;
 
     private void addFormAttributes(Model model) {
         model.addAttribute("tiposImovel", TipoImovel.values());
@@ -96,9 +103,34 @@ public class ImovelController {
     }
 
     @RequestMapping(value = "/imovel/buscar/", method = RequestMethod.GET)
-    public String buscarDoAnunciante(Model model) {
-        List<Imovel> imoveis = imovelRepository.findByAnuncianteId(Utils.getUsuarioLogado().getId());
-        model.addAttribute("imoveis", imoveis);
+    public String buscarDoAnunciante(Model model,
+                                     @RequestParam(value = "page", required = false) Integer page,
+                                     @RequestParam(value = "size", required = false) Integer size,
+                                     @RequestParam(value = "rua", required = false) String rua,
+                                     @RequestParam(value = "bairro", required = false) String bairro,
+                                     @RequestParam(value = "cidade", required = false) String cidade) throws IOException {
+        if (page != null) {
+            currentPage = page;
+        }
+        if (size != null) {
+            pageSize = size;
+        }
+
+        Page<Imovel> imoveis = imovelRepository
+                .findByRuaOrBairroOrCidadeOrTipoImovelOrAnuncianteIdAllIgnoreCaseOrderByCidadeAscBairroAscRuaAsc
+                        (rua, bairro, cidade, null, Utils.getUsuarioLogado().getId(), PageRequest.of(currentPage - 1, pageSize));
+        imovelServices.findUploadedFiles(imoveis);
+        model.addAttribute("imoveisPage", imoveis);
+        model.addAttribute("imoveis", imoveis.getContent());
+
+        int totalPages = imoveis.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+
         return "anunciante/meusAnuncios";
     }
 

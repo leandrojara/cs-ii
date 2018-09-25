@@ -57,6 +57,7 @@
                 $('#anuncioImovel' + n).remove();
             }
         }
+
     </script>
 </head>
 
@@ -94,5 +95,15 @@
         </div>
     </div>
 </div>
+
+<nav th:if="${imoveisPage.totalPages > 0}">
+    <ul class="pagination">
+        <li th:each="pageNumber : ${pageNumbers}" class="page-item">
+            <a th:href="@{/imovel/buscar/(size=${imoveisPage.size}, page=${pageNumber})}"
+               th:text="${pageNumber}" th:class="${pageNumber==imoveisPage.number + 1} ? active"
+               class="page-link"></a>
+        </li>
+    </ul>
+</nav>
 </body>
 </html>
