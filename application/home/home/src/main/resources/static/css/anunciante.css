@@ -90,8 +90,15 @@ body p {
 
 .imagem-user {
 	border-radius: 50%;
-	width: 250px;
-	height: 250px;
+  width: 120px;
+  height: 120px;
+}
+
+.centraliza-imagem {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
 .menu-user {
@@ -176,7 +183,7 @@ body p {
 
 #vizualizar-button {
   width: 70px;
-  margin: 9px 5px 5px 5px;
+  margin: 9px 15px 5px 5px;
   background: #32cd32 ;
   border: 0;
   padding: 7px;
@@ -190,7 +197,7 @@ body p {
 
 #editar-button {
   width: 70px;
-  margin: 9px 5px 5px 5px;
+  margin: 9px 15px 5px 5px;
   background: #071075;
   border: 0;
   padding: 7px;
@@ -229,28 +236,29 @@ body p {
 }
 
 .div-anuncio {
-	margin: 10px;
+  width: 100%;
 	background-color: white;
 	height: 130px;
+  border:8px solid #ccc;
 }
 
 .div-area-anuncio {
-	width: 600px;
+	width: 75%;
 	float: left;
 	height: 130px;
 }
 
 .div-botoes-anuncio {
-	width: 100px;
+	width: 25%;
 	float: right;
 	height: 130px;
 }
 
 .voltar-link {
-    margin: 15px 0 0;
-    color: #b3b3b3;
-    font-size: 12px;
-    text-align: center
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+  text-align: center
 }
 
 .pagination{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;padding-left:0;list-style:none;border-radius:.25rem}

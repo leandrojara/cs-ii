@@ -6,6 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" type="text/css" href="../../../resources/static/css/reset.css" th:href="@{/css/reset.css}">
     <link rel="stylesheet" type="text/css" href="../../../resources/static/css/anunciante.css" th:href="@{/css/anunciante.css}">
+    <link rel="stylesheet" type="text/css" href="../../../resources/static/bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}">
     <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
     <script th:src="@{/js/jquery.mask.js}"></script>
     <title>
@@ -62,47 +63,57 @@
 
 <body>
 
-<div class="quadro-menu-user">
-    <img src="../../../resources/static/imagens/no-image.jpg" th:src="@{/imagens/no-image.jpg}"
-         class="imagem-user"/>
+    <div class="container">
 
-    <div class="menu-user">
-        <a href="/anunciante/editar/">Editar Dados</a>
-        <a href="/imovel/buscar/" class="active">Meus Anuncios</a>
-        <a href="/logout">Logout</a>
-    </div>
-    <p class="voltar-link"><a href="/">Voltar</a></p>
+        <div class="row" style="margin-top: 50px">
 
-</div>
-
-<div class="quadro-apresentacao-user">
-    <h1>Meus Anúncios</h1>
-    <div style="background-color: #d3d3d3; padding:1px;">
-        <div th:id="${'anuncioImovel' + imovel.id}" class="div-anuncio" th:each="imovel : ${imoveis}">
-            <div class="div-area-anuncio">
-                <h2 th:text="${imovel.getDescription()}">Anúncio</h2>
-                <p th:text="${imovel.descricao}"></p>
+            <div class="col-sm-3">
+                <div class="centraliza-imagem">
+                    <img src="../../../resources/static/imagens/no-image.jpg" th:src="@{/imagens/no-image.jpg}" class="imagem-user" />
+                </div>
+                <div class="menu-user">
+                    <a href="/anunciante/editar/">Editar Dados</a>
+                    <a href="/imovel/buscar/" class="active">Meus Anuncios</a>
+                    <a href="/logout">Logout</a>
+                </div>
+                <p class="voltar-link"><a href="/">Voltar</a></p>
             </div>
-            <div class="div-botoes-anuncio">
-                <a th:href="@{'/imovel/editar/' + ${imovel.id}}">
-                    <div id="editar-button">Editar</div>
-                </a>
-                <a th:onclick="'removeImovel(' + ${imovel.id} + ');'" href="#">
-                    <div id="excluir-button">Excluir</div>
-                </a>
+
+            <div class="col-sm-9">
+
+                <h1>Meus Anúncios</h1>
+                <div>
+                    <div th:id="${'anuncioImovel' + imovel.id}" class="div-anuncio" th:each="imovel : ${imoveis}">
+                        <div class="div-area-anuncio">
+                            <h2 th:text="${imovel.getDescription()}">Anúncio</h2>
+                            <p th:text="${imovel.descricao}"></p>
+                        </div>
+                        <div class="div-botoes-anuncio">
+                            <div style=" float: right;">
+                                <a th:href="@{'/imovel/editar/' + ${imovel.id}}">
+                                    <div id="editar-button">Editar</div>
+                                </a>
+                                <a th:onclick="'removeImovel(' + ${imovel.id} + ');'" href="#">
+                                    <div id="excluir-button">Excluir</div>
+                                </a>  
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <br />
+
+                <nav th:if="${imoveisPage.totalPages > 0}">
+                    <ul class="pagination">
+                        <li th:each="pageNumber : ${pageNumbers}" class="page-item">
+                            <a th:href="@{/imovel/buscar/(size=${imoveisPage.size}, page=${pageNumber})}"
+                               th:text="${pageNumber}" th:class="${'page-link ' + (pageNumber==imoveisPage.number + 1 ? 'active' : '')}"></a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>
-    <br />
-
-    <nav th:if="${imoveisPage.totalPages > 0}">
-        <ul class="pagination">
-            <li th:each="pageNumber : ${pageNumbers}" class="page-item">
-                <a th:href="@{/imovel/buscar/(size=${imoveisPage.size}, page=${pageNumber})}"
-                   th:text="${pageNumber}" th:class="${'page-link ' + (pageNumber==imoveisPage.number + 1 ? 'active' : '')}"></a>
-            </li>
-        </ul>
-    </nav>
-</div>
 </body>
+
 </html>
