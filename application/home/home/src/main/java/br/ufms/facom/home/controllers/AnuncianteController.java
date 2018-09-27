@@ -36,6 +36,7 @@ public class AnuncianteController {
     @RequestMapping(value = "/anunciante/editar/", method = RequestMethod.GET)
     public String editarAnunciante(Model model) {
         model.addAttribute("anunciante", anuncianteRepository.findById(Utils.getUsuarioLogado().getId()).get());
+        model.addAttribute("usuarioLogado", Utils.getUsuarioLogado());
         return "anunciante/editar";
     }
 

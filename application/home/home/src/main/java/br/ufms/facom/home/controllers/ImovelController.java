@@ -130,7 +130,7 @@ public class ImovelController {
                     .collect(Collectors.toList());
             model.addAttribute("pageNumbers", pageNumbers);
         }
-
+        model.addAttribute("usuarioLogado", Utils.getUsuarioLogado());
         return "anunciante/meusAnuncios";
     }
 

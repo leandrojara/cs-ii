@@ -155,6 +155,7 @@ body p {
   right: 70px;
   bottom: -100px;
   width: 140px;
+  height: 51px;
 }
 
 .form button:hover,.form button:active,.form button:focus {
