@@ -9,6 +9,39 @@
     <link rel="stylesheet" type="text/css" href="../../resources/static/css/reset.css" th:href="@{/css/reset.css}">
     <link rel="stylesheet" type="text/css" href="../../resources/static/css/main.css" th:href="@{/css/main.css}">
     <link rel="stylesheet" type="text/css" href="../../resources/static/bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}">
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#rua").autocomplete({
+                minLength: 2,
+                source: function(request, response) {
+                    var lista = "";
+                    $.ajax({
+                            url: "/ruas",
+                            type: "POST",
+                            async: true,
+                            data: {request.term},
+                            success: function(data) {
+                               response(data);
+                            }
+                    }).done(function(data){
+                    if(data.length > 0){
+
+                        data = data.split(',');
+                        response( $.each(data, function(key, item){
+                            return({
+                                label: item
+                            });
+                        }));
+                    }
+                    });
+                }
+            });
+
+        });
+    </script>
 </head>
 
 <body>
