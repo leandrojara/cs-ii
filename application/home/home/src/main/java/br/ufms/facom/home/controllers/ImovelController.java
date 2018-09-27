@@ -205,4 +205,22 @@ public class ImovelController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @RequestMapping(value = "/ruas", method = RequestMethod.POST)
+    public ResponseEntity buscarRuas(@RequestParam(value = "text") String text) {
+        List<String> ruas = imovelRepository.findRuas(text);
+        return ResponseEntity.ok(ruas);
+    }
+
+    @RequestMapping(value = "/bairros", method = RequestMethod.POST)
+    public ResponseEntity buscarBairros(@RequestParam(value = "text") String text) {
+        List<String> bairros = imovelRepository.findBairros(text);
+        return ResponseEntity.ok(bairros);
+    }
+
+    @RequestMapping(value = "/cidades", method = RequestMethod.POST)
+    public ResponseEntity buscarCidades(@RequestParam(value = "text") String text) {
+        List<String> cidades = imovelRepository.findCidades(text);
+        return ResponseEntity.ok(cidades);
+    }
 }
