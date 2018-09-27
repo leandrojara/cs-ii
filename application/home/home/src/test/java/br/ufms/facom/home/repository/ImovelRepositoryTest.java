@@ -1,5 +1,6 @@
 package br.ufms.facom.home.repository;
 
+import br.ufms.facom.home.HomeApplicationTests;
 import br.ufms.facom.home.domain.Anunciante;
 import br.ufms.facom.home.domain.Imovel;
 import br.ufms.facom.home.utils.Utils;
@@ -12,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class ImovelRepositoryTest {
+public class ImovelRepositoryTest extends HomeApplicationTests {
 
     @Autowired
     private AnuncianteRepository anuncianteRepository;
@@ -33,6 +34,9 @@ public class ImovelRepositoryTest {
         imovel1.setDataCadastro(new Date());
         imovel1.setAnunciante(anunciante);
         imovel1.setDescricao("imovel 1");
+        imovel1.setRua("rua domingo legal");
+        imovel1.setBairro("bairro jockey");
+        imovel1.setCidade("cidade morta");
 
         anunciante.setImoveis(new ArrayList<>());
         anunciante.getImoveis().add(imovel1);
@@ -43,6 +47,9 @@ public class ImovelRepositoryTest {
         imovel2.setDataCadastro(new Date());
         imovel2.setAnunciante(anunciante);
         imovel2.setDescricao("imovel 2");
+        imovel2.setRua("rua domingo legal");
+        imovel2.setBairro("bairro vila");
+        imovel2.setCidade("cidade viva");
 
         imovelRepository.save(imovel2);
     }
@@ -54,8 +61,33 @@ public class ImovelRepositoryTest {
         Assertions.assertThat(imovelRepository.findByAnuncianteId(anunciante.getId())).hasSize(2);
     }
 
+    @Test
+    public void buscarPorParametrosTest() {
+        Assertions.assertThat(imovelRepository.findByParameters("rua", null, null, null, null, null).getTotalElements()).isGreaterThan(0L);
+        Assertions.assertThat(imovelRepository.findByParameters("RUA", null, null, null, null, null).getTotalElements()).isGreaterThan(0L);
+        Assertions.assertThat(imovelRepository.findByParameters("LEGAL", null, null, null, null, null).getTotalElements()).isGreaterThan(0L);
+    }
+
+    @Test
+    public void buscarRuasTest(){
+        Assertions.assertThat(imovelRepository.findRuas("rua")).hasSize(1);
+        Assertions.assertThat(imovelRepository.findRuas("RUA")).hasSize(1);
+    }
+
+    @Test
+    public void buscarBairrosTest(){
+        Assertions.assertThat(imovelRepository.findBairros("bairro")).hasSize(2);
+        Assertions.assertThat(imovelRepository.findBairros("BAIRRO")).hasSize(2);
+    }
+
+    @Test
+    public void buscarCidadesTest(){
+        Assertions.assertThat(imovelRepository.findCidades("cidade")).hasSize(2);
+        Assertions.assertThat(imovelRepository.findCidades("CIDADE")).hasSize(2);
+    }
+
     @After
     public void after() {
-        anuncianteRepository.delete(anunciante);
+        anuncianteRepository.deleteAll();
     }
 }

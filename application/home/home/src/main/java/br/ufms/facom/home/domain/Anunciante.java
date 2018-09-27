@@ -13,7 +13,7 @@ public class Anunciante extends Usuario {
     @Column(name = "creci")
     private String creci;
 
-    @OneToMany(mappedBy = "anunciante", fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(mappedBy = "anunciante", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.PERSIST)
     private List<Imovel> imoveis;
 
     public Anunciante() {

@@ -117,7 +117,7 @@ public class ImovelController {
         }
 
         Page<Imovel> imoveis = imovelRepository
-                .findByRuaOrBairroOrCidadeOrTipoImovelOrAnuncianteIdAllIgnoreCaseOrderByCidadeAscBairroAscRuaAsc
+                .findByParameters
                         (rua, bairro, cidade, null, Utils.getUsuarioLogado().getId(), PageRequest.of(currentPage - 1, pageSize));
         imovelServices.findUploadedFiles(imoveis);
         model.addAttribute("imoveisPage", imoveis);
