@@ -6,10 +6,11 @@
 */
 
 body {
-    background: #d3d3d3; /* fallback for old browsers */
     font-family: "Roboto", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-image: url("../imagens/repeat.png");
+    background-repeat: repeat;
 }
 
 body h1 {
@@ -30,23 +31,24 @@ body h2 {
 }
 
 #div-central {
+    background-color: #ddd;
     position: relative;
     margin-left: 100px;
     margin-right: 100px;
     box-shadow: 0px 0px 20px #000
 }
 
-@media (min-width: 1400px) {
+@media (max-width: 768px) {
     #div-central {
-        margin-left: 200px;
-        margin-right: 200px;
+
     }
 }
 
-#header {
-    height: 185px;
+.header {
+    width:1550px;
+    background-color:white;
+    height: 178px;
     width: 100%;
-    background-color: #fff;
     position: relative;
 }
 

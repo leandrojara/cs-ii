@@ -9,38 +9,79 @@
     <link rel="stylesheet" type="text/css" href="../../resources/static/css/reset.css" th:href="@{/css/reset.css}">
     <link rel="stylesheet" type="text/css" href="../../resources/static/css/main.css" th:href="@{/css/main.css}">
     <link rel="stylesheet" type="text/css" href="../../resources/static/bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script th:src="@{/js/jquery-1.10.2.min.js}"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <script type="text/javascript">
 
         $(document).ready(function () {
-
-            $("#rua").autocomplete({
-                minLength: 2,
-                source: function(request, response) {
-                    var lista = "";
+            $("#ruaInput").autocomplete({
+                source: function (request, response) {
                     $.ajax({
-                            url: "/ruas",
-                            type: "POST",
-                            async: true,
-                            data: {request.term},
-                            success: function(data) {
-                               response(data);
-                            }
-                    }).done(function(data){
-                    if(data.length > 0){
+                        type: "POST",
+                        url: "/ruas",
+                        dataType: "json",
+                        data: {
+                            text: $("#ruaInput").val()
+                        },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item, value: item };
+                            }));
+                        },
+                        error: function (status, error) {
+                            alert("Error");
+                        }
+                    });
+                }
+            });
 
-                        data = data.split(',');
-                        response( $.each(data, function(key, item){
-                            return({
-                                label: item
-                            });
-                        }));
-                    }
+            $("#bairroInput").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/bairros",
+                        dataType: "json",
+                        data: {
+                            text: $("#bairroInput").val()
+                        },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item, value: item };
+                            }));
+                        },
+                        error: function (status, error) {
+                            alert("Error");
+                        }
+                    });
+                }
+            });
+
+            $("#cidadeInput").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/cidades",
+                        dataType: "json",
+                        data: {
+                            text: $("#cidadeInput").val()
+                        },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item, value: item };
+                            }));
+                        },
+                        error: function (status, error) {
+                            alert("Error");
+                        }
                     });
                 }
             });
 
         });
+
     </script>
 </head>
 
@@ -57,11 +98,11 @@
                 <h2 style="text-align: center;">Filtro de Busca</h2>
                 <form class="form" th:action="@{/}" method="GET" enctype="multipart/form-data">
                     <p>Busca por Rua:</p>
-                    <input id="rua" name="rua" type="text" style="width:100%"/>
+                    <input id="ruaInput" type="text" style="width:100%"/>
                     <p>Busca por Bairro:</p>
-                    <input id="bairro" name="bairro" type="text" style="width:100%"/>
+                    <input id="bairroInput" type="text" style="width:100%"/>
                     <p>Busca por Cidade:</p>
-                    <input id="cidade" name="cidade" type="text" style="width:100%"/>
+                    <input id="cidadeInput" type="text" style="width:100%"/>
                     <button type="submit" style="width:100%; padding: 10px 20px;">Buscar</button>
                 </form>
             </aside>
