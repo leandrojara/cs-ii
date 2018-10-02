@@ -72,6 +72,8 @@ public class UsuarioController implements UserDetailsService {
 
         if (page != null) {
             currentPage = page;
+        } else {
+            currentPage = 1;
         }
         if (size != null) {
             pageSize = size;
