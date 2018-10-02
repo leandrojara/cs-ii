@@ -50,7 +50,7 @@ public class ImovelController {
     private ImagemImovelRepository imagemImovelRepository;
 
     private static int currentPage = 1;
-    private static int pageSize = 5;
+    private static int pageSize = 4;
 
     private void addFormAttributes(Model model) {
         model.addAttribute("tiposImovel", TipoImovel.values());
