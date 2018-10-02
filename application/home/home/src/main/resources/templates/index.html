@@ -98,11 +98,11 @@
                 <h2 style="text-align: center;">Filtro de Busca</h2>
                 <form class="form" th:action="@{/}" method="GET" enctype="multipart/form-data">
                     <p>Busca por Rua:</p>
-                    <input id="ruaInput" type="text" style="width:100%"/>
+                    <input id="ruaInput" name="rua" type="text" style="width:100%"/>
                     <p>Busca por Bairro:</p>
-                    <input id="bairroInput" type="text" style="width:100%"/>
+                    <input id="bairroInput" name="bairro" type="text" style="width:100%"/>
                     <p>Busca por Cidade:</p>
-                    <input id="cidadeInput" type="text" style="width:100%"/>
+                    <input id="cidadeInput" name="cidade" type="text" style="width:100%"/>
                     <button type="submit" style="width:100%; padding: 10px 20px;">Buscar</button>
                 </form>
             </aside>
