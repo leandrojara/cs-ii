@@ -38,7 +38,7 @@ public class UsuarioController implements UserDetailsService {
     private ImovelServices imovelServices;
 
     private static int currentPage = 1;
-    private static int pageSize = 5;
+    private static int pageSize = 4;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
