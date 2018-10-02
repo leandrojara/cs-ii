@@ -1,5 +1,6 @@
 package br.ufms.facom.home.services;
 
+import br.ufms.facom.home.HomeApplicationTests;
 import br.ufms.facom.home.domain.AdicionalImovel;
 import br.ufms.facom.home.repository.AdicionalImovelRepository;
 import org.assertj.core.api.Assertions;
@@ -10,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdicionalImovelServicesTest {
+public class AdicionalImovelServicesTest extends HomeApplicationTests {
 
     @Autowired
     private AdicionalImovelRepository adicionalImovelRepository;
