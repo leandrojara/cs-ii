@@ -81,7 +81,7 @@ public class UsuarioController implements UserDetailsService {
 
         Page<Imovel> imoveis = imovelRepository
                 .findByParameters
-                        (rua, bairro, cidade, null, null, PageRequest.of(currentPage - 1, pageSize));
+                        (rua, bairro, cidade != null ? cidade.split(" - ")[0] : null, null, null, PageRequest.of(currentPage - 1, pageSize));
         imovelServices.findUploadedFiles(imoveis);
         model.addAttribute("imoveisPage", imoveis);
         model.addAttribute("imoveis", imoveis.getContent());
