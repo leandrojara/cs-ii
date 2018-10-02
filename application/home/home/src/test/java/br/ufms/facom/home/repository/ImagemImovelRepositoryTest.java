@@ -1,5 +1,6 @@
 package br.ufms.facom.home.repository;
 
+import br.ufms.facom.home.HomeApplicationTests;
 import br.ufms.facom.home.domain.Anunciante;
 import br.ufms.facom.home.domain.Imovel;
 import br.ufms.facom.home.domain.ImovelImagem;
@@ -13,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class ImagemImovelRepositoryTest {
+public class ImagemImovelRepositoryTest extends HomeApplicationTests {
 
     @Autowired
     private AnuncianteRepository anuncianteRepository;

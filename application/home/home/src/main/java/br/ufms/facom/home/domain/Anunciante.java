@@ -1,6 +1,7 @@
 package br.ufms.facom.home.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,7 +15,7 @@ public class Anunciante extends Usuario {
     private String creci;
 
     @OneToMany(mappedBy = "anunciante", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.PERSIST)
-    private List<Imovel> imoveis;
+    private List<Imovel> imoveis = new ArrayList<>();
 
     public Anunciante() {
     }

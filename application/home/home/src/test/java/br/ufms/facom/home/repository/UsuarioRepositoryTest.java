@@ -1,5 +1,6 @@
 package br.ufms.facom.home.repository;
 
+import br.ufms.facom.home.HomeApplicationTests;
 import br.ufms.facom.home.domain.Usuario;
 import br.ufms.facom.home.utils.Utils;
 import org.assertj.core.api.Assertions;
@@ -8,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class UsuarioRepositoryTest {
+public class UsuarioRepositoryTest extends HomeApplicationTests {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
@@ -29,7 +30,7 @@ public class UsuarioRepositoryTest {
     public void updateAnuncianteTest() {
         usuario.setSenha(Utils.encrypt("12345"));
         usuarioRepository.save(usuario);
-        Assertions.assertThat(usuarioRepository.findById(usuario.getId()).get().getSenha()).isEqualTo(Utils.encrypt("12345"));
+        Assertions.assertThat(Utils.getEncoder().matches("12345", usuarioRepository.findById(usuario.getId()).get().getSenha())).isTrue();
     }
 
     @Test

@@ -1,5 +1,6 @@
 package br.ufms.facom.home.repository;
 
+import br.ufms.facom.home.HomeApplicationTests;
 import br.ufms.facom.home.domain.Anunciante;
 import br.ufms.facom.home.utils.Utils;
 import org.assertj.core.api.Assertions;
@@ -8,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class AnuncianteRepositoryTest {
+public class AnuncianteRepositoryTest extends HomeApplicationTests {
 
     @Autowired
     private AnuncianteRepository anuncianteRepository;

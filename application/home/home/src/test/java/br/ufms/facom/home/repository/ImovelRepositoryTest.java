@@ -37,6 +37,7 @@ public class ImovelRepositoryTest extends HomeApplicationTests {
         imovel1.setRua("rua domingo legal");
         imovel1.setBairro("bairro jockey");
         imovel1.setCidade("cidade morta");
+        imovel1.setEstado("PE");
 
         anunciante.setImoveis(new ArrayList<>());
         anunciante.getImoveis().add(imovel1);
@@ -50,6 +51,7 @@ public class ImovelRepositoryTest extends HomeApplicationTests {
         imovel2.setRua("rua domingo legal");
         imovel2.setBairro("bairro vila");
         imovel2.setCidade("cidade viva");
+        imovel2.setEstado("MS");
 
         imovelRepository.save(imovel2);
     }

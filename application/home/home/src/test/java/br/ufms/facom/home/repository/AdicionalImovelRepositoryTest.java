@@ -1,10 +1,11 @@
 package br.ufms.facom.home.repository;
 
+import br.ufms.facom.home.HomeApplicationTests;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class AdicionalImovelRepositoryTest {
+public class AdicionalImovelRepositoryTest extends HomeApplicationTests {
 
     @Autowired
     private AdicionalImovelRepository adicionalImovelRepository;
