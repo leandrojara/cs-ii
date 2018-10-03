@@ -8,11 +8,13 @@
 
       <div th:fragment="header" >
 
-          <div class="container header">
+          <div class="container-fluid header">
 
             <div class="row">
               <div class="col-md-12 div-logo">
-                <img src="../../resources/static/imagens/logo.png" th:src="@{/imagens/logo.png}" id="logo-header"/>
+                  <a href="/">
+                      <img src="../../resources/static/imagens/logo.png" th:src="@{/imagens/logo.png}" id="logo-header"/>
+                  </a>
               </div>
             </div>
 
