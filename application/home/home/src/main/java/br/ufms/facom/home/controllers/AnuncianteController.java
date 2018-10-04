@@ -91,7 +91,7 @@ public class AnuncianteController {
         List<Imovel> result = imovelRepository.listagem(Utils.getUsuarioLogado().getId(), tipoNegocio);
         return new FileSystemResource(
                 new File(
-                        Utils.gerarRelatorio("listagemImoveis.jasper", result,
+                        Utils.gerarRelatorio("listagemImoveis.jrxml", result,
                                 new ReportParameter("titulo", "Listagem de Imóveis para Venda"))
                 )
         );
@@ -104,7 +104,7 @@ public class AnuncianteController {
         List<Imovel> result = imovelRepository.listagem(Utils.getUsuarioLogado().getId(), tipoNegocio);
         return new FileSystemResource(
                 new File(
-                        Utils.gerarRelatorio("listagemImoveis.jasper", result,
+                        Utils.gerarRelatorio("listagemImoveis.jrxml", result,
                                 new ReportParameter("titulo", "Listagem de Imóveis para Aluguel"))
                 )
         );

@@ -3,7 +3,6 @@ package br.ufms.facom.home.repository;
 import br.ufms.facom.home.domain.Imovel;
 import br.ufms.facom.home.domain.enums.TipoImovel;
 import br.ufms.facom.home.domain.enums.TipoNegocio;
-import br.ufms.facom.home.domain.report.ReportImovel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

@@ -64,6 +64,11 @@
             <artifactId>xercesImpl</artifactId>
             <version>2.11.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>2.1.5</version>
+        </dependency>
 
         <!--banco de dados-->
         <dependency>

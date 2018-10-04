@@ -16,10 +16,10 @@
 		<variableExpression><![CDATA[$F{valorImovel}]]></variableExpression>
 	</variable>
 	<pageHeader>
-		<band height="73" splitType="Stretch">
+		<band height="69" splitType="Stretch">
 			<image>
 				<reportElement uuid="4e015aa3-bfa6-45ee-b0d1-dc9a5d9b1bec" x="0" y="0" width="99" height="65"/>
-				<imageExpression><![CDATA["C:\\Users\\TDR\\Documents\\GitHub\\cs-ii\\application\\home\\home\\src\\main\\resources\\static\\imagens\\logo.png"]]></imageExpression>
+				<imageExpression><![CDATA["..\\home\\home\\src\\main\\resources\\static\\imagens\\logo.png"]]></imageExpression>
 			</image>
 			<textField>
 				<reportElement uuid="29252d07-69f7-4ce4-af25-d8025948c566" x="113" y="0" width="375" height="65"/>
@@ -101,14 +101,14 @@
 			<textField>
 				<reportElement uuid="decb909a-919b-48fd-b87c-8eea9f2085f9" x="428" y="1" width="100" height="15"/>
 				<textElement textAlignment="Right" verticalAlignment="Top">
-					<font fontName="ArialGSEA" size="8"/>
+					<font fontName="Arial" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Página  "+$V{PAGE_NUMBER}+"  de  "]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
 				<reportElement uuid="f65c1c02-741f-4bc9-8cf0-be711812860f" x="528" y="1" width="27" height="15"/>
 				<textElement verticalAlignment="Top">
-					<font fontName="ArialGSEA" size="8"/>
+					<font fontName="Arial" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA["  " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
