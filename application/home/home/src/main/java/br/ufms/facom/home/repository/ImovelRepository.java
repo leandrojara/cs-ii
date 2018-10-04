@@ -2,6 +2,8 @@ package br.ufms.facom.home.repository;
 
 import br.ufms.facom.home.domain.Imovel;
 import br.ufms.facom.home.domain.enums.TipoImovel;
+import br.ufms.facom.home.domain.enums.TipoNegocio;
+import br.ufms.facom.home.domain.report.ReportImovel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -60,4 +62,10 @@ public interface ImovelRepository extends JpaRepository<Imovel, Long> {
     default List<String> findCidades(@Nullable String cidade) {
         return findCidades(cidade, PageRequest.of(0, 6));
     }
+
+    @Query("Select i From Imovel i" +
+            " Where i.anunciante.id = ?1" +
+            " and i.tipoNegocio = ?2" +
+            " Order by i.estado, i.cidade, i.bairro, i.rua, i.numero")
+    List<Imovel> listagem(Long idAnunciante, TipoNegocio tipoNegocio);
 }

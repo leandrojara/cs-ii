@@ -1,20 +1,27 @@
 package br.ufms.facom.home.controllers;
 
 import br.ufms.facom.home.domain.Anunciante;
+import br.ufms.facom.home.domain.Imovel;
 import br.ufms.facom.home.domain.Usuario;
+import br.ufms.facom.home.domain.enums.TipoNegocio;
 import br.ufms.facom.home.repository.AnuncianteRepository;
 import br.ufms.facom.home.repository.ImovelRepository;
 import br.ufms.facom.home.repository.UsuarioRepository;
+import br.ufms.facom.home.utils.ReportParameter;
 import br.ufms.facom.home.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -75,5 +82,31 @@ public class AnuncianteController {
             return nextPage;
         }
         return "login";
+    }
+
+    @RequestMapping(value = "/anunciante/listagemVenda", method = RequestMethod.GET)
+    @ResponseBody
+    public FileSystemResource listagemVenda() {
+        TipoNegocio tipoNegocio = TipoNegocio.VENDA;
+        List<Imovel> result = imovelRepository.listagem(Utils.getUsuarioLogado().getId(), tipoNegocio);
+        return new FileSystemResource(
+                new File(
+                        Utils.gerarRelatorio("listagemImoveis.jasper", result,
+                                new ReportParameter("titulo", "Listagem de Imóveis para Venda"))
+                )
+        );
+    }
+
+    @RequestMapping(value = "/anunciante/listagemAluguel", method = RequestMethod.GET)
+    @ResponseBody
+    public FileSystemResource listagemAluguel() {
+        TipoNegocio tipoNegocio = TipoNegocio.ALUGUEL;
+        List<Imovel> result = imovelRepository.listagem(Utils.getUsuarioLogado().getId(), tipoNegocio);
+        return new FileSystemResource(
+                new File(
+                        Utils.gerarRelatorio("listagemImoveis.jasper", result,
+                                new ReportParameter("titulo", "Listagem de Imóveis para Aluguel"))
+                )
+        );
     }
 }
