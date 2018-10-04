@@ -10,7 +10,10 @@ import br.ufms.facom.home.repository.UsuarioRepository;
 import br.ufms.facom.home.utils.ReportParameter;
 import br.ufms.facom.home.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 import java.io.File;
+import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -86,27 +90,45 @@ public class AnuncianteController {
 
     @RequestMapping(value = "/anunciante/listagemVenda", method = RequestMethod.GET)
     @ResponseBody
-    public FileSystemResource listagemVenda() {
+    public ResponseEntity<Resource> listagemVenda() {
         TipoNegocio tipoNegocio = TipoNegocio.VENDA;
         List<Imovel> result = imovelRepository.listagem(Utils.getUsuarioLogado().getId(), tipoNegocio);
-        return new FileSystemResource(
-                new File(
-                        Utils.gerarRelatorio("listagemImoveis.jrxml", result,
-                                new ReportParameter("titulo", "Listagem de Imóveis para Venda"))
-                )
-        );
+
+        try {
+            Resource file = new UrlResource(
+                    new File(
+                            Utils.gerarRelatorio("listagemImoveis.jrxml", result,
+                                    new ReportParameter("titulo", "Listagem de Imóveis para Venda")
+                            )
+                    ).toURI()
+            );
+
+            return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @RequestMapping(value = "/anunciante/listagemAluguel", method = RequestMethod.GET)
     @ResponseBody
-    public FileSystemResource listagemAluguel() {
+    public ResponseEntity<Resource> listagemAluguel() {
         TipoNegocio tipoNegocio = TipoNegocio.ALUGUEL;
         List<Imovel> result = imovelRepository.listagem(Utils.getUsuarioLogado().getId(), tipoNegocio);
-        return new FileSystemResource(
-                new File(
-                        Utils.gerarRelatorio("listagemImoveis.jrxml", result,
-                                new ReportParameter("titulo", "Listagem de Imóveis para Aluguel"))
-                )
-        );
+
+        try {
+            Resource file = new UrlResource(
+                    new File(
+                            Utils.gerarRelatorio("listagemImoveis.jrxml", result,
+                                    new ReportParameter("titulo", "Listagem de Imóveis para Aluguel")
+                            )
+                    ).toURI()
+            );
+
+            return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
