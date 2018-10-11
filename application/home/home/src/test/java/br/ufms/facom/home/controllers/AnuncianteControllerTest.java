@@ -5,7 +5,6 @@ import br.ufms.facom.home.domain.Anunciante;
 import br.ufms.facom.home.domain.Imovel;
 import br.ufms.facom.home.repository.AnuncianteRepository;
 import br.ufms.facom.home.repository.ImovelRepository;
-import br.ufms.facom.home.repository.UsuarioRepository;
 import br.ufms.facom.home.utils.Utils;
 import org.assertj.core.api.Assertions;
 import org.junit.After;
@@ -17,17 +16,15 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
-import br.ufms.facom.home.utils.Utils;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import br.ufms.facom.home.domain.Usuario;
 import br.ufms.facom.home.domain.enums.TipoNegocio;
 import br.ufms.facom.home.utils.ReportParameter;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 
 
 public class AnuncianteControllerTest extends HomeApplicationTests {
@@ -44,7 +41,7 @@ public class AnuncianteControllerTest extends HomeApplicationTests {
     private List<Imovel> result;
     private MockMvc mockMvc;
 
-    private String pdfGerado = null;
+    private String pdf = null;
     private File file;
 
     @Before
@@ -88,29 +85,29 @@ public class AnuncianteControllerTest extends HomeApplicationTests {
         this.mockMvc = MockMvcBuilders.standaloneSetup(AnuncianteController).build();
     }
 
-//    @Test
-//    public void contextLoad() throws Exception {
-//        Assertions.assertThat(AnuncianteController).isNotNull();
-//    }
-//
-//    @Test
-//    public void gerarRelatorioVenda() throws Exception {
-//        mockMvc.perform(get("/anunciante/listagemVenda"))
-//                .andExpect(status().isOk());
-//    }
-//
-//    @Test
-//    public void gerarRelatorioAluguel() throws Exception {
-//        mockMvc.perform(get("/anunciante/listagemAluguel"))
-//                .andExpect(status().isOk());
-//    }
+    @Test
+    public void contextLoad() throws Exception {
+        Assertions.assertThat(AnuncianteController).isNotNull();
+    }
+
+    @Test
+    public void gerarRelatorioVenda() throws Exception {
+        mockMvc.perform(get("/anunciante/listagemVenda"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void gerarRelatorioAluguel() throws Exception {
+        mockMvc.perform(get("/anunciante/listagemAluguel"))
+                .andExpect(status().isOk());
+    }
 
     @Test
     public void gerarRelatorioVendaTest() {
-        pdfGerado = Utils.gerarRelatorio("listagemImoveis.jrxml", result,
+        pdf = Utils.gerarRelatorio("listagemImoveis.jrxml", result,
                 new ReportParameter("titulo", "Listagem de Imóveis para Venda")
         );
-        file = new File(pdfGerado);
+        file = new File(pdf);
         Assert.assertTrue(file.exists());
     }
 
