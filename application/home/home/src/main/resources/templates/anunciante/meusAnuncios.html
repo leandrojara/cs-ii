@@ -84,12 +84,34 @@
 
             <div class="col-xs-9 col-md-9 col-sm-9" style="background-color:white; padding-top: 50px;">
 
-                <a th:href="@{/anunciante/listagemVenda}" >
-                    <div id="venda-button">RELATÓRIO VENDA</div>
-                </a>
-                <a th:href="@{/anunciante/listagemAluguel}">
-                    <div id="aluguel-button">RELATÓRIO ALUGUEL</div>
-                </a>
+                <form th:action="@{/anunciante/gerarRelatorio}">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-1 col-md-1 col-sm-1" style="text-align: center; padding-bottom: 10px">
+                                Relatórios
+                            </div>
+                            <div class="col-xs-7 col-md-7 col-sm-7" style="text-align: center; padding-bottom: 10px">
+
+                                <select class="relatorio-select" th:field="*{tipoRelatorio}" required>
+                                    <option value="" selected="selected">- Tipo do Relatório -</option>
+                                    <option value="venda">Venda</option>
+                                    <option value="aluguel">Aluguel</option>
+                                </select>
+
+                                <select class="relatorio-select" th:field="*{formato}" required>
+
+                                    <option value="" selected="selected">- Selecione o Formato -</option>
+                                    <option th:each="tipoFormato : ${tiposFormato}" th:value="${tiposFormato}"
+                                            th:text="${tiposFormato.descricao}"></option>
+                                </select>
+
+                            </div>
+                            <div class="col-xs-1 col-md-1 col-sm-1" style="text-align: center; padding-bottom: 10px">
+                                <button type="submit" id="gerar-relatorio-button">GERAR</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
 
                 <h1>Meus Anúncios</h1>
                 <div>
