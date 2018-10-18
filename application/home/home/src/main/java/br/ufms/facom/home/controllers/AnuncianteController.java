@@ -88,6 +88,55 @@ public class AnuncianteController {
         return "login";
     }
 
+    @RequestMapping(value = "/anunciante/gerarRelatorio", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Resource> listagem() {
+
+        //tem que pegar os parametros que vem por GET em vez de declarar aqui
+        String tipoRelatorio = new String("venda");
+        String formato = new String("html");
+
+        if ( tipoRelatorio == "venda") {
+
+            TipoNegocio tipoNegocio = TipoNegocio.VENDA;
+            List<Imovel> result = imovelRepository.listagem(Utils.getUsuarioLogado().getId(), tipoNegocio);
+
+            try {
+                Resource file = new UrlResource(
+                        new File(
+                                Utils.gerarRelatorio(formato, "listagemImoveis.jrxml", result,
+                                        new ReportParameter("titulo", "Listagem de Imóveis para Venda")
+                                )
+                        ).toURI()
+                );
+
+                return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+        } else if (tipoRelatorio == "aluguel") {
+
+            TipoNegocio tipoNegocio = TipoNegocio.ALUGUEL;
+            List<Imovel> result = imovelRepository.listagem(Utils.getUsuarioLogado().getId(), tipoNegocio);
+
+            try {
+                Resource file = new UrlResource(
+                        new File(
+                                Utils.gerarRelatorio(formato, "listagemImoveis.jrxml", result,
+                                        new ReportParameter("titulo", "Listagem de Imóveis para Aluguel")
+                                )
+                        ).toURI()
+                );
+
+                return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return null;
+    }
+    /*
     @RequestMapping(value = "/anunciante/listagemVenda", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<Resource> listagemVenda() {
@@ -131,4 +180,6 @@ public class AnuncianteController {
         }
         return null;
     }
+    */
+
 }

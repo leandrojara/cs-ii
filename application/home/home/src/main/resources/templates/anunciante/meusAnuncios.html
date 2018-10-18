@@ -84,7 +84,7 @@
 
             <div class="col-xs-9 col-md-9 col-sm-9" style="background-color:white; padding-top: 50px;">
 
-                <form th:action="@{/anunciante/gerarRelatorio}">
+                <form th:action="@{/anunciante/gerarRelatorio}" method="get">
                     <div class="container">
                         <div class="row">
                             <div class="col-xs-1 col-md-1 col-sm-1" style="text-align: center; padding-bottom: 10px">
@@ -92,13 +92,13 @@
                             </div>
                             <div class="col-xs-7 col-md-7 col-sm-7" style="text-align: center; padding-bottom: 10px">
 
-                                <select class="relatorio-select" th:field="*{tipoRelatorio}" required>
+                                <select class="relatorio-select" required>
                                     <option value="" selected="selected">- Tipo do Relatório -</option>
                                     <option value="venda">Venda</option>
                                     <option value="aluguel">Aluguel</option>
                                 </select>
 
-                                <select class="relatorio-select" th:field="*{formato}" required>
+                                <select class="relatorio-select" >
 
                                     <option value="" selected="selected">- Selecione o Formato -</option>
                                     <option th:each="tipoFormato : ${tiposFormato}" th:value="${tiposFormato}"

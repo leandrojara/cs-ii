@@ -104,7 +104,7 @@ public class AnuncianteControllerTest extends HomeApplicationTests {
 
     @Test
     public void gerarRelatorioVendaTest() {
-        pdf = Utils.gerarRelatorio("listagemImoveis.jrxml", result,
+        pdf = Utils.gerarRelatorio("pdf","listagemImoveis.jrxml", result,
                 new ReportParameter("titulo", "Listagem de Imóveis para Venda")
         );
         file = new File(pdf);
