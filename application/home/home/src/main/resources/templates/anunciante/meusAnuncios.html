@@ -101,8 +101,8 @@
                                 <select class="relatorio-select" >
 
                                     <option value="" selected="selected">- Selecione o Formato -</option>
-                                    <option th:each="tipoFormato : ${tiposFormato}" th:value="${tiposFormato}"
-                                            th:text="${tiposFormato.descricao}"></option>
+                                    <option th:each="formatoRelatorio : ${formatosRelatorio}" th:value="${formatoRelatorio.getDescricao()}"
+                                            th:text="${formatoRelatorio.getDescricao()}"></option>
                                 </select>
 
                             </div>

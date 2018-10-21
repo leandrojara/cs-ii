@@ -2,10 +2,10 @@ package br.ufms.facom.home.domain.enums;
 
 public enum TipoFormato {
 
-    PDF("pdf"),
-    HTML("html"),
-    XML("xml"),
-    EXCEL("xls");
+    PDF("PDF"),
+    HTML("HTML"),
+    XML("XML"),
+    EXCEL("EXCEL");
 
     private final String descricao;
 

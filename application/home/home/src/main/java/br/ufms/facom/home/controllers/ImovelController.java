@@ -4,6 +4,7 @@ import br.ufms.facom.home.domain.*;
 import br.ufms.facom.home.domain.enums.TipoConservacao;
 import br.ufms.facom.home.domain.enums.TipoImovel;
 import br.ufms.facom.home.domain.enums.TipoNegocio;
+import br.ufms.facom.home.domain.enums.TipoFormato;
 import br.ufms.facom.home.repository.AdicionalImovelRepository;
 import br.ufms.facom.home.repository.AnuncianteRepository;
 import br.ufms.facom.home.repository.ImagemImovelRepository;
@@ -122,6 +123,7 @@ public class ImovelController {
         imovelServices.findUploadedFiles(imoveis);
         model.addAttribute("imoveisPage", imoveis);
         model.addAttribute("imoveis", imoveis.getContent());
+        model.addAttribute("formatosRelatorio", TipoFormato.values());
 
         int totalPages = imoveis.getTotalPages();
         if (totalPages > 0) {

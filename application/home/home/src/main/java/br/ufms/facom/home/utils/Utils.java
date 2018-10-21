@@ -74,16 +74,16 @@ public class Utils {
 
             String nomeArquivo = new String();
 
-            if (formato == "pdf") {
+            if (formato == "PDF") {
                 nomeArquivo = new Date().getTime() + ".pdf";
                 JasperExportManager.exportReportToPdfFile(jasperPrint, reportdir + nomeArquivo);
-            } else if (formato == "xml") {
+            } else if (formato == "XML") {
                 nomeArquivo = new Date().getTime() + ".xml";
                 JasperExportManager.exportReportToXmlFile(jasperPrint, reportdir + nomeArquivo, true);
-            } else if (formato == "html") {
+            } else if (formato == "HTML") {
                 nomeArquivo = new Date().getTime() + ".html";
                 JasperExportManager.exportReportToHtmlFile(jasperPrint, reportdir + nomeArquivo);
-            } else if (formato == "xls") {
+            } else if (formato == "EXCEL") {
                 JRXlsExporter exporter = new JRXlsExporter();
 
                 exporter.setParameter(JRExporterParameter.INPUT_FILE_NAME,
