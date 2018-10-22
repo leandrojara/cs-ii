@@ -2,11 +2,12 @@ package br.ufms.facom.home.utils;
 
 import br.ufms.facom.home.domain.Usuario;
 import br.ufms.facom.home.domain.bean.Validation;
+import br.ufms.facom.home.domain.enums.TipoFormato;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.engine.export.JRXlsExporter;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -50,7 +51,7 @@ public class Utils {
         return null;
     }
 
-    public static String gerarRelatorio(String formato, String layout, List result, ReportParameter... reportParameters) {
+    public static String gerarRelatorio(TipoFormato formato, String layout, List result, ReportParameter... reportParameters) {
         try {
             //criando o layout do relatorio a partir do jasper
             JasperDesign desenho = JRXmlLoader.load(jasperdir + layout);
@@ -72,26 +73,24 @@ public class Utils {
             File outDir = new File(reportdir);
             outDir.mkdirs();
 
-            String nomeArquivo = new String();
-
-            if (formato == "PDF") {
-                nomeArquivo = new Date().getTime() + ".pdf";
-                JasperExportManager.exportReportToPdfFile(jasperPrint, reportdir + nomeArquivo);
-            } else if (formato == "XML") {
-                nomeArquivo = new Date().getTime() + ".xml";
-                JasperExportManager.exportReportToXmlFile(jasperPrint, reportdir + nomeArquivo, true);
-            } else if (formato == "HTML") {
-                nomeArquivo = new Date().getTime() + ".html";
-                JasperExportManager.exportReportToHtmlFile(jasperPrint, reportdir + nomeArquivo);
-            } else if (formato == "EXCEL") {
-                JRXlsExporter exporter = new JRXlsExporter();
-
-                exporter.setParameter(JRExporterParameter.INPUT_FILE_NAME,
-                        jasperPrint);
-                exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME,
-                        new Date().getTime() + ".xls");
-
-                exporter.exportReport();
+            String nomeArquivo = new Date().getTime() + formato.getExtensao();
+            switch (formato) {
+                case PDF:
+                    JasperExportManager.exportReportToPdfFile(jasperPrint, reportdir + nomeArquivo);
+                    break;
+                case XML:
+                    JasperExportManager.exportReportToXmlFile(jasperPrint, reportdir + nomeArquivo, true);
+                    break;
+                case HTML:
+                    JasperExportManager.exportReportToHtmlFile(jasperPrint, reportdir + nomeArquivo);
+                    break;
+                case EXCEL:
+                    JRXlsExporter exporter = new JRXlsExporter();
+                    exporter.setParameter(JRExporterParameter.INPUT_FILE_NAME, jasperPrint);
+                    exporter.setParameter(JRExporterParameter.OUTPUT_FILE, outDir);
+                    exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, nomeArquivo);
+                    exporter.exportReport();
+                    break;
             }
 
             //retorna o caminho do relatorio gerado

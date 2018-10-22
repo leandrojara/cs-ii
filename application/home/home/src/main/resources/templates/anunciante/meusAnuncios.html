@@ -5,9 +5,11 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" type="text/css" href="../../../resources/static/css/reset.css" th:href="@{/css/reset.css}">
-    <link rel="stylesheet" type="text/css" href="../../../resources/static/css/anunciante.css" th:href="@{/css/anunciante.css}">
+    <link rel="stylesheet" type="text/css" href="../../../resources/static/css/anunciante.css"
+          th:href="@{/css/anunciante.css}">
     <link rel="stylesheet" type="text/css" href="../../../resources/static/css/main.css" th:href="@{/css/main.css}">
-    <link rel="stylesheet" type="text/css" href="../../../resources/static/bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" href="../../../resources/static/bootstrap/css/bootstrap.min.css"
+          th:href="@{/bootstrap/css/bootstrap.min.css}">
     <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
     <script th:src="@{/js/jquery.mask.js}"></script>
     <title>
@@ -72,7 +74,8 @@
 
             <div class="col-xs-3 col-md-3 col-sm-3" style="padding-top: 50px;">
                 <div class="centraliza-imagem">
-                    <img src="../../../resources/static/imagens/no-image.jpg" th:src="@{/imagens/no-image.jpg}" class="imagem-user" />
+                    <img src="../../../resources/static/imagens/no-image.jpg" th:src="@{/imagens/no-image.jpg}"
+                         class="imagem-user"/>
                 </div>
                 <div class="menu-user">
                     <a href="/anunciante/editar/">Editar Dados</a>
@@ -92,16 +95,16 @@
                             </div>
                             <div class="col-xs-7 col-md-7 col-sm-7" style="text-align: center; padding-bottom: 10px">
 
-                                <select class="relatorio-select" required>
-                                    <option value="" selected="selected">- Tipo do Relatório -</option>
-                                    <option value="venda">Venda</option>
-                                    <option value="aluguel">Aluguel</option>
+                                <select id="tipoRelatorio" name="tipoRelatorio" class="relatorio-select" required>
+                                    <option value="" selected="selected">- Selecione o Relatório -</option>
+                                    <option th:each="tipoRelatorio : ${tiposRelatorios}" th:value="${tipoRelatorio}"
+                                            th:text="${tipoRelatorio.getDescricao()}"></option>
                                 </select>
 
-                                <select class="relatorio-select" >
-
+                                <select id="tipoFormato" name="tipoFormato" class="relatorio-select" required>
                                     <option value="" selected="selected">- Selecione o Formato -</option>
-                                    <option th:each="formatoRelatorio : ${formatosRelatorio}" th:value="${formatoRelatorio.getDescricao()}"
+                                    <option th:each="formatoRelatorio : ${formatosRelatorio}"
+                                            th:value="${formatoRelatorio}"
                                             th:text="${formatoRelatorio.getDescricao()}"></option>
                                 </select>
 
@@ -127,19 +130,20 @@
                                 </a>
                                 <a th:onclick="'removeImovel(' + ${imovel.id} + ');'" href="#">
                                     <div id="excluir-button">Excluir</div>
-                                </a>  
+                                </a>
                             </div>
                         </div>
                     </div>
 
                 </div>
-                <br />
+                <br/>
 
                 <nav th:if="${imoveisPage.totalPages > 0}">
                     <ul class="pagination">
                         <li th:each="pageNumber : ${pageNumbers}" class="page-item">
                             <a th:href="@{/imovel/buscar/(size=${imoveisPage.size}, page=${pageNumber})}"
-                               th:text="${pageNumber}" th:class="${'page-link ' + (pageNumber==imoveisPage.number + 1 ? 'active' : '')}"></a>
+                               th:text="${pageNumber}"
+                               th:class="${'page-link ' + (pageNumber==imoveisPage.number + 1 ? 'active' : '')}"></a>
                         </li>
                     </ul>
                 </nav>

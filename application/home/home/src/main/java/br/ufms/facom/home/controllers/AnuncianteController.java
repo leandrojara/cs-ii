@@ -3,7 +3,9 @@ package br.ufms.facom.home.controllers;
 import br.ufms.facom.home.domain.Anunciante;
 import br.ufms.facom.home.domain.Imovel;
 import br.ufms.facom.home.domain.Usuario;
+import br.ufms.facom.home.domain.enums.TipoFormato;
 import br.ufms.facom.home.domain.enums.TipoNegocio;
+import br.ufms.facom.home.domain.enums.TipoRelatorio;
 import br.ufms.facom.home.repository.AnuncianteRepository;
 import br.ufms.facom.home.repository.ImovelRepository;
 import br.ufms.facom.home.repository.UsuarioRepository;
@@ -24,7 +26,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 import java.io.File;
-import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -90,96 +91,39 @@ public class AnuncianteController {
 
     @RequestMapping(value = "/anunciante/gerarRelatorio", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<Resource> listagem() {
-
-        //tem que pegar os parametros que vem por GET em vez de declarar aqui
-        String tipoRelatorio = new String("venda");
-        String formato = new String("html");
-
-        if ( tipoRelatorio == "venda") {
-
-            TipoNegocio tipoNegocio = TipoNegocio.VENDA;
-            List<Imovel> result = imovelRepository.listagem(Utils.getUsuarioLogado().getId(), tipoNegocio);
-
-            try {
-                Resource file = new UrlResource(
-                        new File(
-                                Utils.gerarRelatorio(formato, "listagemImoveis.jrxml", result,
-                                        new ReportParameter("titulo", "Listagem de Imóveis para Venda")
-                                )
-                        ).toURI()
-                );
-
-                return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
-        } else if (tipoRelatorio == "aluguel") {
-
-            TipoNegocio tipoNegocio = TipoNegocio.ALUGUEL;
-            List<Imovel> result = imovelRepository.listagem(Utils.getUsuarioLogado().getId(), tipoNegocio);
-
-            try {
-                Resource file = new UrlResource(
-                        new File(
-                                Utils.gerarRelatorio(formato, "listagemImoveis.jrxml", result,
-                                        new ReportParameter("titulo", "Listagem de Imóveis para Aluguel")
-                                )
-                        ).toURI()
-                );
-
-                return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
+    public ResponseEntity<Resource> listagem(@RequestParam("tipoRelatorio") TipoRelatorio tipoRelatorio,
+                                             @RequestParam("tipoFormato") TipoFormato tipoFormato) {
+        List<Imovel> result = null;
+        switch (tipoRelatorio) {
+            case LISTAGEM_VENDAS:
+                result = imovelRepository.listagem(Utils.getUsuarioLogado().getId(), TipoNegocio.VENDA);
+                break;
+            case LISTAGEM_ALUGUEL:
+                result = imovelRepository.listagem(Utils.getUsuarioLogado().getId(), TipoNegocio.ALUGUEL);
+                break;
         }
-
-        return null;
-    }
-    /*
-    @RequestMapping(value = "/anunciante/listagemVenda", method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseEntity<Resource> listagemVenda() {
-        TipoNegocio tipoNegocio = TipoNegocio.VENDA;
-        List<Imovel> result = imovelRepository.listagem(Utils.getUsuarioLogado().getId(), tipoNegocio);
 
         try {
-            Resource file = new UrlResource(
-                    new File(
-                            Utils.gerarRelatorio("listagemImoveis.jrxml", result,
-                                    new ReportParameter("titulo", "Listagem de Imóveis para Venda")
-                            )
-                    ).toURI()
+            String relatorioGerado = Utils.gerarRelatorio(tipoFormato, tipoRelatorio.getJrxml(), result,
+                    new ReportParameter("titulo", tipoRelatorio.getDescricao())
             );
 
-            return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
-        } catch (MalformedURLException e) {
+            if (relatorioGerado != null) {
+                Resource file = new UrlResource(
+                        new File(relatorioGerado).toURI()
+                );
+
+                return ResponseEntity
+                        .ok()
+                        .contentType(tipoFormato.getMediaType())
+                        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
+                        .header(HttpHeaders.CONTENT_TYPE, tipoFormato.getMediaType().getType())
+                        .body(file);
+            }
+        } catch (Throwable e) {
             e.printStackTrace();
         }
+
         return null;
     }
-
-    @RequestMapping(value = "/anunciante/listagemAluguel", method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseEntity<Resource> listagemAluguel() {
-        TipoNegocio tipoNegocio = TipoNegocio.ALUGUEL;
-        List<Imovel> result = imovelRepository.listagem(Utils.getUsuarioLogado().getId(), tipoNegocio);
-
-        try {
-            Resource file = new UrlResource(
-                    new File(
-                            Utils.gerarRelatorio("listagemImoveis.jrxml", result,
-                                    new ReportParameter("titulo", "Listagem de Imóveis para Aluguel")
-                            )
-                    ).toURI()
-            );
-
-            return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-    */
-
 }
