@@ -6,6 +6,7 @@ import br.ufms.facom.home.domain.enums.TipoFormato;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
@@ -81,16 +82,12 @@ public class Utils {
             String nomeArquivo = new Date().getTime() + formato.getExtensao();
             switch (formato) {
                 case JSON:
-                    try {
-                        ObjectMapper mapper = new ObjectMapper();
-                        mapper.writeValue(new File(reportdir + nomeArquivo), result);
-                    } catch (JsonGenerationException e) {
-                        e.printStackTrace();
-                    } catch (JsonMappingException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    ObjectMapper mapper = new ObjectMapper();
+                    mapper.writeValue(new File(reportdir + nomeArquivo), result);
+                    break;
+                case XML:
+                    XmlMapper xmlMapper = new XmlMapper();
+                    xmlMapper.writeValue(new File(reportdir + nomeArquivo), result);
                     break;
                 default:
                     JRAbstractExporter exporter = formato.getClazz().newInstance();
@@ -116,6 +113,12 @@ public class Utils {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (JsonGenerationException e) {
+            e.printStackTrace();
+        } catch (JsonMappingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;

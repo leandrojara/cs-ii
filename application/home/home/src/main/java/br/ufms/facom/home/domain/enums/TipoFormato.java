@@ -9,7 +9,7 @@ public enum TipoFormato {
 
     PDF("PDF", ".pdf", MediaType.APPLICATION_PDF_VALUE, JRPdfExporter.class),
     HTML("HTML", ".html", MediaType.TEXT_HTML_VALUE, HtmlExporter.class),
-    XML("XML", ".xml", MediaType.APPLICATION_XML_VALUE, JRXmlExporter.class),
+    XML("XML", ".xml", MediaType.APPLICATION_XML_VALUE),
     JSON("JSON", ".json", MediaType.APPLICATION_JSON_VALUE),
     TXT("TXT", ".txt", MediaType.TEXT_PLAIN_VALUE, JRTextExporter.class),
     CSV("CSV", ".csv", "text/csv", JRCsvExporter.class),
