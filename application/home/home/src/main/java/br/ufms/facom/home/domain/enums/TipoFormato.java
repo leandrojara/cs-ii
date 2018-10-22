@@ -7,6 +7,9 @@ public enum TipoFormato {
     PDF("PDF", ".pdf", MediaType.APPLICATION_PDF_VALUE),
     HTML("HTML", ".html", MediaType.TEXT_HTML_VALUE),
     XML("XML", ".xml", MediaType.APPLICATION_XML_VALUE),
+    TXT("TXT", ".txt", MediaType.TEXT_PLAIN_VALUE),
+    CSV("CSV", ".csv", "text/csv"),
+    JSON("JSON", ".json", MediaType.APPLICATION_JSON_VALUE),
     EXCEL("EXCEL", ".xls", "application/vnd.ms-excel");
 
     private final String descricao;

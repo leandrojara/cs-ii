@@ -3,11 +3,13 @@ package br.ufms.facom.home.utils;
 import br.ufms.facom.home.domain.Usuario;
 import br.ufms.facom.home.domain.bean.Validation;
 import br.ufms.facom.home.domain.enums.TipoFormato;
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.export.JRXlsExporter;
-import net.sf.jasperreports.engine.export.JRXlsExporterParameter;
+import net.sf.jasperreports.engine.export.*;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.ObjectError;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 public class Utils {
@@ -80,20 +83,44 @@ public class Utils {
                     JasperExportManager.exportReportToPdfFile(jasperPrint, reportdir + nomeArquivo);
                     break;
                 case XML:
-                    JasperExportManager.exportReportToXmlFile(jasperPrint, reportdir + nomeArquivo, true);
+//                    JRXmlExporter exporterXml = new JRXmlExporter();
+                    JasperExportManager.exportReportToXmlFile(jasperPrint, reportdir + nomeArquivo, false);
                     break;
                 case HTML:
                     JasperExportManager.exportReportToHtmlFile(jasperPrint, reportdir + nomeArquivo);
                     break;
                 case EXCEL:
-                    outDir = new File(reportdir + fileSeparator + nomeArquivo);
-
-                    JRXlsExporter exporter = new JRXlsExporter();
-                    exporter.setParameter(JRXlsExporterParameter.JASPER_PRINT, jasperPrint);
-                    exporter.setParameter(JRXlsExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_ROWS, Boolean.TRUE);
-                    exporter.setParameter(JRXlsExporterParameter.OUTPUT_FILE, outDir);
-                    exporter.setParameter(JRXlsExporterParameter.OUTPUT_FILE_NAME, nomeArquivo);
-                    exporter.exportReport();
+                    JRXlsExporter exporterExcel = new JRXlsExporter();
+                    exporterExcel.setParameter(JRXlsExporterParameter.JASPER_PRINT, jasperPrint);
+                    exporterExcel.setParameter(JRXlsExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_ROWS, Boolean.TRUE);
+                    exporterExcel.setParameter(JRXlsExporterParameter.OUTPUT_FILE_NAME, reportdir + nomeArquivo);
+                    exporterExcel.exportReport();
+                    break;
+                case CSV:
+                    JRCsvExporter exporterCsv = new JRCsvExporter();
+                    exporterCsv.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+                    exporterCsv.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, reportdir + nomeArquivo);
+                    exporterCsv.exportReport();
+                    break;
+                case TXT:
+                    JRTextExporter exporterTxt = new JRTextExporter();
+                    exporterTxt.setParameter(JRTextExporterParameter.PAGE_WIDTH, 150);
+                    exporterTxt.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 60);
+                    exporterTxt.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+                    exporterTxt.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, reportdir + nomeArquivo);
+                    exporterTxt.exportReport();
+                    break;
+                case JSON:
+                    try {
+                        ObjectMapper mapper = new ObjectMapper();
+                        mapper.writeValue(new File(reportdir + nomeArquivo), result);
+                    } catch (JsonGenerationException e) {
+                        e.printStackTrace();
+                    } catch (JsonMappingException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     break;
             }
 
