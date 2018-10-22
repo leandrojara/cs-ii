@@ -3,28 +3,28 @@ package br.ufms.facom.home.controllers;
 import br.ufms.facom.home.HomeApplicationTests;
 import br.ufms.facom.home.domain.Anunciante;
 import br.ufms.facom.home.domain.Imovel;
+import br.ufms.facom.home.domain.enums.TipoFormato;
+import br.ufms.facom.home.domain.enums.TipoNegocio;
 import br.ufms.facom.home.repository.AnuncianteRepository;
 import br.ufms.facom.home.repository.ImovelRepository;
+import br.ufms.facom.home.utils.ReportParameter;
 import br.ufms.facom.home.utils.Utils;
 import org.assertj.core.api.Assertions;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import br.ufms.facom.home.domain.enums.TipoNegocio;
-import br.ufms.facom.home.utils.ReportParameter;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 public class AnuncianteControllerTest extends HomeApplicationTests {
@@ -104,7 +104,7 @@ public class AnuncianteControllerTest extends HomeApplicationTests {
 
     @Test
     public void gerarRelatorioVendaTest() {
-        pdf = Utils.gerarRelatorio("pdf","listagemImoveis.jrxml", result,
+        pdf = Utils.gerarRelatorio(TipoFormato.PDF, "listagemImoveis.jrxml", result,
                 new ReportParameter("titulo", "Listagem de Imóveis para Venda")
         );
         file = new File(pdf);

@@ -4,16 +4,16 @@ import org.springframework.http.MediaType;
 
 public enum TipoFormato {
 
-    PDF("PDF", ".pdf", MediaType.APPLICATION_PDF),
-    HTML("HTML", ".html", MediaType.TEXT_HTML),
-    XML("XML", ".xml", MediaType.APPLICATION_XML),
-    EXCEL("EXCEL", ".xls", new MediaType("application/vnd.ms-excel"));
+    PDF("PDF", ".pdf", MediaType.APPLICATION_PDF_VALUE),
+    HTML("HTML", ".html", MediaType.TEXT_HTML_VALUE),
+    XML("XML", ".xml", MediaType.APPLICATION_XML_VALUE),
+    EXCEL("EXCEL", ".xls", "application/vnd.ms-excel");
 
     private final String descricao;
     private final String extensao;
-    private final MediaType mediaType;
+    private final String mediaType;
 
-    TipoFormato(String descricao, String extensao, MediaType mediaType) {
+    TipoFormato(String descricao, String extensao, String mediaType) {
         this.descricao = descricao;
         this.extensao = extensao;
         this.mediaType = mediaType;
@@ -27,7 +27,7 @@ public enum TipoFormato {
         return extensao;
     }
 
-    public MediaType getMediaType() {
+    public String getMediaType() {
         return mediaType;
     }
 }

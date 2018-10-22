@@ -115,9 +115,8 @@ public class AnuncianteController {
 
                 return ResponseEntity
                         .ok()
-                        .contentType(tipoFormato.getMediaType())
                         .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
-                        .header(HttpHeaders.CONTENT_TYPE, tipoFormato.getMediaType().getType())
+                        .header(HttpHeaders.CONTENT_TYPE, tipoFormato.getMediaType())
                         .body(file);
             }
         } catch (Throwable e) {

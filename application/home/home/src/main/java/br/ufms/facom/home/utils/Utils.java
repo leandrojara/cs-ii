@@ -7,6 +7,7 @@ import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.export.JRXlsExporter;
+import net.sf.jasperreports.engine.export.JRXlsExporterParameter;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -85,10 +86,13 @@ public class Utils {
                     JasperExportManager.exportReportToHtmlFile(jasperPrint, reportdir + nomeArquivo);
                     break;
                 case EXCEL:
+                    outDir = new File(reportdir + fileSeparator + nomeArquivo);
+
                     JRXlsExporter exporter = new JRXlsExporter();
-                    exporter.setParameter(JRExporterParameter.INPUT_FILE_NAME, jasperPrint);
-                    exporter.setParameter(JRExporterParameter.OUTPUT_FILE, outDir);
-                    exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, nomeArquivo);
+                    exporter.setParameter(JRXlsExporterParameter.JASPER_PRINT, jasperPrint);
+                    exporter.setParameter(JRXlsExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_ROWS, Boolean.TRUE);
+                    exporter.setParameter(JRXlsExporterParameter.OUTPUT_FILE, outDir);
+                    exporter.setParameter(JRXlsExporterParameter.OUTPUT_FILE_NAME, nomeArquivo);
                     exporter.exportReport();
                     break;
             }
