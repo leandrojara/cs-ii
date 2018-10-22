@@ -16,9 +16,13 @@ public enum TipoFormato {
     ODT("ODT", ".odt", "application/vnd.oasis.opendocument.text", JROdtExporter.class),
     EXCEL("EXCEL", ".xls", "application/vnd.ms-excel", JRXlsExporter.class);
 
+    //Obrigatório: Nome conhecido do formato a nível de usuário
     private final String descricao;
+    //Obrigatório: Extensão do arquivo a ser gerado
     private final String extensao;
+    //Obrigatório: MediaType do formato a nível HTTP, para enviar no Header da  requisição
     private final String mediaType;
+    //Opcional: Classe responsável por converter o relatório para a extensão desejada
     private final Class clazz;
 
     TipoFormato(String descricao, String extensao, String mediaType, Class clazz) {
