@@ -88,12 +88,12 @@
             <div class="col-xs-9 col-md-9 col-sm-9" style="background-color:white; padding-top: 50px;">
 
                 <form th:action="@{/anunciante/gerarRelatorio}" method="get">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xs-1 col-md-1 col-sm-1" style="text-align: center; padding-bottom: 10px">
-                                Relatórios
+                    <div style="display: table; width: 100%">
+                        <div style="display: table-row">
+                            <div class="nome-relatorio-cell">
+                                Relatório
                             </div>
-                            <div class="col-xs-7 col-md-7 col-sm-7" style="text-align: center; padding-bottom: 10px">
+                            <div class="relatorio-cell">
 
                                 <select id="tipoRelatorio" name="tipoRelatorio" class="relatorio-select" required>
                                     <option value="" selected="selected">- Selecione o Relatório -</option>
@@ -109,13 +109,14 @@
                                 </select>
 
                             </div>
-                            <div class="col-xs-1 col-md-1 col-sm-1" style="text-align: center; padding-bottom: 10px">
+                            <div class="relatorio-cell">
                                 <button type="submit" id="gerar-relatorio-button">GERAR</button>
                             </div>
                         </div>
                     </div>
                 </form>
 
+                <br />
                 <h1>Meus Anúncios</h1>
                 <div>
                     <div th:id="${'anuncioImovel' + imovel.id}" class="div-anuncio" th:each="imovel : ${imoveis}">
