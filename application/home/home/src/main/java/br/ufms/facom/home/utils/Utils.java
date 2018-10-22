@@ -25,8 +25,8 @@ import java.util.*;
 public class Utils {
 
     private static final String fileSeparator = System.getProperty("file.separator");
-    private static final String reportdir = System.getProperty("user.dir") + fileSeparator + "reportdir" + fileSeparator;
-    private static final String jasperdir = System.getProperty("user.dir") + fileSeparator + "jasperdir" + fileSeparator;
+    public static String reportdir = System.getProperty("user.dir") + fileSeparator + "reportdir" + fileSeparator;
+    public static String jasperdir = System.getProperty("user.dir") + fileSeparator + "jasperdir" + fileSeparator;
 
     public static BCryptPasswordEncoder getEncoder() {
         return new BCryptPasswordEncoder(7);

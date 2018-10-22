@@ -17,7 +17,7 @@
 	</variable>
 	<pageHeader>
 		<band height="69" splitType="Stretch">
-			<image>
+			<image onErrorType="Blank">
 				<reportElement uuid="4e015aa3-bfa6-45ee-b0d1-dc9a5d9b1bec" x="0" y="0" width="99" height="65"/>
 				<imageExpression><![CDATA["..\\home\\home\\src\\main\\resources\\static\\imagens\\logo.png"]]></imageExpression>
 			</image>

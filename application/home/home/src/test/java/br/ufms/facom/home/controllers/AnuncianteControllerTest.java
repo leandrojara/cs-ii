@@ -5,6 +5,7 @@ import br.ufms.facom.home.domain.Anunciante;
 import br.ufms.facom.home.domain.Imovel;
 import br.ufms.facom.home.domain.enums.TipoFormato;
 import br.ufms.facom.home.domain.enums.TipoNegocio;
+import br.ufms.facom.home.domain.enums.TipoRelatorio;
 import br.ufms.facom.home.repository.AnuncianteRepository;
 import br.ufms.facom.home.repository.ImovelRepository;
 import br.ufms.facom.home.utils.ReportParameter;
@@ -79,8 +80,7 @@ public class AnuncianteControllerTest extends HomeApplicationTests {
 
         anuncianteRepository.save(anunciante);
 
-        TipoNegocio tipoNegocio = TipoNegocio.VENDA;
-        result = imovelRepository.listagem(anunciante.getId(), tipoNegocio);
+        result = imovelRepository.listagem(anunciante.getId(), TipoNegocio.VENDA);
 
         this.mockMvc = MockMvcBuilders.standaloneSetup(AnuncianteController).build();
     }
@@ -104,9 +104,14 @@ public class AnuncianteControllerTest extends HomeApplicationTests {
 
     @Test
     public void gerarRelatorioVendaTest() {
-        pdf = Utils.gerarRelatorio(TipoFormato.PDF, "listagemImoveis.jrxml", result,
-                new ReportParameter("titulo", "Listagem de Imóveis para Venda")
+        Utils.jasperdir = Utils.jasperdir.replace("\\home\\jasperdir", "\\jasperdir");
+        Utils.reportdir = Utils.reportdir.replace("\\home\\reportdir", "\\reportdir");
+
+
+        pdf = Utils.gerarRelatorio(TipoFormato.PDF, TipoRelatorio.LISTAGEM_VENDAS.getJrxml(), result,
+                new ReportParameter("titulo", TipoRelatorio.LISTAGEM_VENDAS.getDescricao())
         );
+        Assert.assertNotNull(pdf);
         file = new File(pdf);
         Assert.assertTrue(file.exists());
     }
