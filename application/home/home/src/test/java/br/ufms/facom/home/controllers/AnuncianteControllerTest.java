@@ -16,11 +16,15 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -42,7 +46,6 @@ public class AnuncianteControllerTest extends HomeApplicationTests {
     private List<Imovel> result;
     private MockMvc mockMvc;
 
-    private String pdf = null;
     private File file;
 
     @Before
@@ -83,6 +86,43 @@ public class AnuncianteControllerTest extends HomeApplicationTests {
         result = imovelRepository.listagem(anunciante.getId(), TipoNegocio.VENDA);
 
         this.mockMvc = MockMvcBuilders.standaloneSetup(AnuncianteController).build();
+
+        SecurityContextHolder.getContext().setAuthentication(new Authentication() {
+            @Override
+            public Collection<? extends GrantedAuthority> getAuthorities() {
+                return null;
+            }
+
+            @Override
+            public Object getCredentials() {
+                return null;
+            }
+
+            @Override
+            public Object getDetails() {
+                return null;
+            }
+
+            @Override
+            public Object getPrincipal() {
+                return anunciante;
+            }
+
+            @Override
+            public boolean isAuthenticated() {
+                return true;
+            }
+
+            @Override
+            public void setAuthenticated(boolean b) throws IllegalArgumentException {
+
+            }
+
+            @Override
+            public String getName() {
+                return anunciante.getNome();
+            }
+        });
     }
 
     @Test
@@ -91,14 +131,15 @@ public class AnuncianteControllerTest extends HomeApplicationTests {
     }
 
     @Test
-    public void gerarRelatorioVenda() throws Exception {
-        mockMvc.perform(get("/anunciante/listagemVenda"))
-                .andExpect(status().isOk());
-    }
+    public void gerarRelatorioController() throws Exception {
+        Utils.jasperdir = Utils.jasperdir.replace("\\home\\jasperdir", "\\jasperdir");
+        Utils.reportdir = Utils.reportdir.replace("\\home\\reportdir", "\\reportdir");
 
-    @Test
-    public void gerarRelatorioAluguel() throws Exception {
-        mockMvc.perform(get("/anunciante/listagemAluguel"))
+        mockMvc.perform(
+                get("/anunciante/gerarRelatorio")
+                        .param("tipoRelatorio", TipoRelatorio.LISTAGEM_VENDAS.toString())
+                        .param("tipoFormato", TipoFormato.PDF.toString())
+        )
                 .andExpect(status().isOk());
     }
 
@@ -107,8 +148,7 @@ public class AnuncianteControllerTest extends HomeApplicationTests {
         Utils.jasperdir = Utils.jasperdir.replace("\\home\\jasperdir", "\\jasperdir");
         Utils.reportdir = Utils.reportdir.replace("\\home\\reportdir", "\\reportdir");
 
-
-        pdf = Utils.gerarRelatorio(TipoFormato.PDF, TipoRelatorio.LISTAGEM_VENDAS.getJrxml(), result,
+        String pdf = Utils.gerarRelatorio(TipoFormato.PDF, TipoRelatorio.LISTAGEM_VENDAS.getJrxml(), result,
                 new ReportParameter("titulo", TipoRelatorio.LISTAGEM_VENDAS.getDescricao())
         );
         Assert.assertNotNull(pdf);
@@ -118,7 +158,9 @@ public class AnuncianteControllerTest extends HomeApplicationTests {
 
     @After
     public void tearDown() {
-        file.delete();
+        if (file != null) {
+            file.delete();
+        }
     }
 
 }
