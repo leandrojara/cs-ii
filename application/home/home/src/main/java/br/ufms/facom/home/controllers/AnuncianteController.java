@@ -103,6 +103,12 @@ public class AnuncianteController {
                 break;
         }
 
+        for (Imovel imovel : result) {
+            imovel.setAdicionais(null);
+            imovel.setImagens(null);
+            imovel.setAnunciante(null);
+        }
+
         try {
             String relatorioGerado = Utils.gerarRelatorio(tipoFormato, tipoRelatorio.getJrxml(), result,
                     new ReportParameter("titulo", tipoRelatorio.getDescricao())
