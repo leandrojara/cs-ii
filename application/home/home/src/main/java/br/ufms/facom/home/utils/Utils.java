@@ -9,7 +9,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.export.*;
+import net.sf.jasperreports.engine.export.JRTextExporterParameter;
+import net.sf.jasperreports.engine.export.JRXlsExporterParameter;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -83,32 +84,10 @@ public class Utils {
                     JasperExportManager.exportReportToPdfFile(jasperPrint, reportdir + nomeArquivo);
                     break;
                 case XML:
-//                    JRXmlExporter exporterXml = new JRXmlExporter();
                     JasperExportManager.exportReportToXmlFile(jasperPrint, reportdir + nomeArquivo, false);
                     break;
                 case HTML:
                     JasperExportManager.exportReportToHtmlFile(jasperPrint, reportdir + nomeArquivo);
-                    break;
-                case EXCEL:
-                    JRXlsExporter exporterExcel = new JRXlsExporter();
-                    exporterExcel.setParameter(JRXlsExporterParameter.JASPER_PRINT, jasperPrint);
-                    exporterExcel.setParameter(JRXlsExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_ROWS, Boolean.TRUE);
-                    exporterExcel.setParameter(JRXlsExporterParameter.OUTPUT_FILE_NAME, reportdir + nomeArquivo);
-                    exporterExcel.exportReport();
-                    break;
-                case CSV:
-                    JRCsvExporter exporterCsv = new JRCsvExporter();
-                    exporterCsv.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-                    exporterCsv.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, reportdir + nomeArquivo);
-                    exporterCsv.exportReport();
-                    break;
-                case TXT:
-                    JRTextExporter exporterTxt = new JRTextExporter();
-                    exporterTxt.setParameter(JRTextExporterParameter.PAGE_WIDTH, 150);
-                    exporterTxt.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 60);
-                    exporterTxt.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-                    exporterTxt.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, reportdir + nomeArquivo);
-                    exporterTxt.exportReport();
                     break;
                 case JSON:
                     try {
@@ -122,11 +101,30 @@ public class Utils {
                         e.printStackTrace();
                     }
                     break;
+                default:
+                    JRAbstractExporter exporter = formato.getClazz().newInstance();
+                    exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+                    exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, reportdir + nomeArquivo);
+                    switch (formato) {
+                        case EXCEL:
+                            exporter.setParameter(JRXlsExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_ROWS, Boolean.TRUE);
+                            break;
+                        case TXT:
+                            exporter.setParameter(JRTextExporterParameter.PAGE_WIDTH, 150);
+                            exporter.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 60);
+                            break;
+                    }
+                    exporter.exportReport();
+                    break;
             }
 
             //retorna o caminho do relatorio gerado
             return reportdir + nomeArquivo;
         } catch (JRException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
             e.printStackTrace();
         }
         return null;
