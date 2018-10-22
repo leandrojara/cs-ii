@@ -73,22 +73,13 @@ public class Utils {
                 }
             }
 
-            //gerando o pdf
+            //gerando o arquivo
             JasperPrint jasperPrint = JasperFillManager.fillReport(relatorio, parameters, jrRS);
             File outDir = new File(reportdir);
             outDir.mkdirs();
 
             String nomeArquivo = new Date().getTime() + formato.getExtensao();
             switch (formato) {
-                case PDF:
-                    JasperExportManager.exportReportToPdfFile(jasperPrint, reportdir + nomeArquivo);
-                    break;
-                case XML:
-                    JasperExportManager.exportReportToXmlFile(jasperPrint, reportdir + nomeArquivo, false);
-                    break;
-                case HTML:
-                    JasperExportManager.exportReportToHtmlFile(jasperPrint, reportdir + nomeArquivo);
-                    break;
                 case JSON:
                     try {
                         ObjectMapper mapper = new ObjectMapper();

@@ -1,17 +1,15 @@
 package br.ufms.facom.home.domain.enums;
 
 import net.sf.jasperreports.engine.JRAbstractExporter;
-import net.sf.jasperreports.engine.export.JRCsvExporter;
-import net.sf.jasperreports.engine.export.JRTextExporter;
-import net.sf.jasperreports.engine.export.JRXlsExporter;
+import net.sf.jasperreports.engine.export.*;
 import net.sf.jasperreports.engine.export.oasis.JROdtExporter;
 import org.springframework.http.MediaType;
 
 public enum TipoFormato {
 
-    PDF("PDF", ".pdf", MediaType.APPLICATION_PDF_VALUE),
-    HTML("HTML", ".html", MediaType.TEXT_HTML_VALUE),
-    XML("XML", ".xml", MediaType.APPLICATION_XML_VALUE),
+    PDF("PDF", ".pdf", MediaType.APPLICATION_PDF_VALUE, JRPdfExporter.class),
+    HTML("HTML", ".html", MediaType.TEXT_HTML_VALUE, HtmlExporter.class),
+    XML("XML", ".xml", MediaType.APPLICATION_XML_VALUE, JRXmlExporter.class),
     JSON("JSON", ".json", MediaType.APPLICATION_JSON_VALUE),
     TXT("TXT", ".txt", MediaType.TEXT_PLAIN_VALUE, JRTextExporter.class),
     CSV("CSV", ".csv", "text/csv", JRCsvExporter.class),
