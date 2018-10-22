@@ -124,6 +124,18 @@ body p {
     color: white;
 }
 
+
+.nome-relatorio-cell {
+    font-size: 14px;
+    display: table-cell;
+    padding: 10px 10px 10px 0px;
+}
+
+.relatorio-cell {
+    display: table-cell;
+    text-align: center;
+}
+
 .form {
   position: relative;
 }
@@ -148,12 +160,6 @@ body p {
   -webkit-transition: all 0.3 ease;
   transition: all 0.3 ease;
   cursor: pointer;
-}
-
-.relatorio-cell {
-    display: table-cell;
-    text-align: center;
-    padding: 8px;
 }
 
 #button-salvar-anunciante {
@@ -279,7 +285,7 @@ body p {
   right: 15px;
   top: 15px;
   */
-  width: 100px;
+  width: 80px;
   height: 35px;
 }
 
