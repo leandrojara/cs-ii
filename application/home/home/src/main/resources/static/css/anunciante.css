@@ -150,6 +150,12 @@ body p {
   cursor: pointer;
 }
 
+.relatorio-cell {
+    display: table-cell;
+    text-align: center;
+    padding: 8px;
+}
+
 #button-salvar-anunciante {
   position: absolute;
   right: 70px;
