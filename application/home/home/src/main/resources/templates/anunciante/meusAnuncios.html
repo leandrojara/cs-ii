@@ -101,6 +101,12 @@
                                             th:text="${tipoRelatorio.getDescricao()}"></option>
                                 </select>
 
+                                <select id="tipoTemplate" name="tipoTemplate" class="relatorio-select" required>
+                                    <option value="" selected="selected">- Selecione o Template -</option>
+                                    <option th:each="tipoTemplate : ${tiposTemplates}" th:value="${tipoTemplate}"
+                                            th:text="${tipoTemplate.getDescricao()}"></option>
+                                </select>
+
                                 <select id="tipoFormato" name="tipoFormato" class="relatorio-select" required>
                                     <option value="" selected="selected">- Selecione o Formato -</option>
                                     <option th:each="formatoRelatorio : ${formatosRelatorio}"

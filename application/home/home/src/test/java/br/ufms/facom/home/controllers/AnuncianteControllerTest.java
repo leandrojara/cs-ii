@@ -3,13 +3,11 @@ package br.ufms.facom.home.controllers;
 import br.ufms.facom.home.HomeApplicationTests;
 import br.ufms.facom.home.domain.Anunciante;
 import br.ufms.facom.home.domain.Imovel;
-import br.ufms.facom.home.domain.enums.TipoFormato;
-import br.ufms.facom.home.domain.enums.TipoImovel;
-import br.ufms.facom.home.domain.enums.TipoNegocio;
-import br.ufms.facom.home.domain.enums.TipoRelatorio;
+import br.ufms.facom.home.domain.enums.*;
 import br.ufms.facom.home.repository.AnuncianteRepository;
 import br.ufms.facom.home.repository.ImovelRepository;
 import br.ufms.facom.home.utils.ReportParameter;
+import br.ufms.facom.home.utils.ReportUtils;
 import br.ufms.facom.home.utils.Utils;
 import org.assertj.core.api.Assertions;
 import org.junit.Assert;
@@ -139,14 +137,15 @@ public class AnuncianteControllerTest extends HomeApplicationTests {
 
     @Test
     public void gerarRelatorioController() throws Exception {
-        Utils.jasperdir = Utils.jasperdir.replace("\\home\\jasperdir", "\\jasperdir");
-        Utils.reportdir = Utils.reportdir.replace("\\home\\reportdir", "\\reportdir");
+        ReportUtils.jasperdir = ReportUtils.jasperdir.replace("\\home\\jasperdir", "\\jasperdir");
+        ReportUtils.reportdir = ReportUtils.reportdir.replace("\\home\\reportdir", "\\reportdir");
 
         for (TipoFormato tipoFormato : TipoFormato.values()) {
             mockMvc.perform(
                     get("/anunciante/gerarRelatorio")
                             .param("tipoRelatorio", TipoRelatorio.LISTAGEM_VENDAS.toString())
                             .param("tipoFormato", tipoFormato.toString())
+                            .param("tipoTemplate", TipoTemplate.CABECALHO_CORPO_RODAPE.toString())
             )
                     .andExpect(status().isOk());
         }
@@ -154,11 +153,14 @@ public class AnuncianteControllerTest extends HomeApplicationTests {
 
     @Test
     public void gerarRelatorioVendaTest() {
-        Utils.jasperdir = Utils.jasperdir.replace("\\home\\jasperdir", "\\jasperdir");
-        Utils.reportdir = Utils.reportdir.replace("\\home\\reportdir", "\\reportdir");
+        ReportUtils.jasperdir = ReportUtils.jasperdir.replace("\\home\\jasperdir", "\\jasperdir");
+        ReportUtils.reportdir = ReportUtils.reportdir.replace("\\home\\reportdir", "\\reportdir");
 
         for (TipoFormato tipoFormato : TipoFormato.values()) {
-            String pdf = Utils.gerarRelatorio(tipoFormato, TipoRelatorio.LISTAGEM_VENDAS.getJrxml(), result,
+            String pdf = ReportUtils.gerarRelatorio(tipoFormato,
+                    TipoTemplate.CABECALHO_CORPO_RODAPE,
+                    TipoRelatorio.LISTAGEM_VENDAS.getJrxml(),
+                    result,
                     new ReportParameter("titulo", TipoRelatorio.LISTAGEM_VENDAS.getDescricao())
             );
             Assert.assertNotNull(pdf);

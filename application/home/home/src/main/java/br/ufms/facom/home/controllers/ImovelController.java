@@ -122,6 +122,7 @@ public class ImovelController {
         model.addAttribute("imoveis", imoveis.getContent());
         model.addAttribute("formatosRelatorio", TipoFormato.values());
         model.addAttribute("tiposRelatorios", TipoRelatorio.values());
+        model.addAttribute("tiposTemplates", TipoTemplate.values());
 
         int totalPages = imoveis.getTotalPages();
         if (totalPages > 0) {

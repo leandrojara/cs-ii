@@ -6,10 +6,12 @@ import br.ufms.facom.home.domain.Usuario;
 import br.ufms.facom.home.domain.enums.TipoFormato;
 import br.ufms.facom.home.domain.enums.TipoNegocio;
 import br.ufms.facom.home.domain.enums.TipoRelatorio;
+import br.ufms.facom.home.domain.enums.TipoTemplate;
 import br.ufms.facom.home.repository.AnuncianteRepository;
 import br.ufms.facom.home.repository.ImovelRepository;
 import br.ufms.facom.home.repository.UsuarioRepository;
 import br.ufms.facom.home.utils.ReportParameter;
+import br.ufms.facom.home.utils.ReportUtils;
 import br.ufms.facom.home.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -92,7 +94,8 @@ public class AnuncianteController {
     @RequestMapping(value = "/anunciante/gerarRelatorio", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<Resource> listagem(@RequestParam("tipoRelatorio") TipoRelatorio tipoRelatorio,
-                                             @RequestParam("tipoFormato") TipoFormato tipoFormato) {
+                                             @RequestParam("tipoFormato") TipoFormato tipoFormato,
+                                             @RequestParam("tipoTemplate") TipoTemplate tipoTemplate) {
         List<Imovel> result = null;
         switch (tipoRelatorio) {
             case LISTAGEM_VENDAS:
@@ -110,8 +113,8 @@ public class AnuncianteController {
         }
 
         try {
-            String relatorioGerado = Utils.gerarRelatorio(tipoFormato, tipoRelatorio.getJrxml(), result,
-                    new ReportParameter("titulo", tipoRelatorio.getDescricao())
+            String relatorioGerado = ReportUtils.gerarRelatorio(tipoFormato, tipoTemplate, tipoRelatorio.getJrxml(), result,
+                    new ReportParameter("titulo", tipoRelatorio.getDescricao() + "\nAnunciante: " + Utils.getUsuarioLogado().getNome())
             );
 
             if (relatorioGerado != null) {

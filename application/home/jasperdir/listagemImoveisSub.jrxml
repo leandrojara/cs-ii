@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="listagemImoveis" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="30e8a3cd-ccd5-42e3-8584-f8894b1b68eb">
+	<property name="ireport.zoom" value="1.6105100000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="dataAtual" class="java.util.Date"/>
+	<parameter name="usuario" class="java.lang.String"/>
+	<parameter name="titulo" class="java.lang.String"/>
+	<parameter name="template" class="java.lang.String"/>
+	<field name="descricao" class="java.lang.String"/>
+	<field name="rua" class="java.lang.String"/>
+	<field name="bairro" class="java.lang.String"/>
+	<field name="cidade" class="java.lang.String"/>
+	<field name="estado" class="java.lang.String"/>
+	<field name="valorImovel" class="java.lang.Double"/>
+	<variable name="SUM_VALOR" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{valorImovel}]]></variableExpression>
+	</variable>
+	<pageHeader>
+		<band height="69" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{template}.equals("Cabeçalho")]]></printWhenExpression>
+			<image onErrorType="Blank">
+				<reportElement uuid="4e015aa3-bfa6-45ee-b0d1-dc9a5d9b1bec" x="0" y="0" width="99" height="65"/>
+				<imageExpression><![CDATA["..\\home\\home\\src\\main\\resources\\static\\imagens\\logo.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement uuid="29252d07-69f7-4ce4-af25-d8025948c566" x="113" y="0" width="375" height="65"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{titulo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="29252d07-69f7-4ce4-af25-d8025948c566" x="488" y="0" width="67" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dataAtual}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm">
+				<reportElement uuid="29252d07-69f7-4ce4-af25-d8025948c566" x="488" y="15" width="67" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dataAtual}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="c97951a8-8a53-4a7f-a019-2b1cdaf82dfe" x="0" y="68" width="555" height="1"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{template}.equals("Corpo")]]></printWhenExpression>
+			<staticText>
+				<reportElement uuid="9f06dc5f-291b-4d06-ad0e-fd042e9edd0c" x="0" y="0" width="488" height="15"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ENDEREÇO DO IMÓVEL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9f06dc5f-291b-4d06-ad0e-fd042e9edd0c" x="488" y="0" width="67" height="15"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VALOR]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="c97951a8-8a53-4a7f-a019-2b1cdaf82dfe" x="0" y="15" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{template}.equals("Corpo")]]></printWhenExpression>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement uuid="1c20ce71-f90b-4a19-a9ef-86264667e2b9" x="488" y="0" width="67" height="15"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valorImovel}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="6cfd8294-5674-438a-a21d-22d1e8a4d109" x="0" y="0" width="488" height="15"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{rua} + ", " + $F{bairro} + ", " + $F{cidade} + "/" + $F{estado}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="16" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{template}.equals("Rodapé")]]></printWhenExpression>
+			<line>
+				<reportElement uuid="c97951a8-8a53-4a7f-a019-2b1cdaf82dfe" x="0" y="0" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement uuid="1c20ce71-f90b-4a19-a9ef-86264667e2b9" x="488" y="1" width="67" height="15"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SUM_VALOR}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="9f06dc5f-291b-4d06-ad0e-fd042e9edd0c" x="419" y="1" width="67" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL:]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>
