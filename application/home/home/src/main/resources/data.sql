@@ -6,10 +6,10 @@ insert into adicional_imovel(id, descricao) select 5, 'ÁREA DE SERVIÇO' where 
 
 insert into usuario(id, nome, telefone, email, senha, DTYPE, bloqueado) values (10, 'user', '(67) 99999-9999', 'email@email.com', '$2a$07$fi5QDS4w9KcGoLPhjraowejID5dihUCsSrz62Ns3/Rx5JR/5FNI0C', 'Anunciante', false);
 
-insert into imovel(id, rua, numero, bairro, cidade, estado, id_anunciante, tipo_imovel, valor_imovel, tipo_negocio) values (10, 'Dr Lelis Espartel 1', 1, 'Tijuca', 'Campo Grande', 'MS', 10, 'CASA', 0, 'VENDA');
-insert into imovel(id, rua, numero, bairro, cidade, estado, id_anunciante, tipo_imovel, valor_imovel, tipo_negocio) values (20, 'Dr Lelis Espartel 2', 2, 'Tijuca', 'Campo Grande', 'MS', 10, 'CASA', 0, 'VENDA');
-insert into imovel(id, rua, numero, bairro, cidade, estado, id_anunciante, tipo_imovel, valor_imovel, tipo_negocio) values (30, 'Dr Lelis Espartel 3', 3, 'Caranda', 'Campo Grande', 'MS', 10, 'CASA', 0, 'VENDA');
-insert into imovel(id, rua, numero, bairro, cidade, estado, id_anunciante, tipo_imovel, valor_imovel, tipo_negocio) values (40, 'Dr Lelis Espartel 4', 4, 'Tijuca', 'Sao Paulo', 'MS', 10, 'CASA', 0, 'VENDA');
-insert into imovel(id, rua, numero, bairro, cidade, estado, id_anunciante, tipo_imovel, valor_imovel, tipo_negocio) values (50, 'Dr Lelis Espartel 5', 5, 'Tijuca', 'Campo Grande', 'MS', 10, 'CASA', 0, 'ALUGUEL');
-insert into imovel(id, rua, numero, bairro, cidade, estado, id_anunciante, tipo_imovel, valor_imovel, tipo_negocio) values (60, 'Av Mato Grosso', 6, 'Tijuca', 'Campo Grande', 'MS', 10, 'CASA', 0, 'ALUGUEL');
-insert into imovel(id, rua, numero, bairro, cidade, estado, id_anunciante, tipo_imovel, valor_imovel, tipo_negocio) values (70, 'Av Afonso Pena 1955', 7, 'Tijuca', 'Campo Grande', 'MS', 10, 'CASA', 0, 'ALUGUEL');
+insert into imovel(id, rua, numero, bairro, cidade, estado, id_anunciante, tipo_imovel, valor_imovel, tipo_negocio) values (10, 'Rua das Garças', 1, 'Centro', 'Campo Grande', 'MS', 10, 'CASA', 200000, 'VENDA');
+insert into imovel(id, rua, numero, bairro, cidade, estado, id_anunciante, tipo_imovel, valor_imovel, tipo_negocio) values (20, 'Rua Bahia', 2, 'Centro', 'Campo Grande', 'MS', 10, 'CASA', 500000, 'VENDA');
+insert into imovel(id, rua, numero, bairro, cidade, estado, id_anunciante, tipo_imovel, valor_imovel, tipo_negocio) values (30, 'Av Afonso Pena', 3, 'Centro', 'Campo Grande', 'MS', 10, 'CASA', 170000, 'VENDA');
+insert into imovel(id, rua, numero, bairro, cidade, estado, id_anunciante, tipo_imovel, valor_imovel, tipo_negocio) values (40, 'Tv Faia', 4, 'São Francisco', 'Sao Paulo', 'SP', 10, 'CASA', 220000, 'VENDA');
+insert into imovel(id, rua, numero, bairro, cidade, estado, id_anunciante, tipo_imovel, valor_imovel, tipo_negocio) values (50, 'Rua Cabo Verde', 5, 'Tijuca', 'Campo Grande', 'MS', 10, 'CASA', 800, 'ALUGUEL');
+insert into imovel(id, rua, numero, bairro, cidade, estado, id_anunciante, tipo_imovel, valor_imovel, tipo_negocio) values (60, 'Av Mato Grosso', 6, 'Centro', 'Campo Grande', 'MS', 10, 'CASA', 600, 'ALUGUEL');
+insert into imovel(id, rua, numero, bairro, cidade, estado, id_anunciante, tipo_imovel, valor_imovel, tipo_negocio) values (70, 'Rua Tocantins', 7, 'Centro', 'Campo Grande', 'MS', 10, 'CASA', 750, 'ALUGUEL');

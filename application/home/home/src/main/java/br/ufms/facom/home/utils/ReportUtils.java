@@ -45,6 +45,7 @@ public class ReportUtils {
             Map<String, Object> parameters = new HashMap<>();
             parameters.put("dataAtual", new Date());
             parameters.put("usuario", Utils.getUsuarioLogado() != null ? Utils.getUsuarioLogado().getNome() : "Usuário Anônimo");
+            parameters.put("subreportDir", jasperdir);
             for (int i = 0; i < tipoTemplate.getOrdem().length; i++) {
                 parameters.put("template" + i, tipoTemplate.getOrdem()[i]);
             }

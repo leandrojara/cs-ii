@@ -9,6 +9,7 @@
 	<parameter name="template0" class="java.lang.String"/>
 	<parameter name="template1" class="java.lang.String"/>
 	<parameter name="template2" class="java.lang.String"/>
+	<parameter name="subreportDir" class="java.lang.String"/>
 	<field name="data0" class="java.lang.Object"/>
 	<field name="data1" class="java.lang.Object"/>
 	<field name="data2" class="java.lang.Object"/>
@@ -30,7 +31,7 @@
 					<subreportParameterExpression><![CDATA[$P{dataAtual}]]></subreportParameterExpression>
 				</subreportParameter>
 				<dataSourceExpression><![CDATA[$F{data0}]]></dataSourceExpression>
-				<subreportExpression><![CDATA["listagemImoveisSub.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA[$P{subreportDir} + "listagemImoveisSub.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 		<band height="10">
@@ -50,7 +51,7 @@
 					<subreportParameterExpression><![CDATA[$P{dataAtual}]]></subreportParameterExpression>
 				</subreportParameter>
 				<dataSourceExpression><![CDATA[$F{data1}]]></dataSourceExpression>
-				<subreportExpression><![CDATA["listagemImoveisSub.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA[$P{subreportDir} + "listagemImoveisSub.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 		<band height="10">
@@ -70,7 +71,7 @@
 					<subreportParameterExpression><![CDATA[$P{dataAtual}]]></subreportParameterExpression>
 				</subreportParameter>
 				<dataSourceExpression><![CDATA[$F{data2}]]></dataSourceExpression>
-				<subreportExpression><![CDATA["listagemImoveisSub.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA[$P{subreportDir} + "listagemImoveisSub.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>
