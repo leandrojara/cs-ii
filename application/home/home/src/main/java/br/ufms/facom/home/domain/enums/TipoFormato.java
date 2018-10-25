@@ -14,6 +14,7 @@ public enum TipoFormato {
     TXT("TXT", ".txt", MediaType.TEXT_PLAIN_VALUE, JRTextExporter.class),
     CSV("CSV", ".csv", "text/csv", JRCsvExporter.class),
     ODT("ODT", ".odt", "application/vnd.oasis.opendocument.text", JROdtExporter.class),
+    XHTML("XHTML", ".xhtml", MediaType.APPLICATION_XHTML_XML_VALUE, JRXhtmlExporter.class),
     EXCEL("EXCEL", ".xls", "application/vnd.ms-excel", JRXlsExporter.class);
 
     //Obrigatório: Nome conhecido do formato a nível de usuário
