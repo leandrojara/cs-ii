@@ -46,6 +46,8 @@ public class AnuncianteControllerTest extends HomeApplicationTests {
 
     @Before
     public void setUp() {
+        ReportUtils.jasperdir = ReportUtils.jasperdir.replace("\\home\\jasperdir", "\\jasperdir");
+        ReportUtils.reportdir = ReportUtils.reportdir.replace("\\home\\reportdir", "\\reportdir");
 
         anunciante = new Anunciante();
         anunciante.setNome("Usuario de teste");
@@ -137,36 +139,55 @@ public class AnuncianteControllerTest extends HomeApplicationTests {
 
     @Test
     public void gerarRelatorioController() throws Exception {
-        ReportUtils.jasperdir = ReportUtils.jasperdir.replace("\\home\\jasperdir", "\\jasperdir");
-        ReportUtils.reportdir = ReportUtils.reportdir.replace("\\home\\reportdir", "\\reportdir");
-
         for (TipoFormato tipoFormato : TipoFormato.values()) {
-            mockMvc.perform(
-                    get("/anunciante/gerarRelatorio")
-                            .param("tipoRelatorio", TipoRelatorio.LISTAGEM_VENDAS.toString())
-                            .param("tipoFormato", tipoFormato.toString())
-                            .param("tipoTemplate", TipoTemplate.CABECALHO_CORPO_RODAPE.toString())
-            )
-                    .andExpect(status().isOk());
+            for (TipoTemplate tipoTemplate : TipoTemplate.values()) {
+                mockMvc.perform(
+                        get("/anunciante/gerarRelatorio")
+                                .param("tipoRelatorio", TipoRelatorio.LISTAGEM_VENDAS.toString())
+                                .param("tipoFormato", tipoFormato.toString())
+                                .param("tipoTemplate", tipoTemplate.toString())
+                )
+                        .andExpect(status().isOk());
+            }
         }
     }
 
     @Test
     public void gerarRelatorioVendaTest() {
-        ReportUtils.jasperdir = ReportUtils.jasperdir.replace("\\home\\jasperdir", "\\jasperdir");
-        ReportUtils.reportdir = ReportUtils.reportdir.replace("\\home\\reportdir", "\\reportdir");
-
         for (TipoFormato tipoFormato : TipoFormato.values()) {
-            String pdf = ReportUtils.gerarRelatorio(tipoFormato,
-                    TipoTemplate.CABECALHO_CORPO_RODAPE,
-                    TipoRelatorio.LISTAGEM_VENDAS.getJrxml(),
-                    result,
-                    new ReportParameter("titulo", TipoRelatorio.LISTAGEM_VENDAS.getDescricao())
-            );
-            Assert.assertNotNull(pdf);
-            File file = new File(pdf);
-            Assert.assertTrue(file.exists());
-            Assert.assertTrue(file.delete());
+            for (TipoTemplate tipoTemplate : TipoTemplate.values()) {
+                String pdf = ReportUtils.gerarRelatorio(tipoFormato,
+                        tipoTemplate,
+                        TipoRelatorio.LISTAGEM_VENDAS.getJrxml(),
+                        result,
+                        new ReportParameter("titulo", TipoRelatorio.LISTAGEM_VENDAS.getDescricao())
+                );
+                Assert.assertNotNull(pdf);
+                File file = new File(pdf);
+                Assert.assertTrue(file.exists());
+                Assert.assertTrue(file.delete());
+            }
         }
+    }
+
+    @Test
+    public void testarTamanhoArquivoRelatorio() {
+        String pdfCabecalhoCorpoRodape = ReportUtils.gerarRelatorio(TipoFormato.PDF, TipoTemplate.CABECALHO_CORPO_RODAPE, TipoRelatorio.LISTAGEM_VENDAS.getJrxml(), result);
+        String pdfCabecalhoCorpoRodape2 = ReportUtils.gerarRelatorio(TipoFormato.PDF, TipoTemplate.CABECALHO_CORPO_RODAPE, TipoRelatorio.LISTAGEM_VENDAS.getJrxml(), result);
+        String pdfCabecalhoRodape = ReportUtils.gerarRelatorio(TipoFormato.PDF, TipoTemplate.CABECALHO_RODAPE, TipoRelatorio.LISTAGEM_VENDAS.getJrxml(), result);
+
+        File fileCabecalhoCorpoRodape = new File(pdfCabecalhoCorpoRodape);
+        File fileCabecalhoCorpoRodape2 = new File(pdfCabecalhoCorpoRodape2);
+        File fileCabecalhoRodape = new File(pdfCabecalhoRodape);
+
+        //um arquivo com cabecalho, corpo e rodapé é maior que um com cabecalho e rodapé
+        Assert.assertTrue(fileCabecalhoCorpoRodape.length() > fileCabecalhoRodape.length());
+
+        //dois arquivos com cabecalho, corpo e rodapé devem ter o mesmo tamanho
+        Assert.assertEquals(fileCabecalhoCorpoRodape.length(), fileCabecalhoCorpoRodape2.length());
+
+        fileCabecalhoCorpoRodape.delete();
+        fileCabecalhoCorpoRodape2.delete();
+        fileCabecalhoRodape.delete();
     }
 }
