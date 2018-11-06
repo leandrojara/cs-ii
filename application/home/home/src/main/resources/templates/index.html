@@ -134,8 +134,16 @@
                                  width="100%"
                                  th:if="${imovel.imagens.isEmpty()}"/>
 
-                            <h2 th:text="${imovel.getDescription()}"></h2>
-                            <p th:text="${imovel.descricao}"></p>
+                            <h2 th:text="${imovel.getDescription()}">description
+                                <span>
+                                    <a href="">
+                                        <img th:if="" src="../../resources/static/imagens/like-outline.png" th:src="@{/imagens/like-outline.png}" style="float:right; width:18px">
+                                        <img th:if="" src="../../resources/static/imagens/like.png" th:src="@{/imagens/like.png}" style="float:right; width:18px">
+                                    </a>
+                                </span>
+                            </h2>
+                            
+                            <p th:text="${imovel.descricao}">teste</p>
 
                             <div class="rodape-quadro-anuncio">
                                 <div class="rodape-quadro-anuncio-preco" th:text="${imovel.getValorStr()}">R$

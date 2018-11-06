@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" type="text/css" href="../../../resources/static/css/reset.css" th:href="@{/css/reset.css}">
+    <link rel="stylesheet" type="text/css" href="../../../resources/static/css/anunciante.css"
+          th:href="@{/css/anunciante.css}">
+    <link rel="stylesheet" type="text/css" href="../../../resources/static/css/main.css" th:href="@{/css/main.css}">
+    <link rel="stylesheet" type="text/css" href="../../../resources/static/bootstrap/css/bootstrap.min.css"
+          th:href="@{/bootstrap/css/bootstrap.min.css}">
+    <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+    <script th:src="@{/js/jquery.mask.js}"></script>
+    <title>
+        House Catalog - Cadastro
+    </title>
+
+    <script type="text/javascript">
+
+        function removeImovel(n) {
+            if (confirm("Deseja desfavoritar este anúncio?")) {
+                $.ajax({
+                    type: "DELETE",
+                    contentType: "application/json",
+                    url: "/imovel/excluir/" + n,
+                    dataType: 'json',
+                    cache: false,
+                    timeout: 600000,
+                    success: function (data) {
+                        //removendo o objeto da lista de imagens
+                        var imoveis = /*[[${imoveis}]]*/ null;
+                        if (imoveis != null) {
+                            for (i = 0; i < imoveis.length; i++) {
+                                if (imoveis[i].id == n) {
+                                    imoveis = imoveis.splice(i, 1);
+                                    break;
+                                }
+                            }
+                        }
+                    },
+                    error: function (e) {
+                        console.log("ERROR : ", e);
+                    }
+                });
+
+                //removendo o quadro da imagem da tela
+                $('#anuncioImovel' + n).remove();
+            }
+        }
+
+    </script>
+</head>
+
+<body>
+
+<div class="div-central">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <div class="container-fluid">
+
+        <div class="row" style="min-height: 700px">
+
+            <div class="col-xs-3 col-md-3 col-sm-3" style="padding-top: 50px;">
+                <div class="centraliza-imagem">
+                    <img src="../../../resources/static/imagens/no-image.jpg" th:src="@{/imagens/no-image.jpg}"
+                         class="imagem-user"/>
+                </div>
+                <div class="menu-user">
+                    <a href="/cliente/editar/">Editar Dados</a>
+                    <a href="/imovel/favoritos/" class="active">Favoritos</a>
+                    <a href="/logout">Logout</a>
+                </div>
+                <!--p class="voltar-link"><a href="/">Voltar</a></p-->
+            </div>
+
+            <div class="col-xs-9 col-md-9 col-sm-9" style="background-color:white; padding-top: 50px;">
+
+                <h1>Imóveis Favoritos</h1>
+                
+                <div class="quadro-anuncio" th:each="imovel, iterator : ${imoveis}">
+                        <a th:href="@{'/imovel/visualizar/' + ${imovel.id}}">
+                            <div class="w3-content w3-display-container" th:if="!${imovel.imagens.isEmpty()}">
+                                <img th:class="${'imgAnuncio mySlides'+iterator.index}"
+                                     th:each="imagem, iteratorImg: ${imovel.imagens}"
+                                     th:src="${imagem.getBytesImgFormatted()}" style="width:100%;"
+                                     th:styleappend="${iteratorImg.index} > 0 ? 'display:none;' : 'display:block;'">
+
+                                <img class="w3-button w3-black w3-display-left"
+                                     th:onclick="'plusDivs(-1, \''+${iterator.index}+'\');'"
+                                     src="../../../resources/static/imagens/arrow_back.png"
+                                     th:src="@{/imagens/arrow_back.png}">
+                                <img class="w3-button w3-black w3-display-right"
+                                     th:onclick="'plusDivs(1, \''+${iterator.index}+'\');'"
+                                     src="../../../resources/static/imagens/arrow_after.png"
+                                     th:src="@{/imagens/arrow_after.png}">
+                            </div>
+
+                            <img src="../../../resources/static/imagens/no-image.jpg" th:src="@{/imagens/no-image.jpg}"
+                                 width="100%"
+                                 th:if="${imovel.imagens.isEmpty()}"/>
+
+                            <h2 th:text="${imovel.getDescription()}">description
+                                <span>
+                                    <a href="">
+                                        <img src="../../../resources/static/imagens/like.png" th:src="@{/imagens/like.png}" style="float:right; width:18px">
+                                    </a>
+                                </span>
+                            </h2>
+                            
+                            <p th:text="${imovel.descricao}">teste</p>
+
+                            <div class="rodape-quadro-anuncio">
+                                <div class="rodape-quadro-anuncio-preco" th:text="${imovel.getValorStr()}">R$
+                                    250.000,00
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+
+                <nav th:if="${imoveisPage.totalPages > 0}">
+                    <ul class="pagination">
+                        <li th:each="pageNumber : ${pageNumbers}" class="page-item">
+                            <a th:href="@{/(size=${imoveisPage.size}, page=${pageNumber})}"
+                               th:text="${pageNumber}" th:class="${'page-link ' + (pageNumber==imoveisPage.number + 1 ? 'active' : '')}"></a>
+                        </li>
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script>
+    var slideIndex = [];
+
+    function plusDivs(n, no) {
+        while (slideIndex.length < no + 1) {
+            slideIndex.push(1);
+        }
+
+        showDivs(slideIndex[no] += n, no);
+    }
+
+    function showDivs(n, no) {
+        var i;
+        var x = document.getElementsByClassName('mySlides' + no);
+        if (n > x.length) {
+            slideIndex[no] = 1
+        }
+        if (n < 1) {
+            slideIndex[no] = x.length
+        }
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        x[slideIndex[no] - 1].style.display = "block";
+    }
+</script>
+
+</html>
