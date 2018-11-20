@@ -82,6 +82,8 @@ public class ReportUtils {
                             exporter.setParameter(JRTextExporterParameter.PAGE_WIDTH, 150);
                             exporter.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 60);
                             break;
+                        default:
+                            //nothing to do
                     }
                     exporter.exportReport();
                     break;

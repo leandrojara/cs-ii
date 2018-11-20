@@ -104,6 +104,8 @@ public class AnuncianteController {
             case LISTAGEM_ALUGUEL:
                 result = imovelRepository.listagem(Utils.getUsuarioLogado().getId(), TipoNegocio.ALUGUEL);
                 break;
+            default:
+                throw new RuntimeException("O tipo de relatório informado não possui implementação!");
         }
 
         for (Imovel imovel : result) {
