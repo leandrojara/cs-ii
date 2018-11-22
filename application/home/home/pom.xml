@@ -116,6 +116,16 @@
     </dependencies>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <!--mvn sonar:sonar \ -Dsonar.projectKey=leandrojara_cs-ii \ -Dsonar.organization=leandrojara-github \ -Dsonar.host.url=https://sonarcloud.io \ -Dsonar.login=0d3d4bf41f2af9d97835cec21e761abdcf7fb783-->
+                <plugin>
+                    <groupId>org.sonarsource.scanner.maven</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>3.5.0.1254</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
