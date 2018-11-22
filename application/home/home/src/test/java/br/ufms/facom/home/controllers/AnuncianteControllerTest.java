@@ -46,8 +46,8 @@ public class AnuncianteControllerTest extends HomeApplicationTests {
 
     @Before
     public void setUp() {
-        ReportUtils.jasperdir = ReportUtils.jasperdir.replace("\\home\\jasperdir", "\\jasperdir");
-        ReportUtils.reportdir = ReportUtils.reportdir.replace("\\home\\reportdir", "\\reportdir");
+        ReportUtils.JASPER_DIR = ReportUtils.JASPER_DIR.replace("\\home\\jasperdir", "\\jasperdir");
+        ReportUtils.REPORT_DIR = ReportUtils.REPORT_DIR.replace("\\home\\reportdir", "\\reportdir");
 
         anunciante = new Anunciante();
         anunciante.setNome("Usuario de teste");

@@ -2,7 +2,6 @@ package br.ufms.facom.home.utils;
 
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -16,7 +15,7 @@ import java.util.List;
  * Observação :
  * ***********************************************
  */
-public class ReportModel implements Serializable {
+public class ReportModel {
 
     private JRBeanCollectionDataSource data0;
     private JRBeanCollectionDataSource data1;

@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.text.NumberFormat;
 import java.util.Date;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
 @Entity
 @Table(name = "imovel")
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Imovel {
+public class Imovel implements Serializable {
 
     @Id
     @Column(name = "id")

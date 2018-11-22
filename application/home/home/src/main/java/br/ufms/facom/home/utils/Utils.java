@@ -12,6 +12,10 @@ import java.util.List;
 
 public class Utils {
 
+    private Utils(){
+        throw new IllegalStateException("Utility class");
+    }
+
     public static BCryptPasswordEncoder getEncoder() {
         return new BCryptPasswordEncoder(7);
     }

@@ -44,12 +44,6 @@ public class Usuario implements UserDetails {
     public Usuario() {
     }
 
-    public Usuario(String nome, String senha, List<GrantedAuthority> grantList) {
-        this.nome = nome;
-        this.senha = senha;
-        this.grantList = grantList;
-    }
-
     public Long getId() {
         return id;
     }

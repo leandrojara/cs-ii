@@ -23,14 +23,14 @@ public enum TipoTemplate {
     TipoTemplate(String... ordem) {
         this.ordem = ordem;
 
-        String descricao = "";
+        StringBuilder descricao = new StringBuilder();
         for (int i = 0; i < ordem.length; i++) {
             if (i > 0) {
-                descricao += ", ";
+                descricao.append(", ");
             }
-            descricao += ordem[i];
+            descricao.append(ordem[i]);
         }
-        this.descricao = descricao;
+        this.descricao = descricao.toString();
     }
 
     public String getDescricao() {

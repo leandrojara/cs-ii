@@ -41,15 +41,18 @@ public class AnuncianteController {
     @Autowired
     private ImovelRepository imovelRepository;
 
+    private static final String ANUNCIANTE_ATTR = "anunciante";
+
     @GetMapping("/anunciante/cadastrar")
     public String cadastrarAnunciante(Model model) {
-        model.addAttribute("anunciante", new Anunciante());
+        model.addAttribute(ANUNCIANTE_ATTR, new Anunciante());
         return "anunciante/cadastrar";
     }
 
     @GetMapping("/anunciante/editar/")
     public String editarAnunciante(Model model) {
-        model.addAttribute("anunciante", anuncianteRepository.findById(Utils.getUsuarioLogado().getId()).get());
+        Optional<Anunciante> anunciante = anuncianteRepository.findById(Utils.getUsuarioLogado().getId());
+        anunciante.ifPresent(anunciante1 -> model.addAttribute(ANUNCIANTE_ATTR, anunciante1));
         model.addAttribute("usuarioLogado", Utils.getUsuarioLogado());
         return "anunciante/editar";
     }
@@ -66,7 +69,7 @@ public class AnuncianteController {
                                    BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("erros", Utils.criarListaDeErrosDaValidacao(bindingResult.getAllErrors()));
-            model.addAttribute("anunciante", anunciante);
+            model.addAttribute(ANUNCIANTE_ATTR, anunciante);
             return "anunciante/cadastrar";
         }
 
@@ -84,7 +87,7 @@ public class AnuncianteController {
         anuncianteRepository.save(anunciante);
 
         model.addAttribute("onSave", "Informações salvas!");
-        model.addAttribute("anunciante", anunciante);
+        model.addAttribute(ANUNCIANTE_ATTR, anunciante);
         if (nextPage != null && !nextPage.trim().isEmpty()) {
             return nextPage;
         }

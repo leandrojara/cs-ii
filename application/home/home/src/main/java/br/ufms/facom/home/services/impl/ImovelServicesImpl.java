@@ -1,5 +1,6 @@
 package br.ufms.facom.home.services.impl;
 
+import br.ufms.facom.home.domain.AdicionalImovel;
 import br.ufms.facom.home.domain.Imovel;
 import br.ufms.facom.home.domain.ImovelImagem;
 import br.ufms.facom.home.repository.AdicionalImovelRepository;
@@ -17,7 +18,7 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.Optional;
 
 @Service
 public class ImovelServicesImpl implements ImovelServices {
@@ -27,15 +28,16 @@ public class ImovelServicesImpl implements ImovelServices {
     @Autowired
     private ImagemImovelRepository imagemImovelRepository;
 
-    private static final String fileSeparator = System.getProperty("file.separator");
-    private static final String uploadingdir = System.getProperty("user.dir") + fileSeparator + "uploadingdir" + fileSeparator + "anuncios" + fileSeparator;
+    private static final String FILE_SEPARATOR = System.getProperty("file.separator");
+    private static final String UPLOADING_DIR = System.getProperty("user.dir") + FILE_SEPARATOR + "uploadingdir" + FILE_SEPARATOR + "anuncios" + FILE_SEPARATOR;
 
     @Override
     public void addAdicionais(Imovel imovel, long[] adicionais) {
         imovel.setAdicionais(new ArrayList<>());
         if (adicionais != null) {
             for (long adicional : adicionais) {
-                imovel.getAdicionais().add(adicionalImovelRepository.findById(adicional).get());
+                Optional<AdicionalImovel> adicionalImovel = adicionalImovelRepository.findById(adicional);
+                adicionalImovel.ifPresent(adicionalImovel1 -> imovel.getAdicionais().add(adicionalImovel1));
             }
         }
     }
@@ -68,15 +70,15 @@ public class ImovelServicesImpl implements ImovelServices {
         if (imovel != null && imovel.getId() != null) {
             for (ImovelImagem imovelImagem : imovel.getImagens()) {
                 if (imovelImagem.getBytesImg() != null) {
-                    File file = new File(uploadingdir);
+                    File file = new File(UPLOADING_DIR);
                     if (!file.exists()) {
                         file.mkdirs();
                     }
-                    file = new File(uploadingdir + imovel.getId());
+                    file = new File(UPLOADING_DIR + imovel.getId());
                     if (!file.exists()) {
                         file.mkdir();
                     }
-                    file = new File(uploadingdir + imovel.getId() + fileSeparator + imovelImagem.getDiretorio());
+                    file = new File(UPLOADING_DIR + imovel.getId() + FILE_SEPARATOR + imovelImagem.getDiretorio());
 
                     OutputStream outputStream = new FileOutputStream(file);
                     outputStream.write(imovelImagem.getBytesImg());
@@ -98,14 +100,11 @@ public class ImovelServicesImpl implements ImovelServices {
     @Override
     public void findUploadedFiles(Page<Imovel> imoveis) {
         if (imoveis != null) {
-            imoveis.forEach(new Consumer<Imovel>() {
-                @Override
-                public void accept(Imovel imovel) {
-                    try {
-                        findUploadedFiles(imovel);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+            imoveis.forEach(imovel -> {
+                try {
+                    findUploadedFiles(imovel);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             });
         }
@@ -115,7 +114,7 @@ public class ImovelServicesImpl implements ImovelServices {
     public void findUploadedFiles(Imovel imovel) throws IOException {
         if (imovel != null && imovel.getImagens() != null) {
             for (ImovelImagem imagem : imovel.getImagens()) {
-                File file = new File(uploadingdir + imovel.getId() + fileSeparator + imagem.getDiretorio());
+                File file = new File(UPLOADING_DIR + imovel.getId() + FILE_SEPARATOR + imagem.getDiretorio());
                 if (file.exists()) {
                     imagem.setBytesImg(Files.readAllBytes(file.toPath()));
                 }
@@ -125,7 +124,7 @@ public class ImovelServicesImpl implements ImovelServices {
 
     @Override
     public void removeImagem(ImovelImagem imovelImagem) {
-        File file = new File(uploadingdir + imovelImagem.getImovel().getId() + fileSeparator + imovelImagem.getDiretorio());
+        File file = new File(UPLOADING_DIR + imovelImagem.getImovel().getId() + FILE_SEPARATOR + imovelImagem.getDiretorio());
         if (file.exists()) {
             file.delete();
         }
