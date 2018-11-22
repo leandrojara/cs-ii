@@ -21,8 +21,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -41,26 +41,26 @@ public class AnuncianteController {
     @Autowired
     private ImovelRepository imovelRepository;
 
-    @RequestMapping(value = "/anunciante/cadastrar", method = RequestMethod.GET)
+    @GetMapping("/anunciante/cadastrar")
     public String cadastrarAnunciante(Model model) {
         model.addAttribute("anunciante", new Anunciante());
         return "anunciante/cadastrar";
     }
 
-    @RequestMapping(value = "/anunciante/editar/", method = RequestMethod.GET)
+    @GetMapping("/anunciante/editar/")
     public String editarAnunciante(Model model) {
         model.addAttribute("anunciante", anuncianteRepository.findById(Utils.getUsuarioLogado().getId()).get());
         model.addAttribute("usuarioLogado", Utils.getUsuarioLogado());
         return "anunciante/editar";
     }
 
-    @RequestMapping(value = "/anunciante/excluir/", method = RequestMethod.GET)
+    @GetMapping("/anunciante/excluir/")
     public String excluir() {
         anuncianteRepository.deleteById(Utils.getUsuarioLogado().getId());
         return "login";
     }
 
-    @RequestMapping(value = "/anunciante/salvar", method = RequestMethod.POST)
+    @PostMapping("/anunciante/salvar")
     public String salvarAnunciante(@Valid Anunciante anunciante,
                                    @RequestParam(value = "nextPage", required = false) String nextPage,
                                    BindingResult bindingResult, Model model) {
@@ -91,7 +91,7 @@ public class AnuncianteController {
         return "login";
     }
 
-    @RequestMapping(value = "/anunciante/gerarRelatorio", method = RequestMethod.GET)
+    @GetMapping("/anunciante/gerarRelatorio")
     @ResponseBody
     public ResponseEntity<Resource> listagem(@RequestParam("tipoRelatorio") TipoRelatorio tipoRelatorio,
                                              @RequestParam("tipoFormato") TipoFormato tipoFormato,

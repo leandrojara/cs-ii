@@ -57,7 +57,7 @@ public class ImovelController {
         model.addAttribute("usuarioLogado", Utils.getUsuarioLogado());
     }
 
-    @RequestMapping(value = "/imovel/anunciar", method = RequestMethod.GET)
+    @GetMapping("/imovel/anunciar")
     public String anunciarImovel(Model model) {
         Imovel imovel = new Imovel();
         imovel.setAdicionais(adicionalImovelRepository.findAll());
@@ -67,7 +67,7 @@ public class ImovelController {
         return "imovel/anunciar";
     }
 
-    @RequestMapping(value = "/imovel/visualizar/{idImovel}", method = RequestMethod.GET)
+    @GetMapping("/imovel/visualizar/{idImovel}")
     public String visualizarImovel(@PathVariable("idImovel") Long idImovel,
                                    Model model) throws IOException {
         Optional<Imovel> imovel = imovelRepository.findById(idImovel);
@@ -81,7 +81,7 @@ public class ImovelController {
         }
     }
 
-    @RequestMapping(value = "/imovel/editar/{idImovel}", method = RequestMethod.GET)
+    @GetMapping("/imovel/editar/{idImovel}")
     public String editarImovel(@PathVariable("idImovel") Long idImovel,
                                Model model) throws IOException {
         Optional<Imovel> imovel = imovelRepository.findById(idImovel);
@@ -100,7 +100,7 @@ public class ImovelController {
         }
     }
 
-    @RequestMapping(value = "/imovel/buscar/", method = RequestMethod.GET)
+    @GetMapping("/imovel/buscar/")
     public String buscarDoAnunciante(Model model,
                                      @RequestParam(value = "page", required = false) Integer page,
                                      @RequestParam(value = "size", required = false) Integer size,
@@ -152,7 +152,7 @@ public class ImovelController {
 
     }
 
-    @RequestMapping(value = "/imovel/salvar", method = RequestMethod.POST)
+    @PostMapping("/imovel/salvar")
     public String salvarImovel(@Valid Imovel imovel,
                                @RequestParam(value = "adicionais", required = false) long[] adicionais,
                                @RequestParam("uploadingFiles") MultipartFile[] uploadingFiles,
@@ -180,7 +180,7 @@ public class ImovelController {
         return anunciarImovel(model);
     }
 
-    @RequestMapping(value = "/imovel/imagem/excluir/{idImagem}", method = RequestMethod.DELETE)
+    @DeleteMapping("/imovel/imagem/excluir/{idImagem}")
     public ResponseEntity removerImagem(@PathVariable("idImagem") Long idImagem) {
         Optional<ImovelImagem> imovelImagem = imagemImovelRepository.findById(idImagem);
         if (imovelImagem.isPresent()) {
@@ -192,7 +192,7 @@ public class ImovelController {
         }
     }
 
-    @RequestMapping(value = "/imovel/excluir/{idImovel}", method = RequestMethod.DELETE)
+    @DeleteMapping("/imovel/excluir/{idImovel}")
     public ResponseEntity removerImovel(@PathVariable("idImovel") Long idImovel) {
         Optional<Imovel> imovel = imovelRepository.findById(idImovel);
         if (imovel.isPresent()) {
@@ -207,19 +207,19 @@ public class ImovelController {
         }
     }
 
-    @RequestMapping(value = "/ruas", method = RequestMethod.POST)
+    @PostMapping("/ruas")
     public ResponseEntity buscarRuas(@RequestParam(value = "text") String text) {
         List<String> ruas = imovelRepository.findRuas(text);
         return ResponseEntity.ok(ruas);
     }
 
-    @RequestMapping(value = "/bairros", method = RequestMethod.POST)
+    @PostMapping("/bairros")
     public ResponseEntity buscarBairros(@RequestParam(value = "text") String text) {
         List<String> bairros = imovelRepository.findBairros(text);
         return ResponseEntity.ok(bairros);
     }
 
-    @RequestMapping(value = "/cidades", method = RequestMethod.POST)
+    @PostMapping("/cidades")
     public ResponseEntity buscarCidades(@RequestParam(value = "text") String text) {
         List<String> cidades = imovelRepository.findCidades(text);
         return ResponseEntity.ok(cidades);
