@@ -13,6 +13,7 @@ import net.sf.jasperreports.engine.xml.JRXmlLoader;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.*;
 
 /**
@@ -59,18 +60,18 @@ public class ReportUtils {
 
             //gerando o arquivo
             JasperPrint jasperPrint = JasperFillManager.fillReport(relatorio, parameters, jrRS);
-            File outDir = new File(REPORT_DIR);
-            outDir.mkdirs();
+            new File(REPORT_DIR).mkdirs();
 
             String nomeArquivo = new Date().getTime() + formato.getExtensao();
+            File reportDirArquivo = Paths.get(REPORT_DIR, nomeArquivo).toFile();
             switch (formato) {
                 case JSON:
                     ObjectMapper mapper = new ObjectMapper();
-                    mapper.writeValue(new File(REPORT_DIR + nomeArquivo), result);
+                    mapper.writeValue(reportDirArquivo, result);
                     break;
                 case XML:
                     XmlMapper xmlMapper = new XmlMapper();
-                    xmlMapper.writeValue(new File(REPORT_DIR + nomeArquivo), result);
+                    xmlMapper.writeValue(reportDirArquivo, result);
                     break;
                 default:
                     JRAbstractExporter exporter = formato.getClazz().newInstance();
